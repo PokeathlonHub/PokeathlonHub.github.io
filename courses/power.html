@@ -1,417 +1,417 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Power Course - Pokéathlon WRs</title>
-		<link rel="stylesheet" href="../style.css">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="icon" href="../championship-trophy.svg" type="image/svg+xml">
-	</head>
-	<body>
-		<button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light theme">🌙</button>
-		<nav><a href="../index.html">← Back to All Events</a></nav>
+<head>
+    <title>Power Course - Pokéathlon WRs</title>
+    <link rel="stylesheet" href="../style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../championship-trophy.svg" type="image/svg+xml">
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light theme">🌙</button>
+    <nav><a href="../index.html">← Back to All Events</a></nav>
 
-		<h1>Power Course</h1>
+    <h1>Power Course</h1>
 
-		<div class="filter-container">
-			<h3>Filter by Proof Type</h3>
-			<div class="filter-options">
-				<div class="filter-option">
-					<input type="radio" id="all-record" name="proofFilter" value="all-record" checked>
-					<label for="all-record">ALL RECORDS</label>
-				</div>
-				<div class="filter-option">
-					<input type="radio" id="verified-record" name="proofFilter" value="verified-record">
-					<label for="verified-record">VERIFIED RECORD</label>
-				</div>
-				<div class="filter-option">
-					<input type="radio" id="photo" name="proofFilter" value="photo">
-					<label for="photo">PHOTO</label>
-				</div>
-				<div class="filter-option">
-					<input type="radio" id="video" name="proofFilter" value="video">
-					<label for="video">VIDEO</label>
-				</div>
-				<div class="filter-option">
-					<input type="radio" id="livestream" name="proofFilter" value="livestream">
-					<label for="livestream">LIVESTREAM</label>
-				</div>
-			</div>
-			<div class="filter-info">
-				Choose how strict you want the proof requirements to be.
-			</div>
-		</div>
-		<div class="stats" id="stats">
-			Showing verified records
-		</div>
-        
-		<h2>Current Record</h2>
-		<div class="table-wrapper">
-		<table>
-			<thead>
-				<tr>
-					<th>Player</th>
-					<th>Total Score</th>
-					<th>Block Smash</th>
-					<th>Circle Push</th>
-					<th>Goal Roll</th>
-					<th>Bonus Points</th>
-					<th>Date</th>
-					<th>Proof</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr data-proof="photo">
-					<td>CS__</td>
-					<td>653</td>
-					<td>158</td>
-					<td>198</td>
-					<td>195</td>
-					<td>102</td>
-					<td>22/08/2025</td>
-					<td><a href="https://www.smogon.com/forums/threads/pok%C3%A9athlon-records.3715012/page-2">Photo</a></td>
-				</tr>
-			</tbody>
-		</table>
-		</div>
+    <div class="filter-container">
+        <h3>Filter by Proof Type</h3>
+        <div class="filter-options">
+            <div class="filter-option">
+                <input type="radio" id="all-record" name="proofFilter" value="all-record" checked>
+                <label for="all-record">ALL RECORDS</label>
+            </div>
+            <div class="filter-option">
+                <input type="radio" id="verified-record" name="proofFilter" value="verified-record">
+                <label for="verified-record">VERIFIED RECORD</label>
+            </div>
+            <div class="filter-option">
+                <input type="radio" id="photo" name="proofFilter" value="photo">
+                <label for="photo">PHOTO</label>
+            </div>
+            <div class="filter-option">
+                <input type="radio" id="video" name="proofFilter" value="video">
+                <label for="video">VIDEO</label>
+            </div>
+            <div class="filter-option">
+                <input type="radio" id="livestream" name="proofFilter" value="livestream">
+                <label for="livestream">LIVESTREAM</label>
+            </div>
+        </div>
+        <div class="filter-info">
+            Choose how strict you want the proof requirements to be.
+        </div>
+    </div>
+    <div class="stats" id="stats">
+        Showing verified records
+    </div>
+    
+    <h2>Current Record</h2>
+    <div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Total Score</th>
+                <th>Block Smash</th>
+                <th>Circle Push</th>
+                <th>Goal Roll</th>
+                <th>Bonus Points</th>
+                <th>Date</th>
+                <th>Proof</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-proof="photo">
+                <td>CS__</td>
+                <td>653</td>
+                <td>158</td>
+                <td>198</td>
+                <td>195</td>
+                <td>102</td>
+                <td>22/08/2025</td>
+                <td><a href="https://www.smogon.com/forums/threads/pok%C3%A9athlon-records.3715012/page-2">Photo</a></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
 
-		<h2>Record History</h2>
-		<div class="table-wrapper">
-		<table>
-			<thead>
-				<tr>
-					<th>Player</th>
-					<th data-sort-method='number'>Total Score</th>
-					<th data-sort-method='number'>Block Smash</th>
-					<th data-sort-method='number'>Circle Push</th>
-					<th data-sort-method='number'>Goal Roll</th>
-					<th data-sort-method='number'>Bonus Points</th>
-					<th>Date</th>
-					<th>Proof</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr data-proof="video">
-					<td>SkyHippowdon</td>
-					<td>394</td>
-					<td>67</td>
-					<td>93</td>
-					<td>160</td>
-					<td>74</td>
-					<td>17/09/2009</td>
-					<td><a href="https://www.youtube.com/watch?v=Ji4ZWR5aRiU">Video</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>hatena2</td>
-					<td>484</td>
-					<td>110</td>
-					<td>105</td>
-					<td>185</td>
-					<td>84</td>
-					<td>22/10/2009</td>
-					<td><a href="https://suimidori.hatenablog.jp/entry/31045674">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>ranbapkm</td>
-					<td>548</td>
-					<td>132</td>
-					<td>198</td>
-					<td>140</td>
-					<td>78</td>
-					<td>07/12/2009</td>
-					<td><a href="http://ranbapkmn.blog85.fc2.com/blog-entry-99.html">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>shayminguy7</td>
-					<td>505</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>02/04/2010</td>
-					<td><a href="https://gamefaqs.gamespot.com/boards/960099-pokemon-heartgold-version/54194139">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Nerdrowwilson</td>
-					<td>533</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>04/04/2010</td>
-					<td><a href="https://gamefaqs.gamespot.com/boards/960099-pokemon-heartgold-version/54194139?page=2">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>NESKamikaze</td>
-					<td>527</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>12/04/2010</td>
-					<td><a href="https://www.supercheats.com/nintendods/walkthroughs/pokemonsoulsilver-walkthrough07.txt">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Joujou-Michael</td>
-					<td>540</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>20/04/2010</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-power-chart-c137946/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Eon80</td>
-					<td>545</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>19/06/2010</td>
-					<td><a href="https://www.neoseeker.com/forums/44117/t1543700-my-pokeathlon-guide/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>PsychoMugetsu</td>
-					<td>567</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>04/09/2010</td>
-					<td><a href="https://www.neoseeker.com/forums/44117/t1557977-pokeathlon-high-scores/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>eeci</td>
-					<td>570</td>
-					<td>140</td>
-					<td>198</td>
-					<td>185</td>
-					<td>47</td>
-					<td>12/12/2010</td>
-					<td><a href="https://www.neoseeker.com/forums/44116/t1523114-pokeathlon-records/3.htm">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>PokePoindexter</td>
-					<td>551</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>17/11/2011</td>
-					<td><a href="https://projectpokemon.org/home/forums/topic/11171-record-for-the-pokeathlon/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>ChaosZero_CDC</td>
-					<td>559</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>14/02/2012</td>
-					<td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-3">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Chimecho3000</td>
-					<td>567</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>07/03/2012</td>
-					<td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-3">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>Alex “mathfreak231” B</td>
-					<td>580</td>
-					<td>133</td>
-					<td>186</td>
-					<td>180</td>
-					<td>81</td>
-					<td>09/07/2015</td>
-					<td><a href="https://cyberscore.me.uk/charts/111816">Photo</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>hotdogturtle</td>
-					<td>590</td>
-					<td>140</td>
-					<td>198</td>
-					<td>160</td>
-					<td>92</td>
-					<td>23/04/2017</td>
-					<td><a href="https://cyberscore.me.uk/charts/111816">Photo</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>Linke</td>
-					<td>622</td>
-					<td>150</td>
-					<td>198</td>
-					<td>200</td>
-					<td>74</td>
-					<td>19/02/2020</td>
-					<td><a href="https://cyberscore.me.uk/charts/111816">Photo</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>Megane</td>
-					<td>594</td>
-					<td>150</td>
-					<td>198</td>
-					<td>180</td>
-					<td>66</td>
-					<td>18/09/2022</td>
-					<td><a href="https://megane0924.blog.jp/archives/47518542.html">Photo</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>Megane</td>
-					<td>605</td>
-					<td>117</td>
-					<td>198</td>
-					<td>200</td>
-					<td>90</td>
-					<td>08/10/2022</td>
-					<td><a href="https://megane0924.blog.jp/archives/47518542.html">Photo</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>BeafCultist</td>
-					<td>602</td>
-					<td>148</td>
-					<td>198</td>
-					<td>180</td>
-					<td>76</td>
-					<td>06/01/2024</td>
-					<td><a href="https://cyberscore.me.uk/charts/111816">Photo</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>CS__</td>
-					<td>653</td>
-					<td>158</td>
-					<td>198</td>
-					<td>195</td>
-					<td>102</td>
-					<td>22/08/2025</td>
-					<td><a href="https://www.smogon.com/forums/threads/pok%C3%A9athlon-records.3715012/page-2">Photo</a></td>
-				</tr>
-			</tbody>
-		</table>
-		</div>
+    <h2>Record History</h2>
+    <div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th data-sort-method='number'>Total Score</th>
+                <th data-sort-method='number'>Block Smash</th>
+                <th data-sort-method='number'>Circle Push</th>
+                <th data-sort-method='number'>Goal Roll</th>
+                <th data-sort-method='number'>Bonus Points</th>
+                <th>Date</th>
+                <th>Proof</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-proof="video">
+                <td>SkyHippowdon</td>
+                <td>394</td>
+                <td>67</td>
+                <td>93</td>
+                <td>160</td>
+                <td>74</td>
+                <td>17/09/2009</td>
+                <td><a href="https://www.youtube.com/watch?v=Ji4ZWR5aRiU">Video</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>hatena2</td>
+                <td>484</td>
+                <td>110</td>
+                <td>105</td>
+                <td>185</td>
+                <td>84</td>
+                <td>22/10/2009</td>
+                <td><a href="https://suimidori.hatenablog.jp/entry/31045674">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>ranbapkm</td>
+                <td>548</td>
+                <td>132</td>
+                <td>198</td>
+                <td>140</td>
+                <td>78</td>
+                <td>07/12/2009</td>
+                <td><a href="http://ranbapkmn.blog85.fc2.com/blog-entry-99.html">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>shayminguy7</td>
+                <td>505</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>02/04/2010</td>
+                <td><a href="https://gamefaqs.gamespot.com/boards/960099-pokemon-heartgold-version/54194139">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>Nerdrowwilson</td>
+                <td>533</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>04/04/2010</td>
+                <td><a href="https://gamefaqs.gamespot.com/boards/960099-pokemon-heartgold-version/54194139?page=2">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>NESKamikaze</td>
+                <td>527</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>12/04/2010</td>
+                <td><a href="https://www.supercheats.com/nintendods/walkthroughs/pokemonsoulsilver-walkthrough07.txt">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>Joujou-Michael</td>
+                <td>540</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>20/04/2010</td>
+                <td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-power-chart-c137946/index">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>Eon80</td>
+                <td>545</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>19/06/2010</td>
+                <td><a href="https://www.neoseeker.com/forums/44117/t1543700-my-pokeathlon-guide/">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>PsychoMugetsu</td>
+                <td>567</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>04/09/2010</td>
+                <td><a href="https://www.neoseeker.com/forums/44117/t1557977-pokeathlon-high-scores/">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>eeci</td>
+                <td>570</td>
+                <td>140</td>
+                <td>198</td>
+                <td>185</td>
+                <td>47</td>
+                <td>12/12/2010</td>
+                <td><a href="https://www.neoseeker.com/forums/44116/t1523114-pokeathlon-records/3.htm">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>PokePoindexter</td>
+                <td>551</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>17/11/2011</td>
+                <td><a href="https://projectpokemon.org/home/forums/topic/11171-record-for-the-pokeathlon/">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>ChaosZero_CDC</td>
+                <td>559</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>14/02/2012</td>
+                <td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-3">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>Chimecho3000</td>
+                <td>567</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>07/03/2012</td>
+                <td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-3">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="photo">
+                <td>Alex “mathfreak231” B</td>
+                <td>580</td>
+                <td>133</td>
+                <td>186</td>
+                <td>180</td>
+                <td>81</td>
+                <td>09/07/2015</td>
+                <td><a href="https://cyberscore.me.uk/charts/111816">Photo</a></td>
+            </tr>
+            <tr data-proof="photo">
+                <td>hotdogturtle</td>
+                <td>590</td>
+                <td>140</td>
+                <td>198</td>
+                <td>160</td>
+                <td>92</td>
+                <td>23/04/2017</td>
+                <td><a href="https://cyberscore.me.uk/charts/111816">Photo</a></td>
+            </tr>
+            <tr data-proof="photo">
+                <td>Linke</td>
+                <td>622</td>
+                <td>150</td>
+                <td>198</td>
+                <td>200</td>
+                <td>74</td>
+                <td>19/02/2020</td>
+                <td><a href="https://cyberscore.me.uk/charts/111816">Photo</a></td>
+            </tr>
+            <tr data-proof="photo">
+                <td>Megane</td>
+                <td>594</td>
+                <td>150</td>
+                <td>198</td>
+                <td>180</td>
+                <td>66</td>
+                <td>18/09/2022</td>
+                <td><a href="https://megane0924.blog.jp/archives/47518542.html">Photo</a></td>
+            </tr>
+            <tr data-proof="photo">
+                <td>Megane</td>
+                <td>605</td>
+                <td>117</td>
+                <td>198</td>
+                <td>200</td>
+                <td>90</td>
+                <td>08/10/2022</td>
+                <td><a href="https://megane0924.blog.jp/archives/47518542.html">Photo</a></td>
+            </tr>
+            <tr data-proof="photo">
+                <td>BeafCultist</td>
+                <td>602</td>
+                <td>148</td>
+                <td>198</td>
+                <td>180</td>
+                <td>76</td>
+                <td>06/01/2024</td>
+                <td><a href="https://cyberscore.me.uk/charts/111816">Photo</a></td>
+            </tr>
+            <tr data-proof="photo">
+                <td>CS__</td>
+                <td>653</td>
+                <td>158</td>
+                <td>198</td>
+                <td>195</td>
+                <td>102</td>
+                <td>22/08/2025</td>
+                <td><a href="https://www.smogon.com/forums/threads/pok%C3%A9athlon-records.3715012/page-2">Photo</a></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
 
-		<h2>Leaderboard Statistics</h2>
-		<div class="table-wrapper">
-		<table>
-			<thead>
-				<tr>
-					<th>Player</th>
-					<th data-sort-method='number'>Number of days at #1</th>
-					<th data-sort-method='number'>Number of days in Top 3 (positions 2-3)</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>PsychoMugetsu</td>
-					<td>99</td>
-					<td>2324</td>
-				</tr>
-				<tr>
-					<td>Alex “mathfreak231” B</td>
-					<td>654</td>
-					<td>1974</td>
-				</tr>
-				<tr>
-					<td>eeci</td>
-					<td>1670</td>
-					<td>1686</td>
-				</tr>
-				<tr>
-					<td>Chimecho3000</td>
-					<td>0</td>
-					<td>1219</td>
-				</tr>
-				<tr>
-					<td>Megane</td>
-					<td>0</td>
-					<td>1069</td>
-				</tr>
-				<tr>
-					<td>hotdogturtle</td>
-					<td>1032</td>
-					<td>962</td>
-				</tr>
-				<tr>
-					<td>BeafCultist</td>
-					<td>0</td>
-					<td>594</td>
-				</tr>
-				<tr>
-					<td>ranbapkm</td>
-					<td>271</td>
-					<td>439</td>
-				</tr>
-				<tr>
-					<td>Eon80</td>
-					<td>0</td>
-					<td>176</td>
-				</tr>
-				<tr>
-					<td>SkyHippowdon</td>
-					<td>35</td>
-					<td>162</td>
-				</tr>
-				<tr>
-					<td>Joujou-Michael</td>
-					<td>0</td>
-					<td>137</td>
-				</tr>
-				<tr>
-					<td>hatena2</td>
-					<td>46</td>
-					<td>118</td>
-				</tr>
-				<tr>
-					<td>PokePoindexter</td>
-					<td>0</td>
-					<td>89</td>
-				</tr>
-				<tr>
-					<td>Nerdrowwilson</td>
-					<td>0</td>
-					<td>76</td>
-				</tr>
-				<tr>
-					<td>ChaosZero_CDC</td>
-					<td>0</td>
-					<td>22</td>
-				</tr>
-				<tr>
-					<td>shayminguy7</td>
-					<td>0</td>
-					<td>10</td>
-				</tr>
-				<tr>
-					<td>NESKamikaze</td>
-					<td>0</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td>Linke</td>
-					<td>2011</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>CS__</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-			</tbody>
-		</table>
-		</div>
-		<script src="../js/tablesort.min.js"></script>
-		<script src="../js/tablesort.number.min.js"></script>
-		<script src="../js/tablesort.date.js"></script>
-		<script src="../js/sorting-logic.js"></script>
-		<script src="../js/theme-toggle.js"></script>
-		<script>
-			document.querySelectorAll('table').forEach(table => {
-				const sort = new Tablesort(table);
-			});
-		</script>
-	</body>
+    <h2>Leaderboard Statistics</h2>
+    <div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th data-sort-method='number'>Number of days at #1</th>
+                <th data-sort-method='number'>Number of days in Top 3 (positions 2-3)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>PsychoMugetsu</td>
+                <td>99</td>
+                <td>2324</td>
+            </tr>
+            <tr>
+                <td>Alex “mathfreak231” B</td>
+                <td>654</td>
+                <td>1974</td>
+            </tr>
+            <tr>
+                <td>eeci</td>
+                <td>1670</td>
+                <td>1686</td>
+            </tr>
+            <tr>
+                <td>Chimecho3000</td>
+                <td>0</td>
+                <td>1219</td>
+            </tr>
+            <tr>
+                <td>Megane</td>
+                <td>0</td>
+                <td>1069</td>
+            </tr>
+            <tr>
+                <td>hotdogturtle</td>
+                <td>1032</td>
+                <td>962</td>
+            </tr>
+            <tr>
+                <td>BeafCultist</td>
+                <td>0</td>
+                <td>594</td>
+            </tr>
+            <tr>
+                <td>ranbapkm</td>
+                <td>271</td>
+                <td>439</td>
+            </tr>
+            <tr>
+                <td>Eon80</td>
+                <td>0</td>
+                <td>176</td>
+            </tr>
+            <tr>
+                <td>SkyHippowdon</td>
+                <td>35</td>
+                <td>162</td>
+            </tr>
+            <tr>
+                <td>Joujou-Michael</td>
+                <td>0</td>
+                <td>137</td>
+            </tr>
+            <tr>
+                <td>hatena2</td>
+                <td>46</td>
+                <td>118</td>
+            </tr>
+            <tr>
+                <td>PokePoindexter</td>
+                <td>0</td>
+                <td>89</td>
+            </tr>
+            <tr>
+                <td>Nerdrowwilson</td>
+                <td>0</td>
+                <td>76</td>
+            </tr>
+            <tr>
+                <td>ChaosZero_CDC</td>
+                <td>0</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>shayminguy7</td>
+                <td>0</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>NESKamikaze</td>
+                <td>0</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>CS__</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Linke</td>
+                <td>2011</td>
+                <td>0</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <script src="../js/tablesort.min.js"></script>
+    <script src="../js/tablesort.number.min.js"></script>
+    <script src="../js/tablesort.date.js"></script>
+    <script src="../js/sorting-logic.js"></script>
+    <script src="../js/theme-toggle.js"></script>
+    <script>
+        document.querySelectorAll('table').forEach(table => {
+            const sort = new Tablesort(table);
+        });
+    </script>
+</body>
 </html>

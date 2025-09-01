@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ring Drop - Pokeathlon WRs</title>
+		<link rel="stylesheet" href="../style.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="../championship-trophy.svg" type="image/svg+xml">
+	</head>
+	<body>
+		<button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light theme">🌙</button>
+		<nav><a href="../index.html">← Back to All Events</a></nav>
+
+		<h1>Ring Drop WR</h1>
+
+		<h2>Current Record</h2>
+		<div class="table-wrapper">
+			<table>
+				<thead>
+					<tr>
+						<th>Score</th>
+						<th>Player</th>
+						<th>Date</th>
+						<th>Proof</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>200.0</td>
+						<td>Fry</td>
+						<td>2009-09-23</td>
+						<td><a href="https://ameblo.jp/tubapokemart/entry-10349141448.html">Link</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h2>Record History</h2>
+		<div class="table-wrapper">
+			<table>
+				<thead>
+					<tr>
+						<th>Player</th>
+						<th>Total Score</th>
+						<th>Date</th>
+						<th>Proof</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Fry</td>
+						<td>200.0</td>
+						<td>23/09/2009</td>
+						<td><a href="https://ameblo.jp/tubapokemart/entry-10349141448.html">Link</a></td>
+					</tr>
+					<tr>
+						<td>Hatena</td>
+						<td>174.0</td>
+						<td>22/10/2009</td>
+						<td><a href="https://suimidori.hatenablog.jp/entry/31045674">Link</a></td>
+					</tr>
+					<tr>
+						<td>ranbapkm</td>
+						<td>200.0</td>
+						<td>07/12/2009</td>
+						<td><a href="http://ranbapkmn.blog85.fc2.com/blog-entry-99.html">Link</a></td>
+					</tr>
+					<tr>
+						<td>鶴甕</td>
+						<td>179.0</td>
+						<td>13/02/2010</td>
+						<td><a href="https://jp.wazap.com/thread/%E3%83%9D%E3%82%B1%E3%82%B9%E3%83%AD%E3%83%B3%E8%A8%98%E9%8C%B2%E3%82%92%E6%9B%B8%E3%81%93%E3%81%86/378240/">Link</a></td>
+					</tr>
+					<tr>
+						<td>shayminguy7</td>
+						<td>180.0</td>
+						<td>02/04/2010</td>
+						<td><a href="https://gamefaqs.gamespot.com/boards/960099-pokemon-heartgold-version/54194139">Link</a></td>
+					</tr>
+					<tr>
+						<td>1337_FF_GoD</td>
+						<td>200.0</td>
+						<td>04/04/2010</td>
+						<td><a href="https://gamefaqs.gamespot.com/boards/960099-pokemon-heartgold-version/54194139?page=2">Link</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h2>Leaderboard Statistics</h2>
+		<div class="table-wrapper">
+			<table>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Number of days at #1</th>
+						<th>Number of days in Top 3</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>ranbapkm</td>
+						<td>0</td>
+						<td>5742</td>
+					</tr>
+					<tr>
+						<td>1337_FF_GoD</td>
+						<td>0</td>
+						<td>5624</td>
+					</tr>
+					<tr>
+						<td>Hatena</td>
+						<td>0</td>
+						<td>114</td>
+					</tr>
+					<tr>
+						<td>鶴甕</td>
+						<td>0</td>
+						<td>48</td>
+					</tr>
+					<tr>
+						<td>shayminguy7</td>
+						<td>0</td>
+						<td>2</td>
+					</tr>
+					<tr>
+						<td>Fry</td>
+						<td>5817</td>
+						<td>0</td>
+					</tr>
+			</tbody>
+			</table>
+		</div>
+		<script src="../js/tablesort.min.js"></script>
+		<script src="../js/tablesort.number.min.js"></script>
+		<script src="../js/tablesort.date.js"></script>
+		<script src="../js/theme-toggle.js"></script>
+		<script>
+			document.querySelectorAll('table').forEach(table => {
+			    const sort = new Tablesort(table);
+			});
+		</script>
+	</body>
+</html>
