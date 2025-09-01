@@ -1,1872 +1,392 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Stamina Course - Pokéathlon WRs</title>
-		<link rel="stylesheet" href="../style.css">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="icon" href="../championship-trophy.svg" type="image/svg+xml">
-	</head>
-	<body>
-		<button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light theme">🌙</button>
-		<nav><a href="../index.html">← Back to All Events</a></nav>
+<head>
+    <title>Stamina Course - Pokéathlon WRs</title>
+    <link rel="stylesheet" href="../style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../championship-trophy.svg" type="image/svg+xml">
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light theme">🌙</button>
+    <nav><a href="../index.html">← Back to All Events</a></nav>
 
-		<h1>Stamina Course</h1>
+    <h1>Stamina Course</h1>
 
-		<div class="filter-container">
-			<h3>Filter by Proof Type</h3>
-			<div class="filter-options">
-				<div class="filter-option">
-					<input type="radio" id="all-record" name="proofFilter" value="all-record" checked>
-					<label for="all-record">ALL RECORDS</label>
-			</div>
-				<div class="filter-option">
-					<input type="radio" id="verified-record" name="proofFilter" value="verified-record">
-					<label for="verified-record">VERIFIED RECORD</label>
-			</div>
-				<div class="filter-option">
-					<input type="radio" id="photo" name="proofFilter" value="photo">
-					<label for="photo">PHOTO</label>
-			</div>
-				<div class="filter-option">
-					<input type="radio" id="video" name="proofFilter" value="video">
-					<label for="video">VIDEO</label>
-			</div>
-				<div class="filter-option">
-					<input type="radio" id="livestream" name="proofFilter" value="livestream">
-					<label for="livestream">LIVESTREAM</label>
-			</div>
-		</div>
-			<div class="filter-info">
-				Choose how strict you want the proof requirements to be.
-			</div>
-		</div>
-		<div class="stats" id="stats">
-			Showing verified records
-		</div>
-        
-		<h2>Current Record</h2>
-		<div class="table-wrapper">
-		<table>
-			<thead>
-				<tr>
-					<th>Player</th>
-					<th>Total Score</th>
-					<th>Hurdle Dash</th>
-					<th>Pennant Capture</th>
-					<th>Relay Run</th>
-					<th>Bonus Points</th>
-					<th>Date</th>
-					<th>Proof</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr data-proof="photo">
-					<td>[[77]]Tanguy</td>
-					<td>650</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>21/02/2011</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Photo</a></td>
-				</tr>
-			</tbody>
-		</table>
-		</div>
+    <div class="filter-container">
+        <h3>Filter by Proof Type</h3>
+        <div class="filter-options">
+            <div class="filter-option">
+                <input type="radio" id="all-record" name="proofFilter" value="all-record" checked>
+                <label for="all-record">ALL RECORDS</label>
+            </div>
+            <div class="filter-option">
+                <input type="radio" id="verified-record" name="proofFilter" value="verified-record">
+                <label for="verified-record">VERIFIED RECORD</label>
+            </div>
+            <div class="filter-option">
+                <input type="radio" id="photo" name="proofFilter" value="photo">
+                <label for="photo">PHOTO</label>
+            </div>
+            <div class="filter-option">
+                <input type="radio" id="video" name="proofFilter" value="video">
+                <label for="video">VIDEO</label>
+            </div>
+            <div class="filter-option">
+                <input type="radio" id="livestream" name="proofFilter" value="livestream">
+                <label for="livestream">LIVESTREAM</label>
+            </div>
+        </div>
+        <div class="filter-info">
+            Choose how strict you want the proof requirements to be.
+        </div>
+    </div>
+    <div class="stats" id="stats">
+        Showing verified records
+    </div>
+    
+    <h2>Current Record</h2>
+    <div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Total Score</th>
+                <th>Ring Drop</th>
+                <th>Relay Run</th>
+                <th>Block Smash</th>
+                <th>Bonus Points</th>
+                <th>Date</th>
+                <th>Proof</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-proof="photo">
+                <td>[[77]]Tanguy</td>
+                <td>650</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>21/02/2011</td>
+                <td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Photo</a></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
 
-		<h2>Record History</h2>
-		<div class="table-wrapper">
-		<table>
-			<thead>
-				<tr>
-					<th>Player</th>
-					<th data-sort-method='number'>Total Score</th>
-					<th data-sort-method='number'>Hurdle Dash</th>
-					<th data-sort-method='number'>Pennant Capture</th>
-					<th data-sort-method='number'>Relay Run</th>
-					<th data-sort-method='number'>Bonus Points</th>
-					<th>Date</th>
-					<th>Proof</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr data-proof="claimed">
-					<td>[DX]CiaraJansonFan</td>
-					<td>339</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>04/04/2011</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Bownzinho</td>
-					<td>339</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>29/05/2011</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="video">
-					<td>SkyHippowdon</td>
-					<td>362</td>
-					<td>102</td>
-					<td>139</td>
-					<td>70</td>
-					<td>51</td>
-					<td>17/09/2009</td>
-					<td><a href="https://www.youtube.com/watch?v=Ji4ZWR5aRiU">Video</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>[⭐]nickwii77</td>
-					<td>371</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>07/12/2010</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>GrandMasterAish !</td>
-					<td>377</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>31/07/2011</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>[RS]Boullu</td>
-					<td>388</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>24/08/2010</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Photo</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>[SBEXP]PIERREL05</td>
-					<td>395</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>13/04/2010</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>ballistic Buizel</td>
-					<td>397</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>11/11/2011</td>
-					<td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-4">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Mugeli</td>
-					<td>399</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>10/08/2012</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>silver-sponge</td>
-					<td>400</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>19/11/2011</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>[GP]Darkabe</td>
-					<td>416</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>08/05/2010</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>zaldor</td>
-					<td>418</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>19/02/2014</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>LarXeneUS13</td>
-					<td>427</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>06/01/2015</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Ausgirl</td>
-					<td>430</td>
-					<td>171</td>
-					<td>101</td>
-					<td>50</td>
-					<td>50</td>
-					<td>16/10/2011</td>
-					<td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-2">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>[DS]ScaryDodge</td>
-					<td>434</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>24/04/2016</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>[FS]Thebestsilver7</td>
-					<td>438</td>
-					<td>200</td>
-					<td>112</td>
-					<td>62</td>
-					<td>64</td>
-					<td>21/05/2020</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Photo</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>Thebestsilver7</td>
-					<td>438</td>
-					<td>200</td>
-					<td>112</td>
-					<td>62</td>
-					<td>64</td>
-					<td>25/01/2022</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Photo</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Magiclapras</td>
-					<td>443</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>02/01/2011</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>[RS]elpierrot17</td>
-					<td>448</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>12/04/2010</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Lord Fighting</td>
-					<td>448</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>22/03/2012</td>
-					<td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-3">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>CrystalDragon</td>
-					<td>453</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>05/09/2010</td>
-					<td><a href="https://www.neoseeker.com/forums/44117/t1557977-pokeathlon-high-scores/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Dominitzk</td>
-					<td>456</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>17/02/2011</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Noble "nnmn" Prize</td>
-					<td>458</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>26/02/2018</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>jacob0057</td>
-					<td>461</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>10/12/2010</td>
-					<td><a href="https://www.neoseeker.com/forums/44116/t1523114-pokeathlon-records/3.htm">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Minccinostopaz</td>
-					<td>461</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>27/04/2013</td>
-					<td><a href="https://projectpokemon.org/home/forums/topic/11171-record-for-the-pokeathlon/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>TotalPotato</td>
-					<td>465</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>09/08/2011</td>
-					<td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-2">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>[Czn]daft.moustik</td>
-					<td>471</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>12/04/2010</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Volcaronick</td>
-					<td>471</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>28/12/2011</td>
-					<td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-3">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Chaos Team</td>
-					<td>473</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>19/06/2010</td>
-					<td><a href="https://www.neoseeker.com/forums/44117/t1543700-my-pokeathlon-guide/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>RaichuArcanine</td>
-					<td>475</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>30/07/2011</td>
-					<td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-2">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>Lennert "SaimeZX"</td>
-					<td>479</td>
-					<td>200</td>
-					<td>143</td>
-					<td>98</td>
-					<td>38</td>
-					<td>07/02/2014</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Photo</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>shayminguy7</td>
-					<td>483</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>02/04/2010</td>
-					<td><a href="https://gamefaqs.gamespot.com/boards/960099-pokemon-heartgold-version/54194139">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>[BF]BlackShark</td>
-					<td>484</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>13/04/2010</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>glukkers</td>
-					<td>484</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>16/02/2011</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Nerdrowwilson</td>
-					<td>486</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>04/04/2010</td>
-					<td><a href="https://gamefaqs.gamespot.com/boards/960099-pokemon-heartgold-version/54194139?page=2">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Eetu247</td>
-					<td>491</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>06/04/2013</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>NassaDane</td>
-					<td>492</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>16/05/2010</td>
-					<td><a href="https://gamefaqs.gamespot.com/boards/960099-pokemon-heartgold-version/54800054">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Angeltripper</td>
-					<td>493</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>14/08/2011</td>
-					<td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-2">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>SabreNightmare</td>
-					<td>493</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>21/05/2013</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>hatena2</td>
-					<td>494</td>
-					<td>189</td>
-					<td>138</td>
-					<td>105</td>
-					<td>62</td>
-					<td>22/10/2009</td>
-					<td><a href="https://suimidori.hatenablog.jp/entry/31045674">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>Pokemonmaster888</td>
-					<td>494</td>
-					<td>200</td>
-					<td>129</td>
-					<td>120</td>
-					<td>45</td>
-					<td>14/12/2014</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Photo</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>[GB]m251</td>
-					<td>495</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>28/08/2010</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="video">
-					<td>pikaby</td>
-					<td>497</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>04/04/2010</td>
-					<td><a href="https://www.youtube.com/watch?v=x9v31tg6TqI">Video</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>jacobthepokemonfreak</td>
-					<td>497</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>28/07/2011</td>
-					<td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>u/Wrong_Owl</td>
-					<td>498</td>
-					<td>200</td>
-					<td>125</td>
-					<td>100</td>
-					<td>73</td>
-					<td>15/05/2022</td>
-					<td><a href="https://www.reddit.com/r/pokemon/comments/sdqm0o/highest_scores_in_the_pokeathlon/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Acquarelle</td>
-					<td>502</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>08/08/2011</td>
-					<td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-2">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>disposable_heroes</td>
-					<td>502</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>25/09/2011</td>
-					<td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-2">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Axelf</td>
-					<td>503</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>24/12/2012</td>
-					<td><a href="https://forum.pokemonmillennium.net/topic/5754-record-pok%C3%A9athlon/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>[RS]Yoshi55</td>
-					<td>504</td>
-					<td>200</td>
-					<td>136</td>
-					<td>120</td>
-					<td>48</td>
-					<td>20/03/2011</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Photo</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>[B2H]Kanbei</td>
-					<td>504</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>01/05/2017</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>PiplupHG</td>
-					<td>504</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>28/12/2024</td>
-					<td><a href="https://discord.com">Photo</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>ash300383</td>
-					<td>505</td>
-					<td>200</td>
-					<td>149</td>
-					<td>106</td>
-					<td>50</td>
-					<td>23/07/2010</td>
-					<td><a href="https://www.neoseeker.com/forums/44117/t1557977-pokeathlon-high-scores/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>bond007106</td>
-					<td>506</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>30/09/2010</td>
-					<td><a href="https://www.neoseeker.com/forums/44117/t1557977-pokeathlon-high-scores/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Nintendofreak2245</td>
-					<td>506</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>19/08/2011</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Astragazer</td>
-					<td>506</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>18/08/2015</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>xAlien95</td>
-					<td>507</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>24/12/2012</td>
-					<td><a href="https://forum.pokemonmillennium.net/topic/5754-record-pok%C3%A9athlon/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>PyrosAWX</td>
-					<td>510</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>16/08/2010</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>DAMN.</td>
-					<td>511</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>24/12/2012</td>
-					<td><a href="https://forum.pokemonmillennium.net/topic/5754-record-pok%C3%A9athlon/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>BielR3</td>
-					<td>511</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>20/05/2014</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Tiigon</td>
-					<td>515</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>15/06/2012</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>NESKamikaze</td>
-					<td>516</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>12/04/2010</td>
-					<td><a href="https://www.supercheats.com/nintendods/walkthroughs/pokemonsoulsilver-walkthrough07.txt">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="video">
-					<td>King j</td>
-					<td>516</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>05/10/2010</td>
-					<td><a href="https://www.youtube.com/watch?v=n8zbXumsjkA">Video</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>PokePoindexter</td>
-					<td>516</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>17/11/2011</td>
-					<td><a href="https://projectpokemon.org/home/forums/topic/11171-record-for-the-pokeathlon/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>guest</td>
-					<td>517</td>
-					<td>189</td>
-					<td>167</td>
-					<td>111</td>
-					<td>50</td>
-					<td>09/04/2011</td>
-					<td><a href="https://www.neoseeker.com/forums/44116/t1523114-pokeathlon-records/3.htm">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>zapteryx</td>
-					<td>518</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>27/10/2011</td>
-					<td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-4">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>Lyto</td>
-					<td>518</td>
-					<td>199</td>
-					<td>171</td>
-					<td>90</td>
-					<td>58</td>
-					<td>05/06/2015</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Photo</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>MatthewOsk</td>
-					<td>519</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>12/04/2010</td>
-					<td><a href="https://www.supercheats.com/nintendods/walkthroughs/pokemonsoulsilver-walkthrough07.txt">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>dragon35</td>
-					<td>520</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>26/09/2011</td>
-					<td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-2">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Carby</td>
-					<td>520</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>05/03/2013</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Icedragon26</td>
-					<td>521</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>12/04/2010</td>
-					<td><a href="https://www.supercheats.com/nintendods/walkthroughs/pokemonsoulsilver-walkthrough07.txt">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>333609543</td>
-					<td>522</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>20/03/2015</td>
-					<td><a href="https://www.neoseeker.com/forums/44116/t1523114-pokeathlon-records/1.htm">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Angusman69</td>
-					<td>523</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>04/09/2011</td>
-					<td><a href="https://www.neoseeker.com/forums/44117/t1557977-pokeathlon-high-scores/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>[CA.fr]GiraPrimal</td>
-					<td>526</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>03/04/2013</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Snowden</td>
-					<td>528</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>10/05/2012</td>
-					<td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-3">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>PurpleOstrich47</td>
-					<td>528</td>
-					<td>200</td>
-					<td>171</td>
-					<td>120</td>
-					<td>37</td>
-					<td>29/07/2016</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Photo</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>alexnag</td>
-					<td>530</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>14/04/2012</td>
-					<td><a href="https://www.neoseeker.com/forums/44116/t1523114-pokeathlon-records/4.htm">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>hfactor66</td>
-					<td>531</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>29/09/2014</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Photo</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>hatena2</td>
-					<td>532</td>
-					<td>200</td>
-					<td>145</td>
-					<td>129</td>
-					<td>58</td>
-					<td>21/05/2010</td>
-					<td><a href="https://suimidori.hatenablog.jp/entry/33138404">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>[CA.fr]pkaddict58</td>
-					<td>532</td>
-					<td>200</td>
-					<td>132</td>
-					<td>122</td>
-					<td>78</td>
-					<td>08/07/2012</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Photo</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>u/Kingofawesomenes</td>
-					<td>532</td>
-					<td>200</td>
-					<td>152</td>
-					<td>119</td>
-					<td>61</td>
-					<td>24/07/2014</td>
-					<td><a href="https://www.reddit.com/r/pokemon/comments/2bmjh8/pokeathlon_world_record_thread/">Photo</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>[B2H]Joujou-Michael</td>
-					<td>533</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>20/04/2010</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="video">
-					<td>lolrandomnojoke</td>
-					<td>536</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>30/08/2011</td>
-					<td><a href="https://www.youtube.com/watch?v=Kq5YtVeBlE0">Video</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>ShinySephiroth</td>
-					<td>537</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>14/02/2011</td>
-					<td><a href="https://projectpokemon.org/home/forums/topic/11171-record-for-the-pokeathlon/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Krisi</td>
-					<td>538</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>28/01/2013</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Linke</td>
-					<td>540</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>22/12/2017</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Ayenamae</td>
-					<td>543</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>15/04/2011</td>
-					<td><a href="https://gamefaqs.gamespot.com/ds/960100-pokemon-soulsilver-version/faqs/59454">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>Alessio954</td>
-					<td>545</td>
-					<td>200</td>
-					<td>157</td>
-					<td>130</td>
-					<td>58</td>
-					<td>08/05/2019</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Photo</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>PsychoMugetsu</td>
-					<td>546</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>04/09/2010</td>
-					<td><a href="https://www.neoseeker.com/forums/44117/t1557977-pokeathlon-high-scores/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Chimecho3000</td>
-					<td>546</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>07/03/2012</td>
-					<td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-3">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Lechanceux</td>
-					<td>546</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>04/04/2012</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Sunny Day</td>
-					<td>549</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>06/03/2011</td>
-					<td><a href="https://projectpokemon.org/home/forums/topic/11171-record-for-the-pokeathlon/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>u/MarsAdept</td>
-					<td>551</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>27/01/2022</td>
-					<td><a href="https://www.reddit.com/r/pokemon/comments/sdqm0o/highest_scores_in_the_pokeathlon/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>PiplupSS</td>
-					<td>551</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>28/12/2024</td>
-					<td><a href="https://discord.com">Photo</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>[B2H]Basile</td>
-					<td>555</td>
-					<td>200</td>
-					<td>180</td>
-					<td>122</td>
-					<td>53</td>
-					<td>25/04/2010</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Photo</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>eeci</td>
-					<td>555</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>12/10/2010</td>
-					<td><a href="https://www.neoseeker.com/forums/44116/t1523114-pokeathlon-records/3.htm">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Basile "itachi55"</td>
-					<td>555</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>05/01/2019</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>FlamezOfGamez</td>
-					<td>557</td>
-					<td>200</td>
-					<td>155</td>
-					<td>135</td>
-					<td>67</td>
-					<td>22/07/2021</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Photo</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>ChaosZero_CDC</td>
-					<td>559</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>14/02/2012</td>
-					<td><a href="https://forums.serebii.net/threads/pokeathlon-discussion-and-records.529378/page-3">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>taib</td>
-					<td>564</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>15/04/2011</td>
-					<td><a href="https://gamefaqs.gamespot.com/ds/960100-pokemon-soulsilver-version/faqs/59454">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>u/BANTAVGC</td>
-					<td>564</td>
-					<td>200</td>
-					<td>146</td>
-					<td>149</td>
-					<td>69</td>
-					<td>29/10/2017</td>
-					<td><a href="https://www.reddit.com/r/pokemon/comments/79ird5/pokeathlon_world_records/">Photo</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>u/RBGolbat</td>
-					<td>565</td>
-					<td>174</td>
-					<td>130</td>
-					<td>61</td>
-					<td>200</td>
-					<td>30/10/2017</td>
-					<td><a href="https://www.reddit.com/r/pokemon/comments/79ird5/pokeathlon_world_records/">Photo</a></td>
-				</tr>
-				<tr data-proof="video">
-					<td>Andrew Reuter</td>
-					<td>567</td>
-					<td>200</td>
-					<td>173</td>
-					<td>145</td>
-					<td>49</td>
-					<td>12/10/2011</td>
-					<td><a href="https://www.youtube.com/watch?v=Lv4cF3Qrl8M">Video</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>u/YouMayNotKnowMeNow</td>
-					<td>569</td>
-					<td>200</td>
-					<td>170</td>
-					<td>122</td>
-					<td>77</td>
-					<td>01/08/2022</td>
-					<td><a href="https://www.reddit.com/r/pokemon/comments/sdqm0o/highest_scores_in_the_pokeathlon/">Photo</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>Megane</td>
-					<td>569</td>
-					<td>200</td>
-					<td>165</td>
-					<td>131</td>
-					<td>73</td>
-					<td>18/09/2022</td>
-					<td><a href="https://megane0924.blog.jp/archives/47518542.html">Photo</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Hikaru</td>
-					<td>570</td>
-					<td>200</td>
-					<td>165</td>
-					<td>131</td>
-					<td>74</td>
-					<td>20/01/2011</td>
-					<td><a href="https://plaza.rakuten.co.jp/ginnohikari/7003/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>vash_starfang</td>
-					<td>571</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>15/04/2011</td>
-					<td><a href="https://gamefaqs.gamespot.com/ds/960100-pokemon-soulsilver-version/faqs/59454">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>Megane</td>
-					<td>573</td>
-					<td>200</td>
-					<td>160</td>
-					<td>138</td>
-					<td>75</td>
-					<td>08/10/2022</td>
-					<td><a href="https://megane0924.blog.jp/archives/47518542.html">Photo</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>ranbapkm</td>
-					<td>580</td>
-					<td>200</td>
-					<td>200</td>
-					<td>130</td>
-					<td>50</td>
-					<td>07/12/2009</td>
-					<td><a href="http://ranbapkmn.blog85.fc2.com/blog-entry-99.html">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>Eon80</td>
-					<td>581</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>19/06/2010</td>
-					<td><a href="https://www.neoseeker.com/forums/44117/t1543700-my-pokeathlon-guide/">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>JustSayingHi</td>
-					<td>581</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>19/07/2014</td>
-					<td><a href="https://www.neoseeker.com/forums/44116/t1523114-pokeathlon-records/1.htm">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>Alex "mathfreak231" B</td>
-					<td>584</td>
-					<td>200</td>
-					<td>184</td>
-					<td>132</td>
-					<td>68</td>
-					<td>07/07/2015</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Photo</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>mathfreak231</td>
-					<td>584</td>
-					<td>200</td>
-					<td>184</td>
-					<td>132</td>
-					<td>68</td>
-					<td>29/09/2015</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Photo</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>BeafCultist</td>
-					<td>590</td>
-					<td>200</td>
-					<td>187</td>
-					<td>147</td>
-					<td>56</td>
-					<td>06/01/2024</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Photo</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>hotdogturtle</td>
-					<td>595</td>
-					<td>200</td>
-					<td>200</td>
-					<td>132</td>
-					<td>63</td>
-					<td>30/04/2017</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Photo</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>Linke</td>
-					<td>596</td>
-					<td>200</td>
-					<td>200</td>
-					<td>110</td>
-					<td>86</td>
-					<td>17/09/2024</td>
-					<td><a href="https://cyberscore.me.uk/games/864">Photo</a></td>
-				</tr>
-				<tr data-proof="claimed">
-					<td>eeci</td>
-					<td>600</td>
-					<td>200</td>
-					<td>200</td>
-					<td>151</td>
-					<td>49</td>
-					<td>12/12/2010</td>
-					<td><a href="https://www.neoseeker.com/forums/44116/t1523114-pokeathlon-records/3.htm">Claimed Only</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>u/BigCheeseNaan</td>
-					<td>628</td>
-					<td>200</td>
-					<td>199</td>
-					<td>160</td>
-					<td>69</td>
-					<td>13/10/2024</td>
-					<td><a href="https://www.reddit.com/r/pokemon/comments/79ird5/pokeathlon_world_records/">Photo</a></td>
-				</tr>
-				<tr data-proof="photo">
-					<td>[[77]]Tanguy</td>
-					<td>650</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-					<td>21/02/2011</td>
-					<td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Photo</a></td>
-				</tr>
-			</tbody>
-		</table>
-		</div>
+    <h2>Record History</h2>
+    <div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th data-sort-method='number'>Total Score</th>
+                <th data-sort-method='number'>Ring Drop</th>
+                <th data-sort-method='number'>Relay Run</th>
+                <th data-sort-method='number'>Block Smash</th>
+                <th data-sort-method='number'>Bonus Points</th>
+                <th>Date</th>
+                <th>Proof</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-proof="video">
+                <td>SkyHippowdon</td>
+                <td>362</td>
+                <td>102</td>
+                <td>139</td>
+                <td>70</td>
+                <td>51</td>
+                <td>17/09/2009</td>
+                <td><a href="https://www.youtube.com/watch?v=Ji4ZWR5aRiU">Video</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>hatena2</td>
+                <td>494</td>
+                <td>189</td>
+                <td>138</td>
+                <td>105</td>
+                <td>62</td>
+                <td>22/10/2009</td>
+                <td><a href="https://suimidori.hatenablog.jp/entry/31045674">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>ranbapkm</td>
+                <td>580</td>
+                <td>200</td>
+                <td>200</td>
+                <td>130</td>
+                <td>50</td>
+                <td>07/12/2009</td>
+                <td><a href="http://ranbapkmn.blog85.fc2.com/blog-entry-99.html">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>shayminguy7</td>
+                <td>483</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>02/04/2010</td>
+                <td><a href="https://gamefaqs.gamespot.com/boards/960099-pokemon-heartgold-version/54194139">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>Nerdrowwilson</td>
+                <td>486</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>04/04/2010</td>
+                <td><a href="https://gamefaqs.gamespot.com/boards/960099-pokemon-heartgold-version/54194139?page=2">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="video">
+                <td>pikaby</td>
+                <td>497</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>04/04/2010</td>
+                <td><a href="https://www.youtube.com/watch?v=x9v31tg6TqI">Video</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>NESKamikaze</td>
+                <td>516</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>12/04/2010</td>
+                <td><a href="https://www.supercheats.com/nintendods/walkthroughs/pokemonsoulsilver-walkthrough07.txt">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>MatthewOsk</td>
+                <td>519</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>12/04/2010</td>
+                <td><a href="https://www.supercheats.com/nintendods/walkthroughs/pokemonsoulsilver-walkthrough07.txt">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>Icedragon26</td>
+                <td>521</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>12/04/2010</td>
+                <td><a href="https://www.supercheats.com/nintendods/walkthroughs/pokemonsoulsilver-walkthrough07.txt">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>[B2H]Joujou-Michael</td>
+                <td>533</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>20/04/2010</td>
+                <td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="photo">
+                <td>[B2H]Basile</td>
+                <td>555</td>
+                <td>200</td>
+                <td>180</td>
+                <td>122</td>
+                <td>53</td>
+                <td>25/04/2010</td>
+                <td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Photo</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>Eon80</td>
+                <td>581</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>19/06/2010</td>
+                <td><a href="https://www.neoseeker.com/forums/44117/t1543700-my-pokeathlon-guide/">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="claimed">
+                <td>eeci</td>
+                <td>600</td>
+                <td>200</td>
+                <td>200</td>
+                <td>151</td>
+                <td>49</td>
+                <td>12/12/2010</td>
+                <td><a href="https://www.neoseeker.com/forums/44116/t1523114-pokeathlon-records/3.htm">Claimed Only</a></td>
+            </tr>
+            <tr data-proof="photo">
+                <td>[[77]]Tanguy</td>
+                <td>650</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>21/02/2011</td>
+                <td><a href="https://www.videogamesrecords.net/en/pok%C3%A9athlon-game-g2166/pok%C3%A9athlon-group-g7722/course-stamina-chart-c137948/index">Photo</a></td>
+            </tr>
+            <tr data-proof="photo">
+                <td>Alex "mathfreak231" B</td>
+                <td>584</td>
+                <td>200</td>
+                <td>184</td>
+                <td>132</td>
+                <td>68</td>
+                <td>07/07/2015</td>
+                <td><a href="https://cyberscore.me.uk/games/864">Photo</a></td>
+            </tr>
+            <tr data-proof="photo">
+                <td>hotdogturtle</td>
+                <td>595</td>
+                <td>200</td>
+                <td>200</td>
+                <td>132</td>
+                <td>63</td>
+                <td>30/04/2017</td>
+                <td><a href="https://cyberscore.me.uk/games/864">Photo</a></td>
+            </tr>
+            <tr data-proof="photo">
+                <td>Linke</td>
+                <td>596</td>
+                <td>200</td>
+                <td>200</td>
+                <td>110</td>
+                <td>86</td>
+                <td>17/09/2024</td>
+                <td><a href="https://cyberscore.me.uk/games/864">Photo</a></td>
+            </tr>
+            <tr data-proof="photo">
+                <td>u/BigCheeseNaan</td>
+                <td>628</td>
+                <td>200</td>
+                <td>199</td>
+                <td>160</td>
+                <td>69</td>
+                <td>13/10/2024</td>
+                <td><a href="https://www.reddit.com/r/pokemon/comments/79ird5/pokeathlon_world_records/">Photo</a></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
 
-		<h2>Leaderboard Statistics</h2>
-		<div class="table-wrapper">
-		<table>
-			<thead>
-				<tr>
-					<th>Player</th>
-					<th data-sort-method='number'>Number of days at #1</th>
-					<th data-sort-method='number'>Number of days in Top 3 (positions 2-3)</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>PsychoMugetsu</td>
-					<td>183</td>
-					<td>5046</td>
-				</tr>
-				<tr>
-					<td>Axelf</td>
-					<td>0</td>
-					<td>5032</td>
-				</tr>
-				<tr>
-					<td>[GB]m251</td>
-					<td>0</td>
-					<td>4424</td>
-				</tr>
-				<tr>
-					<td>u/YouMayNotKnowMeNow</td>
-					<td>0</td>
-					<td>4279</td>
-				</tr>
-				<tr>
-					<td>u/RBGolbat</td>
-					<td>0</td>
-					<td>3994</td>
-				</tr>
-				<tr>
-					<td>Chimecho3000</td>
-					<td>0</td>
-					<td>3613</td>
-				</tr>
-				<tr>
-					<td>u/MarsAdept</td>
-					<td>0</td>
-					<td>3177</td>
-				</tr>
-				<tr>
-					<td>LarXeneUS13</td>
-					<td>0</td>
-					<td>3140</td>
-				</tr>
-				<tr>
-					<td>Eon80</td>
-					<td>1844</td>
-					<td>3105</td>
-				</tr>
-				<tr>
-					<td>[RS]elpierrot17</td>
-					<td>146</td>
-					<td>2731</td>
-				</tr>
-				<tr>
-					<td>lolrandomnojoke</td>
-					<td>0</td>
-					<td>2503</td>
-				</tr>
-				<tr>
-					<td>ChaosZero_CDC</td>
-					<td>0</td>
-					<td>2390</td>
-				</tr>
-				<tr>
-					<td>Ausgirl</td>
-					<td>1652</td>
-					<td>2102</td>
-				</tr>
-				<tr>
-					<td>FlamezOfGamez</td>
-					<td>0</td>
-					<td>2084</td>
-				</tr>
-				<tr>
-					<td>ranbapkm</td>
-					<td>194</td>
-					<td>1844</td>
-				</tr>
-				<tr>
-					<td>ash300383</td>
-					<td>69</td>
-					<td>1783</td>
-				</tr>
-				<tr>
-					<td>taib</td>
-					<td>2390</td>
-					<td>1736</td>
-				</tr>
-				<tr>
-					<td>silver-sponge</td>
-					<td>0</td>
-					<td>1704</td>
-				</tr>
-				<tr>
-					<td>Megane</td>
-					<td>0</td>
-					<td>1685</td>
-				</tr>
-				<tr>
-					<td>Acquarelle</td>
-					<td>504</td>
-					<td>1589</td>
-				</tr>
-				<tr>
-					<td>hfactor66</td>
-					<td>0</td>
-					<td>1525</td>
-				</tr>
-				<tr>
-					<td>NESKamikaze</td>
-					<td>362</td>
-					<td>1518</td>
-				</tr>
-				<tr>
-					<td>xAlien95</td>
-					<td>0</td>
-					<td>1373</td>
-				</tr>
-				<tr>
-					<td>[Czn]daft.moustik</td>
-					<td>68</td>
-					<td>1329</td>
-				</tr>
-				<tr>
-					<td>Angusman69</td>
-					<td>577</td>
-					<td>1213</td>
-				</tr>
-				<tr>
-					<td>Eetu247</td>
-					<td>0</td>
-					<td>1101</td>
-				</tr>
-				<tr>
-					<td>zapteryx</td>
-					<td>0</td>
-					<td>1058</td>
-				</tr>
-				<tr>
-					<td>Basile "itachi55"</td>
-					<td>0</td>
-					<td>929</td>
-				</tr>
-				<tr>
-					<td>[RS]Boullu</td>
-					<td>0</td>
-					<td>850</td>
-				</tr>
-				<tr>
-					<td>Mugeli</td>
-					<td>0</td>
-					<td>823</td>
-				</tr>
-				<tr>
-					<td>glukkers</td>
-					<td>0</td>
-					<td>780</td>
-				</tr>
-				<tr>
-					<td>Carby</td>
-					<td>0</td>
-					<td>745</td>
-				</tr>
-				<tr>
-					<td>[DX]CiaraJansonFan</td>
-					<td>0</td>
-					<td>682</td>
-				</tr>
-				<tr>
-					<td>hatena2</td>
-					<td>310</td>
-					<td>634</td>
-				</tr>
-				<tr>
-					<td>Tiigon</td>
-					<td>0</td>
-					<td>584</td>
-				</tr>
-				<tr>
-					<td>mathfreak231</td>
-					<td>0</td>
-					<td>579</td>
-				</tr>
-				<tr>
-					<td>Alessio954</td>
-					<td>0</td>
-					<td>578</td>
-				</tr>
-				<tr>
-					<td>SabreNightmare</td>
-					<td>0</td>
-					<td>572</td>
-				</tr>
-				<tr>
-					<td>[B2H]Joujou-Michael</td>
-					<td>497</td>
-					<td>517</td>
-				</tr>
-				<tr>
-					<td>dragon35</td>
-					<td>0</td>
-					<td>510</td>
-				</tr>
-				<tr>
-					<td>u/Wrong_Owl</td>
-					<td>0</td>
-					<td>504</td>
-				</tr>
-				<tr>
-					<td>Krisi</td>
-					<td>1789</td>
-					<td>502</td>
-				</tr>
-				<tr>
-					<td>eeci</td>
-					<td>5054</td>
-					<td>490</td>
-				</tr>
-				<tr>
-					<td>zaldor</td>
-					<td>321</td>
-					<td>474</td>
-				</tr>
-				<tr>
-					<td>[FS]Thebestsilver7</td>
-					<td>0</td>
-					<td>445</td>
-				</tr>
-				<tr>
-					<td>GrandMasterAish !</td>
-					<td>0</td>
-					<td>444</td>
-				</tr>
-				<tr>
-					<td>JustSayingHi</td>
-					<td>0</td>
-					<td>437</td>
-				</tr>
-				<tr>
-					<td>[RS]Yoshi55</td>
-					<td>0</td>
-					<td>392</td>
-				</tr>
-				<tr>
-					<td>King j</td>
-					<td>0</td>
-					<td>387</td>
-				</tr>
-				<tr>
-					<td>Lennert "SaimeZX"</td>
-					<td>0</td>
-					<td>320</td>
-				</tr>
-				<tr>
-					<td>Angeltripper</td>
-					<td>0</td>
-					<td>310</td>
-				</tr>
-				<tr>
-					<td>Alex "mathfreak231" B</td>
-					<td>3105</td>
-					<td>255</td>
-				</tr>
-				<tr>
-					<td>333609543</td>
-					<td>0</td>
-					<td>249</td>
-				</tr>
-				<tr>
-					<td>Noble "nnmn" Prize</td>
-					<td>0</td>
-					<td>242</td>
-				</tr>
-				<tr>
-					<td>Magiclapras</td>
-					<td>0</td>
-					<td>146</td>
-				</tr>
-				<tr>
-					<td>jacob0057</td>
-					<td>242</td>
-					<td>141</td>
-				</tr>
-				<tr>
-					<td>Linke</td>
-					<td>0</td>
-					<td>71</td>
-				</tr>
-				<tr>
-					<td>TotalPotato</td>
-					<td>0</td>
-					<td>68</td>
-				</tr>
-				<tr>
-					<td>[BF]BlackShark</td>
-					<td>0</td>
-					<td>42</td>
-				</tr>
-				<tr>
-					<td>hotdogturtle</td>
-					<td>2697</td>
-					<td>26</td>
-				</tr>
-				<tr>
-					<td>jacobthepokemonfreak</td>
-					<td>0</td>
-					<td>11</td>
-				</tr>
-				<tr>
-					<td>[SBEXP]PIERREL05</td>
-					<td>577</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td>SkyHippowdon</td>
-					<td>446</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Lechanceux</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Volcaronick</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>PokePoindexter</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>[⭐]nickwii77</td>
-					<td>236</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Lord Fighting</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Thebestsilver7</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Bownzinho</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>PyrosAWX</td>
-					<td>861</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>MatthewOsk</td>
-					<td>532</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Ayenamae</td>
-					<td>2945</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Icedragon26</td>
-					<td>1803</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Hikaru</td>
-					<td>85</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>BeafCultist</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>PurpleOstrich47</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>vash_starfang</td>
-					<td>4194</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>[B2H]Kanbei</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Sunny Day</td>
-					<td>3980</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>NassaDane</td>
-					<td>455</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>u/BigCheeseNaan</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>RaichuArcanine</td>
-					<td>923</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>ShinySephiroth</td>
-					<td>714</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>[B2H]Basile</td>
-					<td>4106</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Pokemonmaster888</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Minccinostopaz</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>[[77]]Tanguy</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>[CA.fr]GiraPrimal</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Nerdrowwilson</td>
-					<td>1098</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Lyto</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>[DS]ScaryDodge</td>
-					<td>1488</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Chaos Team</td>
-					<td>406</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>ballistic Buizel</td>
-					<td>273</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Snowden</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>guest</td>
-					<td>201</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>pikaby</td>
-					<td>4424</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>disposable_heroes</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Dominitzk</td>
-					<td>2566</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>CrystalDragon</td>
-					<td>165</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>alexnag</td>
-					<td>898</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>[CA.fr]pkaddict58</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>BielR3</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>PiplupSS</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>shayminguy7</td>
-					<td>11</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Nintendofreak2245</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>u/Kingofawesomenes</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>bond007106</td>
-					<td>816</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Astragazer</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>[GP]Darkabe</td>
-					<td>1383</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>PiplupHG</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>Andrew Reuter</td>
-					<td>3946</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>DAMN.</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>u/BANTAVGC</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-			</tbody>
-		</table>
-		</div>
-		<script src="../js/tablesort.min.js"></script>
-		<script src="../js/tablesort.number.min.js"></script>
-		<script src="../js/tablesort.date.js"></script>
-		<script src="../js/sorting-logic.js"></script>
-		<script src="../js/theme-toggle.js"></script>
-		<script>
-			document.querySelectorAll('table').forEach(table => {
-				const sort = new Tablesort(table);
-			});
-		</script>
-	</body>
+    <h2>Leaderboard Statistics</h2>
+    <div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th data-sort-method='number'>Number of days at #1</th>
+                <th data-sort-method='number'>Number of days in Top 3 (positions 2-3)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>eeci</td>
+                <td>71</td>
+                <td>5059</td>
+            </tr>
+            <tr>
+                <td>hotdogturtle</td>
+                <td>0</td>
+                <td>2697</td>
+            </tr>
+            <tr>
+                <td>Eon80</td>
+                <td>176</td>
+                <td>1668</td>
+            </tr>
+            <tr>
+                <td>Alex "mathfreak231" B</td>
+                <td>0</td>
+                <td>663</td>
+            </tr>
+            <tr>
+                <td>ranbapkm</td>
+                <td>194</td>
+                <td>247</td>
+            </tr>
+            <tr>
+                <td>[B2H]Basile</td>
+                <td>0</td>
+                <td>231</td>
+            </tr>
+            <tr>
+                <td>SkyHippowdon</td>
+                <td>35</td>
+                <td>162</td>
+            </tr>
+            <tr>
+                <td>hatena2</td>
+                <td>46</td>
+                <td>126</td>
+            </tr>
+            <tr>
+                <td>u/BigCheeseNaan</td>
+                <td>0</td>
+                <td>76</td>
+            </tr>
+            <tr>
+                <td>[B2H]Joujou-Michael</td>
+                <td>0</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>Linke</td>
+                <td>0</td>
+                <td>26</td>
+            </tr>
+            <tr>
+                <td>Icedragon26</td>
+                <td>0</td>
+                <td>13</td>
+            </tr>
+            <tr>
+                <td>pikaby</td>
+                <td>0</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>MatthewOsk</td>
+                <td>0</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>shayminguy7</td>
+                <td>0</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>Nerdrowwilson</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>[[77]]Tanguy</td>
+                <td>5059</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>NESKamikaze</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <script src="../js/tablesort.min.js"></script>
+    <script src="../js/tablesort.number.min.js"></script>
+    <script src="../js/tablesort.date.js"></script>
+    <script src="../js/sorting-logic.js"></script>
+    <script src="../js/theme-toggle.js"></script>
+    <script>
+        document.querySelectorAll('table').forEach(table => {
+            const sort = new Tablesort(table);
+        });
+    </script>
+</body>
 </html>
