@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pokeathlonhub.github.io/data/players.schema.json",
+  "title": "PokeathlonHub Players Data",
+  "description": "Schema for the player-centric Pokeathlon world records data",
+  "type": "object",
+  "required": ["metadata", "players"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["version", "generatedAt", "source"],
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Schema version"
+        },
+        "generatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the data was generated"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the data (e.g., csv_migration, manual)"
+        },
+        "totalPlayers": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "totalCourseRecords": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "totalEventRecords": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "players": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/player"
+      }
+    }
+  },
+  "$defs": {
+    "player": {
+      "type": "object",
+      "required": ["name", "courseRecords", "eventRecords"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Player display name"
+        },
+        "country": {
+          "type": "string",
+          "description": "Player's country"
+        },
+        "firstRecordDate": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "Date of first record submission"
+        },
+        "lastActiveDate": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "Date of most recent record submission"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "inactive", "retired"],
+          "description": "Player activity status"
+        },
+        "courseRecords": {
+          "type": "object",
+          "properties": {
+            "speed": { "$ref": "#/$defs/courseRecordList" },
+            "power": { "$ref": "#/$defs/courseRecordList" },
+            "skill": { "$ref": "#/$defs/courseRecordList" },
+            "stamina": { "$ref": "#/$defs/courseRecordList" },
+            "jump": { "$ref": "#/$defs/courseRecordList" }
+          },
+          "additionalProperties": false
+        },
+        "eventRecords": {
+          "type": "object",
+          "properties": {
+            "hurdle-dash": { "$ref": "#/$defs/eventRecordList" },
+            "pennant-capture": { "$ref": "#/$defs/eventRecordList" },
+            "circle-push": { "$ref": "#/$defs/eventRecordList" },
+            "block-smash": { "$ref": "#/$defs/eventRecordList" },
+            "disc-catch": { "$ref": "#/$defs/eventRecordList" },
+            "lamp-jump": { "$ref": "#/$defs/eventRecordList" },
+            "relay-run": { "$ref": "#/$defs/eventRecordList" },
+            "ring-drop": { "$ref": "#/$defs/eventRecordList" },
+            "snow-throw": { "$ref": "#/$defs/eventRecordList" },
+            "goal-roll": { "$ref": "#/$defs/eventRecordList" }
+          },
+          "additionalProperties": false
+        },
+        "statistics": {
+          "type": "object",
+          "properties": {
+            "totalRecordsSubmitted": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "currentWorldRecords": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "personalBests": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "progression": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/progressionEntry"
+          }
+        }
+      }
+    },
+    "courseRecordList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/courseRecord"
+      }
+    },
+    "courseRecord": {
+      "type": "object",
+      "required": ["totalScore"],
+      "properties": {
+        "totalScore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 800,
+          "description": "Total course score"
+        },
+        "eventScores": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 200
+          },
+          "description": "Individual event scores within the course"
+        },
+        "bonusPoints": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 200,
+          "description": "Bonus points earned"
+        },
+        "date": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "Date of the record"
+        },
+        "proof": {
+          "$ref": "#/$defs/proof"
+        }
+      }
+    },
+    "eventRecordList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/eventRecord"
+      }
+    },
+    "eventRecord": {
+      "type": "object",
+      "required": ["score"],
+      "properties": {
+        "score": {
+          "type": "number",
+          "description": "Raw event score"
+        },
+        "date": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "Date of the record"
+        },
+        "proof": {
+          "$ref": "#/$defs/proof"
+        }
+      }
+    },
+    "proof": {
+      "type": ["object", "null"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["video", "photo", "claimed"],
+          "description": "Type of proof provided"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the proof"
+        }
+      }
+    },
+    "progressionEntry": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": ["string", "null"],
+          "format": "date"
+        },
+        "category": {
+          "type": "string",
+          "description": "Course or event ID"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["course", "event"]
+        },
+        "event": {
+          "type": "string",
+          "enum": ["new_pb", "first_record", "new_record"]
+        },
+        "previousScore": {
+          "type": ["number", "null"]
+        },
+        "newScore": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

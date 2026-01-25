@@ -1,119 +1,266 @@
-import csv
-from datetime import datetime
+#!/usr/bin/env python3
+"""
+HTML Generator for Pokeathlon World Records
+
+Generates static HTML pages from player-centric JSON data and YAML configuration.
+"""
+
+import json
 import os
+import math
+from datetime import datetime, date
 
-def parse_number(value):
-    """Parse a number from string, handling commas and empty values"""
-    if not value or value.strip() == '':
-        return None
-    try:
-        return float(value.replace(",", "."))
-    except:
-        return None
+# Try to import PyYAML, fall back to basic parsing if not available
+try:
+    import yaml
+    HAS_YAML = True
+except ImportError:
+    HAS_YAML = False
 
-def parse_date(value):
-    """Parse a date from DD/MM/YYYY format"""
-    try:
-        return datetime.strptime(value.strip(), "%d/%m/%Y").date()
-    except:
-        return None
 
-def get_proof_type(photo_val, link):
-    """Determine proof type based on photo column and link"""
-    if photo_val and photo_val.lower() == 'y':
-        return 'video' if ('youtube.com' in link or 'youtu.be' in link) else 'photo'
-    return 'claimed'
-
-def format_proof_link(link, proof_type, is_event=False):
-    """Format the proof link with appropriate text"""
-    if proof_type == 'video':
-        return f'<a href="{link}">Video</a>'
-    elif proof_type == 'photo':
-        return f'<a href="{link}">Photo</a>'
+def load_yaml(filepath):
+    """Load a YAML file."""
+    if HAS_YAML:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            return yaml.safe_load(f)
     else:
-        return f'<a href="{link}">{"Link" if is_event else "Claimed Only"}</a>'
+        # Simple fallback parser for our specific YAML structure
+        return parse_yaml_simple(filepath)
 
-def analyze_leaderboard(file_path, score_col, date_col, link_col, lower_is_better=False, 
-                       event1_col=None, event2_col=None, event3_col=None, bonus_col=None):
-    """Analyze leaderboard changes and return statistics"""
-    top_scores = []
-    top3_changes = []
+
+def parse_yaml_simple(filepath):
+    """Simple YAML parser for our specific config structure."""
+    result = {}
+    current_section = None
+    current_item = None
+    current_subitem = None
+
+    with open(filepath, 'r', encoding='utf-8') as f:
+        for line in f:
+            stripped = line.rstrip()
+            if not stripped or stripped.startswith('#'):
+                continue
+
+            indent = len(line) - len(line.lstrip())
+
+            if indent == 0 and ':' in stripped:
+                key = stripped.split(':')[0].strip()
+                result[key] = {}
+                current_section = key
+                current_item = None
+            elif indent == 2 and ':' in stripped:
+                key = stripped.split(':')[0].strip()
+                value = stripped.split(':', 1)[1].strip() if ':' in stripped else None
+                if current_section:
+                    if value and value != '':
+                        result[current_section][key] = parse_yaml_value(value)
+                    else:
+                        result[current_section][key] = {}
+                    current_item = key
+                    current_subitem = None
+            elif indent == 4 and ':' in stripped:
+                key = stripped.split(':')[0].strip()
+                value = stripped.split(':', 1)[1].strip() if ':' in stripped else ''
+                if current_section and current_item:
+                    if isinstance(result[current_section][current_item], dict):
+                        if value and not value.startswith('-'):
+                            result[current_section][current_item][key] = parse_yaml_value(value)
+                        else:
+                            result[current_section][current_item][key] = []
+                        current_subitem = key
+            elif indent == 4 and stripped.startswith('- '):
+                value = stripped[2:].strip()
+                if current_section and current_item and current_subitem:
+                    result[current_section][current_item][current_subitem].append(value)
+            elif indent == 6 and ':' in stripped:
+                key = stripped.split(':')[0].strip()
+                value = stripped.split(':', 1)[1].strip()
+                if current_section and current_item and current_subitem:
+                    if not isinstance(result[current_section][current_item][current_subitem], dict):
+                        result[current_section][current_item][current_subitem] = {}
+                    result[current_section][current_item][current_subitem][key] = parse_yaml_value(value)
+
+    return result
+
+
+def parse_yaml_value(value):
+    """Parse a YAML value to appropriate Python type."""
+    if value in ('true', 'True'):
+        return True
+    if value in ('false', 'False'):
+        return False
+    if value in ('null', 'None', '~'):
+        return None
+    if value.startswith('"') and value.endswith('"'):
+        return value[1:-1]
+    if value.startswith("'") and value.endswith("'"):
+        return value[1:-1]
+    try:
+        return int(value)
+    except ValueError:
+        try:
+            return float(value)
+        except ValueError:
+            return value
+
+
+def load_players(filepath):
+    """Load players.json data."""
+    with open(filepath, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
+def load_config():
+    """Load configuration from YAML files."""
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    config_dir = os.path.join(base_dir, 'data', 'config')
+
+    courses_file = os.path.join(config_dir, 'courses.yaml')
+    events_file = os.path.join(config_dir, 'events.yaml')
+
+    courses = load_yaml(courses_file).get('courses', {})
+    events = load_yaml(events_file).get('events', {})
+
+    return {'courses': courses, 'events': events}
+
+
+def parse_date(date_str):
+    """Parse an ISO date string to date object."""
+    if not date_str:
+        return None
+    try:
+        return datetime.fromisoformat(date_str).date()
+    except (ValueError, TypeError):
+        return None
+
+
+def format_date(date_obj, fmt="%d/%m/%Y"):
+    """Format a date object to string."""
+    if date_obj:
+        return date_obj.strftime(fmt)
+    return '--'
+
+
+def get_proof_type(proof):
+    """Get proof type from proof object."""
+    if not proof:
+        return 'claimed'
+    return proof.get('type', 'claimed')
+
+
+def format_proof_link(proof, is_event=False):
+    """Format proof link for HTML output."""
+    if not proof or not proof.get('url'):
+        return 'N/A'
+
+    url = proof['url']
+    proof_type = proof.get('type', 'claimed')
+
+    if proof_type == 'video':
+        return f'<a href="{url}">Video</a>'
+    elif proof_type == 'photo':
+        return f'<a href="{url}">Photo</a>'
+    else:
+        return f'<a href="{url}">{"Link" if is_event else "Claimed Only"}</a>'
+
+
+def calculate_points(score, event_id, events_config):
+    """Calculate points from raw score using event formula."""
+    event_config = events_config.get(event_id, {})
+    max_points = event_config.get('max_points', 200)
+
+    formulas = {
+        'hurdle-dash': lambda s: math.floor(11500 / s) if s > 0 else 0,
+        'pennant-capture': lambda s: int(s * 3),
+        'circle-push': lambda s: int(s * 3),
+        'block-smash': lambda s: int(s),
+        'disc-catch': lambda s: int(150 - (1500 / (s + 12.5))),
+        'lamp-jump': lambda s: math.floor(s / 3.5),
+        'relay-run': lambda s: int(s * 10),
+        'ring-drop': lambda s: int(s * 1.5),
+        'snow-throw': lambda s: int(s * 3),
+        'goal-roll': lambda s: int(100 + (s * 5))
+    }
+
+    formula_fn = formulas.get(event_id, lambda s: int(s))
+    return min(max_points, formula_fn(score))
+
+
+def get_course_leaderboard(players_data, course_id, config):
+    """
+    Get course leaderboard with best score per player and historical statistics.
+    Returns: (all_records, best_per_player, first_holder_days, top23_presence_days)
+    """
+    players = players_data.get('players', {})
+    all_records = []
+
+    # Collect all records with dates
+    for player_name, player in players.items():
+        course_records = player.get('courseRecords', {}).get(course_id, [])
+        for record in course_records:
+            record_date = parse_date(record.get('date'))
+            if record_date and record.get('totalScore'):
+                all_records.append({
+                    'player': player_name,
+                    'total_score': record['totalScore'],
+                    'event_scores': record.get('eventScores', {}),
+                    'bonus_points': record.get('bonusPoints'),
+                    'date': record_date,
+                    'proof': record.get('proof')
+                })
+
+    # Sort by date
+    all_records.sort(key=lambda r: r['date'])
+
+    # Calculate leaderboard statistics
+    top3 = []
     first_place_periods = []
     top23_periods = {}
-    current_top23_holders = {}
     current_first_holder = None
     current_first_start = None
-    all_records = []
+    current_top23_holders = {}
     record_improvements = []
-    
-    with open(file_path, newline='', encoding='utf-8') as f:
-        reader = csv.reader(f)
-        rows = list(reader)
-        
-        # Parse all records
-        for i, row in enumerate(rows[1:], 1):
-            if len(row) < max(score_col, date_col):
-                continue
-                
-            record = {
-                'row_num': i + 1,
-                'player': row[0].strip(),
-                'total_score': parse_number(row[score_col - 1]),
-                'event1': parse_number(row[event1_col - 1]) if event1_col and len(row) >= event1_col else None,
-                'event2': parse_number(row[event2_col - 1]) if event2_col and len(row) >= event2_col else None,
-                'event3': parse_number(row[event3_col - 1]) if event3_col and len(row) >= event3_col else None,
-                'bonus_points': parse_number(row[bonus_col - 1]) if bonus_col and len(row) >= bonus_col else None,
-                'date': parse_date(row[date_col - 1]),
-                'link': row[link_col - 1] if len(row) >= link_col else '',
-                'photo': row[9] if len(row) > 9 else 'n'
-            }
-            
-            if record['total_score'] is None or record['date'] is None:
-                continue
-            all_records.append(record)
-        
-        # Analyze leaderboard changes
-        for record in all_records:
-            previous_top3 = top_scores.copy()
-            previous_first = top_scores[0] if top_scores else None
-            
-            # Update leaderboard
-            top_scores.append((record['row_num'], record['player'], record['total_score'], record))
-            top_scores.sort(key=lambda x: (x[2] if lower_is_better else -x[2], x[0]))
-            top_scores = top_scores[:3]
-            
-            # Check if leaderboard changed
-            if top_scores != previous_top3:
-                new_top23_names = set(entry[1] for entry in top_scores[1:])
-                
-                # End periods for players no longer in positions 2-3
-                for player, start_date in current_top23_holders.items():
-                    if player not in new_top23_names:
-                        if player not in top23_periods:
-                            top23_periods[player] = []
-                        top23_periods[player].append((start_date, record['date']))
-                
-                # Handle first place changes
-                new_first = top_scores[0]
-                if previous_first and new_first[1] != previous_first[1]:
-                    if current_first_holder and current_first_start:
-                        first_place_periods.append((current_first_holder, current_first_start, record['date']))
-                    current_first_holder = new_first[1]
-                    current_first_start = record['date']
-                elif not previous_first:
-                    current_first_holder = new_first[1]
-                    current_first_start = record['date']
-                
-                # Start new periods for players entering positions 2-3
-                new_top23_holders = {}
-                for entry in top_scores[1:]:
-                    player = entry[1]
-                    new_top23_holders[player] = current_top23_holders.get(player, record['date'])
-                
-                current_top23_holders = new_top23_holders
-                record_improvements.append(record['row_num'])
-                top3_changes.append((record['row_num'], [(n, s, r) for _, n, s, r in top_scores], record['date']))
-    
+
+    for record in all_records:
+        previous_top3 = top3.copy()
+        previous_first = top3[0] if top3 else None
+
+        # Update top 3
+        top3.append((record['player'], record['total_score'], record))
+        top3.sort(key=lambda x: -x[1])
+        top3 = top3[:3]
+
+        # Check if leaderboard changed
+        if [(p, s) for p, s, _ in top3] != [(p, s) for p, s, _ in previous_top3]:
+            new_top23_names = set(entry[0] for entry in top3[1:])
+
+            # End periods for players no longer in positions 2-3
+            for player, start_date in list(current_top23_holders.items()):
+                if player not in new_top23_names:
+                    if player not in top23_periods:
+                        top23_periods[player] = []
+                    top23_periods[player].append((start_date, record['date']))
+
+            # Handle first place changes
+            new_first = top3[0]
+            if previous_first and new_first[0] != previous_first[0]:
+                if current_first_holder and current_first_start:
+                    first_place_periods.append((current_first_holder, current_first_start, record['date']))
+                current_first_holder = new_first[0]
+                current_first_start = record['date']
+            elif not previous_first:
+                current_first_holder = new_first[0]
+                current_first_start = record['date']
+
+            # Start new periods for players entering positions 2-3
+            new_top23_holders = {}
+            for entry in top3[1:]:
+                player = entry[0]
+                new_top23_holders[player] = current_top23_holders.get(player, record['date'])
+            current_top23_holders = new_top23_holders
+
+            record_improvements.append(record)
+
     # End final periods
     if all_records:
         final_date = all_records[-1]['date']
@@ -121,152 +268,238 @@ def analyze_leaderboard(file_path, score_col, date_col, link_col, lower_is_bette
             if player not in top23_periods:
                 top23_periods[player] = []
             top23_periods[player].append((start_date, final_date))
-        
+
         if current_first_holder and current_first_start:
             first_place_periods.append((current_first_holder, current_first_start, final_date))
-    
+
     # Calculate total days
     first_holder_days = {}
     top23_presence_days = {}
-    
+
     for player, start_date, end_date in first_place_periods:
         days = max(0, (end_date - start_date).days)
         first_holder_days[player] = first_holder_days.get(player, 0) + days
-    
+
     for player, periods in top23_periods.items():
         total_days = sum(max(0, (end_date - start_date).days) for start_date, end_date in periods)
         top23_presence_days[player] = total_days
-    
-    return all_records, top3_changes, first_holder_days, top23_presence_days, record_improvements
 
-def generate_simple_html(course_name, all_records, top3_changes, first_holder_days, top23_presence_days, output_file, lower_is_better=False):
-    """Generate simple HTML file for events"""
-    current_record = (min if lower_is_better else max)(all_records, key=lambda x: x['total_score']) if all_records else None
-    improvement_rows = set(row_num for row_num, _, _ in top3_changes)
-    record_history = [r for r in all_records if r['row_num'] in improvement_rows]
-    
+    # Get current best per player
+    best_per_player = {}
+    for player_name, player in players.items():
+        course_records = player.get('courseRecords', {}).get(course_id, [])
+        if course_records:
+            best = max(course_records, key=lambda r: r.get('totalScore', 0))
+            best_per_player[player_name] = best
+
+    return all_records, record_improvements, first_holder_days, top23_presence_days
+
+
+def get_event_leaderboard(players_data, event_id, events_config):
+    """
+    Get event leaderboard with best score per player and historical statistics.
+    """
+    players = players_data.get('players', {})
+    event_config = events_config.get(event_id, {})
+    lower_is_better = event_config.get('lower_is_better', False)
+    all_records = []
+
+    # Collect all records with dates
+    for player_name, player in players.items():
+        event_records = player.get('eventRecords', {}).get(event_id, [])
+        for record in event_records:
+            record_date = parse_date(record.get('date'))
+            if record_date and record.get('score') is not None:
+                all_records.append({
+                    'player': player_name,
+                    'score': record['score'],
+                    'date': record_date,
+                    'proof': record.get('proof')
+                })
+
+    # Sort by date
+    all_records.sort(key=lambda r: r['date'])
+
+    # Calculate leaderboard statistics (similar to course but for events)
+    top3 = []
+    first_place_periods = []
+    top23_periods = {}
+    current_first_holder = None
+    current_first_start = None
+    current_top23_holders = {}
+    record_improvements = []
+
+    for record in all_records:
+        previous_top3 = top3.copy()
+        previous_first = top3[0] if top3 else None
+
+        # Update top 3
+        top3.append((record['player'], record['score'], record))
+        if lower_is_better:
+            top3.sort(key=lambda x: (x[1], all_records.index(x[2]) if x[2] in all_records else 0))
+        else:
+            top3.sort(key=lambda x: (-x[1], all_records.index(x[2]) if x[2] in all_records else 0))
+        top3 = top3[:3]
+
+        # Check if leaderboard changed
+        if [(p, s) for p, s, _ in top3] != [(p, s) for p, s, _ in previous_top3]:
+            new_top23_names = set(entry[0] for entry in top3[1:])
+
+            for player, start_date in list(current_top23_holders.items()):
+                if player not in new_top23_names:
+                    if player not in top23_periods:
+                        top23_periods[player] = []
+                    top23_periods[player].append((start_date, record['date']))
+
+            new_first = top3[0]
+            if previous_first and new_first[0] != previous_first[0]:
+                if current_first_holder and current_first_start:
+                    first_place_periods.append((current_first_holder, current_first_start, record['date']))
+                current_first_holder = new_first[0]
+                current_first_start = record['date']
+            elif not previous_first:
+                current_first_holder = new_first[0]
+                current_first_start = record['date']
+
+            new_top23_holders = {}
+            for entry in top3[1:]:
+                player = entry[0]
+                new_top23_holders[player] = current_top23_holders.get(player, record['date'])
+            current_top23_holders = new_top23_holders
+
+            record_improvements.append(record)
+
+    # End final periods
+    if all_records:
+        final_date = all_records[-1]['date']
+        for player, start_date in current_top23_holders.items():
+            if player not in top23_periods:
+                top23_periods[player] = []
+            top23_periods[player].append((start_date, final_date))
+
+        if current_first_holder and current_first_start:
+            first_place_periods.append((current_first_holder, current_first_start, final_date))
+
+    # Calculate total days
+    first_holder_days = {}
+    top23_presence_days = {}
+
+    for player, start_date, end_date in first_place_periods:
+        days = max(0, (end_date - start_date).days)
+        first_holder_days[player] = first_holder_days.get(player, 0) + days
+
+    for player, periods in top23_periods.items():
+        total_days = sum(max(0, (end_date - start_date).days) for start_date, end_date in periods)
+        top23_presence_days[player] = total_days
+
+    return all_records, record_improvements, first_holder_days, top23_presence_days
+
+
+def get_current_course_record(players_data, course_id):
+    """Get the current world record for a course."""
+    players = players_data.get('players', {})
+    best_record = None
+    best_score = -1
+
+    for player_name, player in players.items():
+        course_records = player.get('courseRecords', {}).get(course_id, [])
+        for record in course_records:
+            score = record.get('totalScore', 0)
+            if score > best_score:
+                best_score = score
+                best_record = {
+                    'player': player_name,
+                    'total_score': score,
+                    'event_scores': record.get('eventScores', {}),
+                    'bonus_points': record.get('bonusPoints'),
+                    'date': parse_date(record.get('date')),
+                    'proof': record.get('proof')
+                }
+
+    return best_record
+
+
+def get_current_event_record(players_data, event_id, events_config):
+    """Get the current world record for an event."""
+    event_config = events_config.get(event_id, {})
+
+    # Check for fixed record (Circle Push, Ring Drop)
+    if event_config.get('fixed_record'):
+        fixed = event_config['fixed_record']
+        return {
+            'player': fixed['player'],
+            'score': fixed['score'],
+            'points': fixed['points'],
+            'date': parse_date(fixed['date']),
+            'proof': None
+        }
+
+    players = players_data.get('players', {})
+    lower_is_better = event_config.get('lower_is_better', False)
+    best_record = None
+    best_score = None
+
+    for player_name, player in players.items():
+        event_records = player.get('eventRecords', {}).get(event_id, [])
+        for record in event_records:
+            score = record.get('score')
+            if score is None:
+                continue
+
+            if best_score is None:
+                best_score = score
+                best_record = {
+                    'player': player_name,
+                    'score': score,
+                    'points': calculate_points(score, event_id, events_config),
+                    'date': parse_date(record.get('date')),
+                    'proof': record.get('proof')
+                }
+            elif lower_is_better and score < best_score:
+                best_score = score
+                best_record = {
+                    'player': player_name,
+                    'score': score,
+                    'points': calculate_points(score, event_id, events_config),
+                    'date': parse_date(record.get('date')),
+                    'proof': record.get('proof')
+                }
+            elif not lower_is_better and score > best_score:
+                best_score = score
+                best_record = {
+                    'player': player_name,
+                    'score': score,
+                    'points': calculate_points(score, event_id, events_config),
+                    'date': parse_date(record.get('date')),
+                    'proof': record.get('proof')
+                }
+
+    return best_record
+
+
+def generate_course_html(course_id, course_config, players_data, events_config, output_file):
+    """Generate HTML page for a course."""
+    display_name = course_config.get('display_name', course_id.title() + ' Course')
+    event_ids = course_config.get('events', [])
+
+    # Get event display names
+    event_names = []
+    for eid in event_ids:
+        evt_cfg = events_config.get(eid, {})
+        event_names.append(evt_cfg.get('display_name', eid.replace('-', ' ').title()))
+
+    # Get leaderboard data
+    all_records, record_history, first_holder_days, top23_presence_days = get_course_leaderboard(
+        players_data, course_id, course_config
+    )
+
+    # Get current record
+    current_record = get_current_course_record(players_data, course_id)
+
     html_content = f'''<!DOCTYPE html>
 <html>
 <head>
-    <title>{course_name} - Pokeathlon WRs</title>
-    <link rel="stylesheet" href="../style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="../championship-trophy.svg" type="image/svg+xml">
-</head>
-<body>
-    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light theme">🌙</button>
-    <nav><a href="../index.html">← Back to All Events</a></nav>
-
-    <h1>{course_name} WR</h1>
-
-    <h2>Current Record</h2>
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th>Score</th>
-                    <th>Player</th>
-                    <th>Date</th>
-                    <th>Proof</th>
-                </tr>
-            </thead>
-            <tbody>'''
-    
-    if current_record:
-        proof_type = get_proof_type(current_record['photo'], current_record['link'])
-        proof_link = format_proof_link(current_record['link'], proof_type, is_event=True)
-        html_content += f'''
-                <tr>
-                    <td>{current_record['total_score']}</td>
-                    <td>{current_record['player']}</td>
-                    <td>{current_record['date'].strftime("%Y-%m-%d")}</td>
-                    <td>{proof_link}</td>
-                </tr>'''
-    
-    html_content += '''
-            </tbody>
-        </table>
-    </div>
-
-    <h2>Record History</h2>
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th>Player</th>
-                    <th>Total Score</th>
-                    <th>Date</th>
-                    <th>Proof</th>
-                </tr>
-            </thead>
-            <tbody>'''
-    
-    for record in record_history:
-        proof_type = get_proof_type(record['photo'], record['link'])
-        proof_link = format_proof_link(record['link'], proof_type, is_event=True)
-        html_content += f'''
-                <tr>
-                    <td>{record['player']}</td>
-                    <td>{record['total_score']}</td>
-                    <td>{record['date'].strftime("%d/%m/%Y")}</td>
-                    <td>{proof_link}</td>
-                </tr>'''
-    
-    html_content += '''
-            </tbody>
-        </table>
-    </div>
-
-    <h2>Leaderboard Statistics</h2>
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Number of days at #1</th>
-                    <th>Number of days in Top 3</th>
-                </tr>
-            </thead>
-            <tbody>'''
-    
-    all_names = set(first_holder_days.keys()) | set(top23_presence_days.keys())
-    for name in sorted(all_names, key=lambda n: -top23_presence_days.get(n, 0)):
-        html_content += f'''
-                <tr>
-                    <td>{name}</td>
-                    <td>{first_holder_days.get(name, 0)}</td>
-                    <td>{top23_presence_days.get(name, 0)}</td>
-                </tr>'''
-    
-    html_content += '''
-            </tbody>
-        </table>
-    </div>
-    <script src="../js/tablesort.min.js"></script>
-    <script src="../js/tablesort.number.min.js"></script>
-    <script src="../js/tablesort.date.js"></script>
-    <script src="../js/theme-toggle.js"></script>
-    <script>
-        document.querySelectorAll('table').forEach(table => {
-            const sort = new Tablesort(table);
-        });
-    </script>
-</body>
-</html>'''
-    
-    with open(output_file, 'w', encoding='utf-8') as f:
-        f.write(html_content)
-
-def generate_advanced_html(course_name, all_records, top3_changes, first_holder_days, top23_presence_days, output_file, event1_name=None, event2_name=None, event3_name=None):
-    """Generate advanced HTML file for courses with filtering"""
-    current_record = max(all_records, key=lambda x: x['total_score']) if all_records else None
-    improvement_rows = set(row_num for row_num, _, _ in top3_changes)
-    record_history = [r for r in all_records if r['row_num'] in improvement_rows]
-
-    html_content = f'''<!DOCTYPE html>
-<html>
-<head>
-    <title>{course_name} - Pokéathlon WRs</title>
+    <title>{display_name} - Pokéathlon WRs</title>
     <link rel="stylesheet" href="../style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../championship-trophy.svg" type="image/svg+xml">
@@ -275,7 +508,7 @@ def generate_advanced_html(course_name, all_records, top3_changes, first_holder_
     <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light theme">🌙</button>
     <nav><a href="../index.html">← Back to All Events</a></nav>
 
-    <h1>{course_name}</h1>
+    <h1>{display_name}</h1>
 
     <div class="filter-container">
         <h3>Filter by Proof Type</h3>
@@ -310,10 +543,21 @@ def generate_advanced_html(course_name, all_records, top3_changes, first_holder_
     </div>'''
 
     if current_record:
-        proof_type = get_proof_type(current_record['photo'], current_record['link'])
-        proof_link = format_proof_link(current_record['link'], proof_type)
+        proof_type = get_proof_type(current_record['proof'])
+        proof_link = format_proof_link(current_record['proof'])
+
+        event_score_1 = current_record['event_scores'].get(event_ids[0], '--')
+        event_score_2 = current_record['event_scores'].get(event_ids[1], '--')
+        event_score_3 = current_record['event_scores'].get(event_ids[2], '--')
+        if event_score_1 != '--':
+            event_score_1 = int(event_score_1)
+        if event_score_2 != '--':
+            event_score_2 = int(event_score_2)
+        if event_score_3 != '--':
+            event_score_3 = int(event_score_3)
+
         html_content += f'''
-    
+
     <h2>Current Record</h2>
     <div class="table-wrapper">
     <table>
@@ -321,9 +565,9 @@ def generate_advanced_html(course_name, all_records, top3_changes, first_holder_
             <tr>
                 <th>Player</th>
                 <th>Total Score</th>
-                <th>{event1_name or "Event 1"}</th>
-                <th>{event2_name or "Event 2"}</th>
-                <th>{event3_name or "Event 3"}</th>
+                <th>{event_names[0]}</th>
+                <th>{event_names[1]}</th>
+                <th>{event_names[2]}</th>
                 <th>Bonus Points</th>
                 <th>Date</th>
                 <th>Proof</th>
@@ -333,11 +577,11 @@ def generate_advanced_html(course_name, all_records, top3_changes, first_holder_
             <tr data-proof="{proof_type}">
                 <td>{current_record['player']}</td>
                 <td>{int(current_record['total_score'])}</td>
-                <td>{int(current_record['event1']) if current_record['event1'] else '--'}</td>
-                <td>{int(current_record['event2']) if current_record['event2'] else '--'}</td>
-                <td>{int(current_record['event3']) if current_record['event3'] else '--'}</td>
+                <td>{event_score_1}</td>
+                <td>{event_score_2}</td>
+                <td>{event_score_3}</td>
                 <td>{int(current_record['bonus_points']) if current_record['bonus_points'] else '--'}</td>
-                <td>{current_record['date'].strftime("%d/%m/%Y")}</td>
+                <td>{format_date(current_record['date'])}</td>
                 <td>{proof_link}</td>
             </tr>
         </tbody>
@@ -353,9 +597,9 @@ def generate_advanced_html(course_name, all_records, top3_changes, first_holder_
             <tr>
                 <th>Player</th>
                 <th data-sort-method='number'>Total Score</th>
-                <th data-sort-method='number'>{event1_name or "Event 1"}</th>
-                <th data-sort-method='number'>{event2_name or "Event 2"}</th>
-                <th data-sort-method='number'>{event3_name or "Event 3"}</th>
+                <th data-sort-method='number'>{event_names[0]}</th>
+                <th data-sort-method='number'>{event_names[1]}</th>
+                <th data-sort-method='number'>{event_names[2]}</th>
                 <th data-sort-method='number'>Bonus Points</th>
                 <th>Date</th>
                 <th>Proof</th>
@@ -364,17 +608,28 @@ def generate_advanced_html(course_name, all_records, top3_changes, first_holder_
         <tbody>'''
 
     for record in record_history:
-        proof_type = get_proof_type(record['photo'], record['link'])
-        proof_link = format_proof_link(record['link'], proof_type)
+        proof_type = get_proof_type(record['proof'])
+        proof_link = format_proof_link(record['proof'])
+
+        event_score_1 = record['event_scores'].get(event_ids[0], '--')
+        event_score_2 = record['event_scores'].get(event_ids[1], '--')
+        event_score_3 = record['event_scores'].get(event_ids[2], '--')
+        if event_score_1 != '--':
+            event_score_1 = int(event_score_1)
+        if event_score_2 != '--':
+            event_score_2 = int(event_score_2)
+        if event_score_3 != '--':
+            event_score_3 = int(event_score_3)
+
         html_content += f'''
             <tr data-proof="{proof_type}">
                 <td>{record['player']}</td>
                 <td>{int(record['total_score'])}</td>
-                <td>{int(record['event1']) if record['event1'] else '--'}</td>
-                <td>{int(record['event2']) if record['event2'] else '--'}</td>
-                <td>{int(record['event3']) if record['event3'] else '--'}</td>
-                <td>{int(record['bonus_points']) if record['bonus_points'] else '--'}</td>
-                <td>{record['date'].strftime("%d/%m/%Y")}</td>
+                <td>{event_score_1}</td>
+                <td>{event_score_2}</td>
+                <td>{event_score_3}</td>
+                <td>{int(record['bonus_points']) if record.get('bonus_points') else '--'}</td>
+                <td>{format_date(record['date'])}</td>
                 <td>{proof_link}</td>
             </tr>'''
 
@@ -383,6 +638,7 @@ def generate_advanced_html(course_name, all_records, top3_changes, first_holder_
     </table>
     </div>'''
 
+    # Leaderboard statistics
     all_names = set(first_holder_days.keys()) | set(top23_presence_days.keys())
     if all_names:
         html_content += '''
@@ -429,164 +685,173 @@ def generate_advanced_html(course_name, all_records, top3_changes, first_holder_
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(html_content)
 
-def generate_leaderboard_html(file_path, score_col, date_col, link_col, course_name, output_html, html_style, lower_is_better=False, event1_col=None, event2_col=None, event3_col=None, bonus_col=None, event1_name=None, event2_name=None, event3_name=None):
-    """Main function to analyze leaderboard and generate HTML"""
-    all_records, top3_changes, first_holder_days, top23_presence_days, record_improvements = analyze_leaderboard(
-        file_path, score_col, date_col, link_col, lower_is_better, event1_col, event2_col, event3_col, bonus_col
+
+def generate_event_html(event_id, event_config, players_data, events_config, output_file):
+    """Generate HTML page for an event."""
+    display_name = event_config.get('display_name', event_id.replace('-', ' ').title())
+    lower_is_better = event_config.get('lower_is_better', False)
+
+    # Get leaderboard data
+    all_records, record_history, first_holder_days, top23_presence_days = get_event_leaderboard(
+        players_data, event_id, events_config
     )
-    
-    if html_style == "simple":
-        generate_simple_html(course_name, all_records, top3_changes, first_holder_days, top23_presence_days, output_html, lower_is_better)
-    else:
-        generate_advanced_html(course_name, all_records, top3_changes, first_holder_days, top23_presence_days, output_html, event1_name, event2_name, event3_name)
-    
-    return record_improvements
 
-def get_course_records():
-    """Get current world records for all courses"""
-    course_configs = {
-        'Speed': {'csv_file': 'csv/Pokeathlon WRs - Speed_Course.csv', 'event1_col': 3, 'event2_col': 4, 'event3_col': 5, 'bonus_col': 6},
-        'Power': {'csv_file': 'csv/Pokeathlon WRs - Power_Course.csv', 'event1_col': 3, 'event2_col': 4, 'event3_col': 5, 'bonus_col': 6},
-        'Skill': {'csv_file': 'csv/Pokeathlon WRs - Skill_Course.csv', 'event1_col': 3, 'event2_col': 4, 'event3_col': 5, 'bonus_col': 6},
-        'Stamina': {'csv_file': 'csv/Pokeathlon WRs - Stamina_Course.csv', 'event1_col': 3, 'event2_col': 4, 'event3_col': 5, 'bonus_col': 6},
-        'Jump': {'csv_file': 'csv/Pokeathlon WRs - Jump_Course.csv', 'event1_col': 3, 'event2_col': 4, 'event3_col': 5, 'bonus_col': 6}
-    }
-    
+    # Get current record
+    current_record = get_current_event_record(players_data, event_id, events_config)
+
+    html_content = f'''<!DOCTYPE html>
+<html>
+<head>
+    <title>{display_name} - Pokeathlon WRs</title>
+    <link rel="stylesheet" href="../style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../championship-trophy.svg" type="image/svg+xml">
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light theme">🌙</button>
+    <nav><a href="../index.html">← Back to All Events</a></nav>
+
+    <h1>{display_name} WR</h1>
+
+    <h2>Current Record</h2>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Score</th>
+                    <th>Player</th>
+                    <th>Date</th>
+                    <th>Proof</th>
+                </tr>
+            </thead>
+            <tbody>'''
+
+    if current_record:
+        proof_link = format_proof_link(current_record.get('proof'), is_event=True)
+        score_display = current_record['score']
+        if event_id in ['hurdle-dash', 'relay-run']:
+            score_display = f"{score_display:.1f}".replace('.', ',') if isinstance(score_display, float) else score_display
+        html_content += f'''
+                <tr>
+                    <td>{score_display}</td>
+                    <td>{current_record['player']}</td>
+                    <td>{format_date(current_record.get('date'), "%Y-%m-%d")}</td>
+                    <td>{proof_link}</td>
+                </tr>'''
+
+    html_content += '''
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Record History</h2>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Total Score</th>
+                    <th>Date</th>
+                    <th>Proof</th>
+                </tr>
+            </thead>
+            <tbody>'''
+
+    for record in record_history:
+        proof_link = format_proof_link(record.get('proof'), is_event=True)
+        score_display = record['score']
+        if event_id in ['hurdle-dash', 'relay-run']:
+            score_display = f"{score_display:.1f}".replace('.', ',') if isinstance(score_display, float) else score_display
+        html_content += f'''
+                <tr>
+                    <td>{record['player']}</td>
+                    <td>{score_display}</td>
+                    <td>{format_date(record['date'])}</td>
+                    <td>{proof_link}</td>
+                </tr>'''
+
+    html_content += '''
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Leaderboard Statistics</h2>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Number of days at #1</th>
+                    <th>Number of days in Top 3</th>
+                </tr>
+            </thead>
+            <tbody>'''
+
+    all_names = set(first_holder_days.keys()) | set(top23_presence_days.keys())
+    for name in sorted(all_names, key=lambda n: -top23_presence_days.get(n, 0)):
+        html_content += f'''
+                <tr>
+                    <td>{name}</td>
+                    <td>{first_holder_days.get(name, 0)}</td>
+                    <td>{top23_presence_days.get(name, 0)}</td>
+                </tr>'''
+
+    html_content += '''
+            </tbody>
+        </table>
+    </div>
+    <script src="../js/tablesort.min.js"></script>
+    <script src="../js/tablesort.number.min.js"></script>
+    <script src="../js/tablesort.date.js"></script>
+    <script src="../js/theme-toggle.js"></script>
+    <script>
+        document.querySelectorAll('table').forEach(table => {
+            const sort = new Tablesort(table);
+        });
+    </script>
+</body>
+</html>'''
+
+    with open(output_file, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+
+
+def generate_index_html(players_data, config):
+    """Generate the main index.html file."""
+    courses_config = config.get('courses', {})
+    events_config = config.get('events', {})
+
+    # Get course records
     course_records = {}
-    for course_name, config in course_configs.items():
-        csv_file = config['csv_file']
-        if os.path.exists(csv_file):
-            try:
-                with open(csv_file, newline='', encoding='utf-8') as f:
-                    reader = csv.reader(f)
-                    rows = list(reader)
-                    if len(rows) > 1:
-                        best_record = None
-                        best_score = -1
-                        
-                        for row in rows[1:]:
-                            if len(row) >= 7:
-                                try:
-                                    total_score = parse_number(row[1])
-                                    if total_score and total_score > best_score:
-                                        best_score = total_score
-                                        event1_score = parse_number(row[config['event1_col'] - 1])
-                                        event2_score = parse_number(row[config['event2_col'] - 1])
-                                        event3_score = parse_number(row[config['event3_col'] - 1])
-                                        
-                                        event1_points = int(event1_score) if event1_score else 0
-                                        event2_points = int(event2_score) if event2_score else 0
-                                        event3_points = int(event3_score) if event3_score else 0
-                                        
-                                        best_record = {
-                                            'player': row[0].strip(),
-                                            'total_score': int(total_score),
-                                            'event1_points': event1_points if event1_points > 0 else '--',
-                                            'event2_points': event2_points if event2_points > 0 else '--',
-                                            'event3_points': event3_points if event3_points > 0 else '--',
-                                            'bonus': int(parse_number(row[config['bonus_col'] - 1])) if parse_number(row[config['bonus_col'] - 1]) else '--',
-                                            'date': parse_date(row[6])
-                                        }
-                                except (ValueError, IndexError):
-                                    continue
-                        
-                        if best_record:
-                            course_records[course_name] = best_record
-            except Exception as e:
-                print(f"Warning: Could not read {csv_file}: {e}")
-    
-    return course_records
+    for course_id in ['speed', 'power', 'skill', 'stamina', 'jump']:
+        record = get_current_course_record(players_data, course_id)
+        if record:
+            course_config = courses_config.get(course_id, {})
+            event_ids = course_config.get('events', [])
+            course_records[course_id] = {
+                'player': record['player'],
+                'total_score': int(record['total_score']),
+                'event1_points': int(record['event_scores'].get(event_ids[0], 0)) if record['event_scores'].get(event_ids[0]) else '--',
+                'event2_points': int(record['event_scores'].get(event_ids[1], 0)) if record['event_scores'].get(event_ids[1]) else '--',
+                'event3_points': int(record['event_scores'].get(event_ids[2], 0)) if record['event_scores'].get(event_ids[2]) else '--',
+                'bonus': int(record['bonus_points']) if record['bonus_points'] else '--',
+                'date': record['date']
+            }
 
-def get_event_records():
-    """Get current world records for all events"""
-    event_configs = {
-        'Hurdle Dash': {'score_col': 2, 'lower_is_better': True},
-        'Pennant Capture': {'score_col': 3, 'lower_is_better': False},
-        'Block Smash': {'score_col': 5, 'lower_is_better': False},
-        'Disc Catch': {'score_col': 6, 'lower_is_better': False},
-        'Lamp Jump': {'score_col': 7, 'lower_is_better': False},
-        'Relay Run': {'score_col': 8, 'lower_is_better': False},
-        'Snow Throw': {'score_col': 10, 'lower_is_better': False},
-        'Goal Roll': {'score_col': 11, 'lower_is_better': False}
-    }
-    
-    # Fixed values for events without pages
-    event_records = {
-        'Circle Push': {'player': '–', 'score': 66, 'points': 198, 'date': datetime.strptime('12/09/2009', '%d/%m/%Y').date()},
-        'Ring Drop': {'player': '–', 'score': 200, 'points': 200, 'date': datetime.strptime('12/09/2009', '%d/%m/%Y').date()}
-    }
-    
-    events_csv = 'csv/Pokeathlon WRs - Events_best_scores.csv'
-    if os.path.exists(events_csv):
-        try:
-            with open(events_csv, newline='', encoding='utf-8') as f:
-                reader = csv.reader(f)
-                rows = list(reader)
-                if len(rows) > 1:
-                    for event_name, config in event_configs.items():
-                        best_record = None
-                        best_score = None
-                        
-                        for row in rows[1:]:
-                            if len(row) >= 13:
-                                try:
-                                    score = parse_number(row[config['score_col'] - 1])
-                                    if score is not None:
-                                        # Calculate points using formulas
-                                        points_map = {
-                                            'Hurdle Dash': lambda s: min(200, int(11500 / s)),
-                                            'Pennant Capture': lambda s: min(200, int(s * 3)),
-                                            'Circle Push': lambda s: min(200, int(s * 3)),
-                                            'Block Smash': lambda s: min(200, int(s)),
-                                            'Disc Catch': lambda s: min(200, int(150 - (1500 / (s + 12.5)))),
-                                            'Lamp Jump': lambda s: min(200, int(s / 3.5)),
-                                            'Relay Run': lambda s: min(200, int(s * 10)),
-                                            'Ring Drop': lambda s: min(200, int(s * 1.5)),
-                                            'Snow Throw': lambda s: min(200, int(s * 3)),
-                                            'Goal Roll': lambda s: min(200, int(100 + 5 * s))
-                                        }
-                                        
-                                        points = points_map.get(event_name, lambda s: min(200, int(s)))(score)
-                                        
-                                        if best_score is None:
-                                            best_score = score
-                                            best_record = {'player': row[0].strip(), 'score': score, 'points': points, 'date': parse_date(row[11])}
-                                        elif config['lower_is_better']:
-                                            if score < best_score:
-                                                best_score = score
-                                                best_record = {'player': row[0].strip(), 'score': score, 'points': points, 'date': parse_date(row[11])}
-                                        else:
-                                            if score > best_score:
-                                                best_score = score
-                                                best_record = {'player': row[0].strip(), 'score': score, 'points': points, 'date': parse_date(row[11])}
-                                except (ValueError, IndexError):
-                                    continue
-                        
-                        if best_record:
-                            event_records[event_name] = best_record
-        except Exception as e:
-            print(f"Warning: Could not read {events_csv}: {e}")
-    
-    return event_records
+    # Get event records
+    event_records = {}
+    for event_id in events_config.keys():
+        record = get_current_event_record(players_data, event_id, events_config)
+        if record:
+            event_records[event_id] = record
 
-def generate_index_html():
-    """Generate the main index.html file"""
-    course_records = get_course_records()
-    event_records = get_event_records()
-    
-    event_formulas = {
-        'Hurdle Dash': r'\( \left\lfloor \frac{11500}{\text{score}} \right\rfloor \)',
-        'Pennant Capture': r'\( \text{score} \times 3 \)',
-        'Circle Push': r'\( \text{score} \times 3 \)',
-        'Block Smash': r'\( \text{score} \)',
-        'Disc Catch': r'\( 150 - \frac{1500}{\text{score} + 12.5} \)',
-        'Lamp Jump': r'\( \left\lfloor \frac{\text{score}}{3.5} \right\rfloor \)',
-        'Relay Run': r'\( \text{score} \times 10 \)',
-        'Ring Drop': r'\( \text{score} \times 1.5 \)',
-        'Snow Throw': r'\( \text{score} \times 3 \)',
-        'Goal Roll': r'\( \text{position_points} + \text{score} \times 5 \)'
-    }
-    
+    # Event formulas for display
+    event_formulas = {}
+    for event_id, evt_cfg in events_config.items():
+        latex = evt_cfg.get('latex', '')
+        if latex:
+            event_formulas[event_id] = r'\( ' + latex + r' \)'
+
     html_content = '''<!DOCTYPE html>
 <html>
 <head>
@@ -632,7 +897,7 @@ def generate_index_html():
 
   <h1>Pokeathlon World Records</h1>
   <p>Since the release of HG/SS, Pokeathlon has been an endless source of entertainment for many people. During these years people have shared their PBs in many different forums and websites, our goal is to create the go-to place for pokeathlon enjoyers.</p>
-  
+
   <h2>Course World Records</h2>
   <div class="table-wrapper">
     <table>
@@ -649,25 +914,26 @@ def generate_index_html():
         </tr>
       </thead>
       <tbody>'''
-    
-    for course_name in ['Speed', 'Power', 'Skill', 'Stamina', 'Jump']:
+
+    for course_name in ['speed', 'power', 'skill', 'stamina', 'jump']:
+        display_name = course_name.title()
         if course_name in course_records:
             record = course_records[course_name]
             html_content += f'''
         <tr>
-          <td><a href="courses/{course_name.lower()}.html">{course_name}</a></td>
+          <td><a href="courses/{course_name}.html">{display_name}</a></td>
           <td>{record['player']}</td>
           <td>{record['total_score']}</td>
           <td>{record['event1_points']}</td>
           <td>{record['event2_points']}</td>
           <td>{record['event3_points']}</td>
           <td>{record['bonus']}</td>
-          <td>{record['date'].strftime("%d/%m/%Y") if record['date'] else '--'}</td>
+          <td>{format_date(record['date']) if record['date'] else '--'}</td>
         </tr>'''
         else:
             html_content += f'''
         <tr>
-          <td><a href="courses/{course_name.lower()}.html">{course_name}</a></td>
+          <td><a href="courses/{course_name}.html">{display_name}</a></td>
           <td>–</td>
           <td>–</td>
           <td>–</td>
@@ -676,7 +942,7 @@ def generate_index_html():
           <td>–</td>
           <td>–</td>
         </tr>'''
-    
+
     html_content += '''
       </tbody>
     </table>
@@ -696,40 +962,52 @@ def generate_index_html():
         </tr>
       </thead>
       <tbody>'''
-    
-    for event_name in ['Hurdle Dash', 'Pennant Capture', 'Circle Push', 'Block Smash', 'Disc Catch', 'Lamp Jump', 'Relay Run', 'Ring Drop', 'Snow Throw', 'Goal Roll']:
-        if event_name in event_records:
-            record = event_records[event_name]
-            if event_name in ['Hurdle Dash', 'Relay Run']:
-                score_display = f"{record['score']:.1f}".replace('.', ',')
+
+    event_order = ['hurdle-dash', 'pennant-capture', 'circle-push', 'block-smash',
+                   'disc-catch', 'lamp-jump', 'relay-run', 'ring-drop', 'snow-throw', 'goal-roll']
+
+    for event_id in event_order:
+        evt_cfg = events_config.get(event_id, {})
+        display_name = evt_cfg.get('display_name', event_id.replace('-', ' ').title())
+        has_page = evt_cfg.get('has_page', True)
+
+        if event_id in event_records:
+            record = event_records[event_id]
+            score = record['score']
+
+            if event_id in ['hurdle-dash', 'relay-run']:
+                score_display = f"{score:.1f}".replace('.', ',') if isinstance(score, float) else str(score)
             else:
-                score_display = str(int(record['score'])) if record['score'] == int(record['score']) else str(record['score'])
-            
-            if event_name in ['Circle Push', 'Ring Drop']:
-                event_cell = f'<td>{event_name}</td>'
+                score_display = str(int(score)) if score == int(score) else str(score)
+
+            if has_page:
+                event_cell = f'<td><a href="events/{event_id}.html">{display_name}</a></td>'
             else:
-                event_cell = f'<td><a href="events/{event_name.lower().replace(' ', '-')}.html">{event_name}</a></td>'
-            
+                event_cell = f'<td>{display_name}</td>'
+
+            formula = event_formulas.get(event_id, '–')
+
             html_content += f'''
         <tr>
           {event_cell}
           <td>{record['player']}</td>
           <td>{score_display}</td>
           <td>{record['points']}</td>
-          <td>{event_formulas[event_name]}</td>
-          <td>{record['date'].strftime("%d/%m/%Y") if record['date'] else '--'}</td>
+          <td>{formula}</td>
+          <td>{format_date(record.get('date')) if record.get('date') else '--'}</td>
         </tr>'''
         else:
+            formula = event_formulas.get(event_id, '–')
             html_content += f'''
         <tr>
-          <td>{event_name}</td>
+          <td>{display_name}</td>
           <td>–</td>
           <td>–</td>
           <td>–</td>
-          <td>{event_formulas.get(event_name, '–')}</td>
+          <td>{formula}</td>
           <td>–</td>
         </tr>'''
-    
+
     html_content += '''
       </tbody>
     </table>
@@ -749,85 +1027,61 @@ def generate_index_html():
   </script>
 </body>
 </html>'''
-    
+
     with open('index.html', 'w', encoding='utf-8') as f:
         f.write(html_content)
 
+
 def generate_all():
-    """Generate all HTML files"""
-    # Course configurations
-    courses_config = {
-        'Speed Course': {
-            'csv_file': 'csv/Pokeathlon WRs - Speed_Course.csv',
-            'score_col': 2, 'date_col': 7, 'link_col': 8, 'output_file': 'courses/speed.html',
-            'event1_col': 3, 'event2_col': 4, 'event3_col': 5, 'bonus_col': 6,
-            'event1_name': 'Hurdle Dash', 'event2_name': 'Pennant Capture', 'event3_name': 'Relay Run'
-        },
-        'Jump Course': {
-            'csv_file': 'csv/Pokeathlon WRs - Jump_Course.csv',
-            'score_col': 2, 'date_col': 7, 'link_col': 8, 'output_file': 'courses/jump.html',
-            'event1_col': 3, 'event2_col': 4, 'event3_col': 5, 'bonus_col': 6,
-            'event1_name': 'Lamp Jump', 'event2_name': 'Disc Catch', 'event3_name': 'Hurdle Dash'
-        },
-        'Power Course': {
-            'csv_file': 'csv/Pokeathlon WRs - Power_Course.csv',
-            'score_col': 2, 'date_col': 7, 'link_col': 8, 'output_file': 'courses/power.html',
-            'event1_col': 3, 'event2_col': 4, 'event3_col': 5, 'bonus_col': 6,
-            'event1_name': 'Block Smash', 'event2_name': 'Circle Push', 'event3_name': 'Goal Roll'
-        },
-        'Skill Course': {
-            'csv_file': 'csv/Pokeathlon WRs - Skill_Course.csv',
-            'score_col': 2, 'date_col': 7, 'link_col': 8, 'output_file': 'courses/skill.html',
-            'event1_col': 3, 'event2_col': 4, 'event3_col': 5, 'bonus_col': 6,
-            'event1_name': 'Snow Throw', 'event2_name': 'Goal Roll', 'event3_name': 'Pennant Capture'
-        },
-        'Stamina Course': {
-            'csv_file': 'csv/Pokeathlon WRs - Stamina_Course.csv',
-            'score_col': 2, 'date_col': 7, 'link_col': 8, 'output_file': 'courses/stamina.html',
-            'event1_col': 3, 'event2_col': 4, 'event3_col': 5, 'bonus_col': 6,
-            'event1_name': 'Ring Drop', 'event2_name': 'Relay Run', 'event3_name': 'Block Smash'
-        }
-    }
-    
-    # Event configurations
-    events_config = {
-        'Hurdle Dash': {'score_col': 2, 'date_col': 12, 'link_col': 13, 'output_file': 'events/hurdle-dash.html', 'lower_is_better': True},
-        'Pennant Capture': {'score_col': 3, 'date_col': 12, 'link_col': 13, 'output_file': 'events/pennant-capture.html'},
-        'Block Smash': {'score_col': 5, 'date_col': 12, 'link_col': 13, 'output_file': 'events/block-smash.html'},
-        'Disc Catch': {'score_col': 6, 'date_col': 12, 'link_col': 13, 'output_file': 'events/disc-catch.html'},
-        'Lamp Jump': {'score_col': 7, 'date_col': 12, 'link_col': 13, 'output_file': 'events/lamp-jump.html'},
-        'Relay Run': {'score_col': 8, 'date_col': 12, 'link_col': 13, 'output_file': 'events/relay-run.html'},
-        'Snow Throw': {'score_col': 10, 'date_col': 12, 'link_col': 13, 'output_file': 'events/snow-throw.html'},
-        'Goal Roll': {'score_col': 11, 'date_col': 12, 'link_col': 13, 'output_file': 'events/goal-roll.html'}
-    }
-    
-    # Generate events
-    events_csv = 'csv/Pokeathlon WRs - Events_best_scores.csv'
-    if os.path.exists(events_csv):
-        for event_name, config in events_config.items():
-            try:
-                generate_leaderboard_html(
-                    events_csv, config['score_col'], config['date_col'], config['link_col'],
-                    event_name, config['output_file'], "simple", config.get('lower_is_better', False)
-                )
-            except Exception as e:
-                print(f"Error processing {event_name}: {e}")
-    
-    # Generate courses
-    for course_name, config in courses_config.items():
-        if os.path.exists(config['csv_file']):
-            try:
-                generate_leaderboard_html(
-                    config['csv_file'], config['score_col'], config['date_col'], config['link_col'],
-                    course_name, config['output_file'], "advanced", False,
-                    config['event1_col'], config['event2_col'], config['event3_col'], config['bonus_col'],
-                    config['event1_name'], config['event2_name'], config['event3_name']
-                )
-            except Exception as e:
-                print(f"Error processing {course_name}: {e}")
-    
-    # Generate index.html
-    generate_index_html()
+    """Generate all HTML files from player-centric data."""
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Load configuration
+    print("Loading configuration...")
+    config = load_config()
+    courses_config = config.get('courses', {})
+    events_config = config.get('events', {})
+
+    # Load player data
+    print("Loading player data...")
+    players_file = os.path.join(base_dir, 'data', 'players.json')
+    players_data = load_players(players_file)
+
+    print(f"Loaded {len(players_data.get('players', {}))} players")
+
+    # Ensure output directories exist
+    os.makedirs('courses', exist_ok=True)
+    os.makedirs('events', exist_ok=True)
+
+    # Generate course pages
+    print("Generating course pages...")
+    for course_id, course_cfg in courses_config.items():
+        output_file = course_cfg.get('output', f'courses/{course_id}.html')
+        try:
+            generate_course_html(course_id, course_cfg, players_data, events_config, output_file)
+            print(f"  Generated {output_file}")
+        except Exception as e:
+            print(f"  Error generating {output_file}: {e}")
+
+    # Generate event pages
+    print("Generating event pages...")
+    for event_id, event_cfg in events_config.items():
+        if not event_cfg.get('has_page', True):
+            continue
+        output_file = event_cfg.get('output', f'events/{event_id}.html')
+        try:
+            generate_event_html(event_id, event_cfg, players_data, events_config, output_file)
+            print(f"  Generated {output_file}")
+        except Exception as e:
+            print(f"  Error generating {output_file}: {e}")
+
+    # Generate index page
+    print("Generating index.html...")
+    generate_index_html(players_data, config)
+    print("  Generated index.html")
+
+    print("\nGeneration complete!")
+
 
 if __name__ == "__main__":
     generate_all()

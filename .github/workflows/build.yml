@@ -3,8 +3,10 @@ name: Build and Deploy Site
 on:
   push:
     paths:
-      - "csv/**/*.csv"
+      - "data/players.json"
+      - "data/config/**"
       - "generate.py"
+      - "scripts/validate_data.py"
 
 jobs:
   build:
@@ -24,6 +26,13 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Install dependencies
+        run: |
+          pip install pyyaml
+
+      - name: Validate player data
+        run: python scripts/validate_data.py
+
       - name: Run script to generate HTML
         run: python generate.py
 
@@ -37,5 +46,5 @@ jobs:
         run: |
           git add events/ courses/ index.html || true
           git diff --staged --quiet && echo "No changes to commit." && exit 0
-          git commit -m "Auto-update site from CSV and courses"
+          git commit -m "Auto-update site from player data"
           git push

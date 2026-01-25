@@ -1,0 +1,48 @@
+# Course definitions for Pokeathlon
+# Each course has 3 events and produces points + bonus
+
+courses:
+  speed:
+    display_name: "Speed Course"
+    events:
+      - hurdle-dash
+      - pennant-capture
+      - relay-run
+    higher_is_better: true
+    output: "courses/speed.html"
+
+  power:
+    display_name: "Power Course"
+    events:
+      - block-smash
+      - circle-push
+      - goal-roll
+    higher_is_better: true
+    output: "courses/power.html"
+
+  skill:
+    display_name: "Skill Course"
+    events:
+      - snow-throw
+      - goal-roll
+      - pennant-capture
+    higher_is_better: true
+    output: "courses/skill.html"
+
+  stamina:
+    display_name: "Stamina Course"
+    events:
+      - ring-drop
+      - relay-run
+      - block-smash
+    higher_is_better: true
+    output: "courses/stamina.html"
+
+  jump:
+    display_name: "Jump Course"
+    events:
+      - lamp-jump
+      - disc-catch
+      - hurdle-dash
+    higher_is_better: true
+    output: "courses/jump.html"
