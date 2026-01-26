@@ -272,6 +272,16 @@ def get_course_leaderboard(players_data, course_id, config):
             third_best_score = top3_extended[2][1]
             top3_extended = [e for e in top3_extended if e[1] >= third_best_score]
 
+        # Deduplicate: keep only one entry per player per score
+        seen_player_scores = {}
+        deduplicated_extended = []
+        for player, score, rec in top3_extended:
+            key = (player, score)
+            if key not in seen_player_scores:
+                seen_player_scores[key] = True
+                deduplicated_extended.append((player, score, rec))
+        top3_extended = deduplicated_extended
+
         # Record if extended leaderboard changed (for record history)
         if [(p, s) for p, s, _ in top3_extended] != [(p, s) for p, s, _ in previous_extended]:
             record_improvements.append(record)
@@ -282,6 +292,16 @@ def get_course_leaderboard(players_data, course_id, config):
         candidates = top3_strict.copy()
         candidates.append((record['player'], record['total_score'], record))
         top3_strict = build_strict_top3(candidates, lower_is_better=False)
+
+        # Deduplicate: keep only one entry per player per score
+        seen_player_scores = {}
+        deduplicated_strict = []
+        for player, score, rec in top3_strict:
+            key = (player, score)
+            if key not in seen_player_scores:
+                seen_player_scores[key] = True
+                deduplicated_strict.append((player, score, rec))
+        top3_strict = deduplicated_strict
 
         # Track time periods if strict leaderboard changed
         if [(p, s) for p, s, _ in top3_strict] != [(p, s) for p, s, _ in previous_strict]:
@@ -397,6 +417,16 @@ def get_event_leaderboard(players_data, event_id, events_config):
             else:
                 top3_extended = [e for e in top3_extended if e[1] >= third_best_score]
 
+        # Deduplicate: keep only one entry per player per score
+        seen_player_scores = {}
+        deduplicated_extended = []
+        for player, score, rec in top3_extended:
+            key = (player, score)
+            if key not in seen_player_scores:
+                seen_player_scores[key] = True
+                deduplicated_extended.append((player, score, rec))
+        top3_extended = deduplicated_extended
+
         # Record if extended leaderboard changed (for record history)
         if [(p, s) for p, s, _ in top3_extended] != [(p, s) for p, s, _ in previous_extended]:
             record_improvements.append(record)
@@ -407,6 +437,16 @@ def get_event_leaderboard(players_data, event_id, events_config):
         candidates = top3_strict.copy()
         candidates.append((record['player'], record['score'], record))
         top3_strict = build_strict_top3(candidates, lower_is_better=lower_is_better)
+
+        # Deduplicate: keep only one entry per player per score
+        seen_player_scores = {}
+        deduplicated_strict = []
+        for player, score, rec in top3_strict:
+            key = (player, score)
+            if key not in seen_player_scores:
+                seen_player_scores[key] = True
+                deduplicated_strict.append((player, score, rec))
+        top3_strict = deduplicated_strict
 
         # Track time periods if strict leaderboard changed
         if [(p, s) for p, s, _ in top3_strict] != [(p, s) for p, s, _ in previous_strict]:
@@ -470,6 +510,8 @@ def get_current_course_record(players_data, course_id):
         course_records = player.get('courseRecords', {}).get(course_id, [])
         for record in course_records:
             score = record.get('totalScore', 0)
+            record_date = parse_date(record.get('date'))
+
             if score > best_score:
                 best_score = score
                 best_record = {
@@ -477,7 +519,16 @@ def get_current_course_record(players_data, course_id):
                     'total_score': score,
                     'event_scores': record.get('eventScores', {}),
                     'bonus_points': record.get('bonusPoints'),
-                    'date': parse_date(record.get('date')),
+                    'date': record_date,
+                    'proof': record.get('proof')
+                }
+            elif score == best_score and record_date < best_record['date']:
+                best_record = {
+                    'player': player_name,
+                    'total_score': score,
+                    'event_scores': record.get('eventScores', {}),
+                    'bonus_points': record.get('bonusPoints'),
+                    'date': record_date,
                     'proof': record.get('proof')
                 }
 
@@ -511,13 +562,15 @@ def get_current_event_record(players_data, event_id, events_config):
             if score is None:
                 continue
 
+            record_date = parse_date(record.get('date'))
+
             if best_score is None:
                 best_score = score
                 best_record = {
                     'player': player_name,
                     'score': score,
                     'points': calculate_points(score, event_id, events_config),
-                    'date': parse_date(record.get('date')),
+                    'date': record_date,
                     'proof': record.get('proof')
                 }
             elif lower_is_better and score < best_score:
@@ -526,7 +579,15 @@ def get_current_event_record(players_data, event_id, events_config):
                     'player': player_name,
                     'score': score,
                     'points': calculate_points(score, event_id, events_config),
-                    'date': parse_date(record.get('date')),
+                    'date': record_date,
+                    'proof': record.get('proof')
+                }
+            elif lower_is_better and score == best_score and record_date < best_record['date']:
+                best_record = {
+                    'player': player_name,
+                    'score': score,
+                    'points': calculate_points(score, event_id, events_config),
+                    'date': record_date,
                     'proof': record.get('proof')
                 }
             elif not lower_is_better and score > best_score:
@@ -535,7 +596,15 @@ def get_current_event_record(players_data, event_id, events_config):
                     'player': player_name,
                     'score': score,
                     'points': calculate_points(score, event_id, events_config),
-                    'date': parse_date(record.get('date')),
+                    'date': record_date,
+                    'proof': record.get('proof')
+                }
+            elif not lower_is_better and score == best_score and record_date < best_record['date']:
+                best_record = {
+                    'player': player_name,
+                    'score': score,
+                    'points': calculate_points(score, event_id, events_config),
+                    'date': record_date,
                     'proof': record.get('proof')
                 }
 
