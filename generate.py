@@ -186,6 +186,36 @@ def calculate_points(score, event_id, events_config):
     return min(max_points, formula_fn(score))
 
 
+def get_medal_for_record(record, records_list, lower_is_better=False):
+    """
+    Determine if a record should have a medal icon and which one.
+    Returns: '🥇', '🥈', '🥉', or None
+
+    Medals are assigned using the strict top 3 logic:
+    1. Include top 3 positions by score
+    2. If multiple records tie for 3rd place on SAME date, include all
+    3. If records tie for 3rd place on DIFFERENT dates, only earliest
+    """
+    if not records_list:
+        return None
+
+    # Determine which score field to use
+    score_field = 'total_score' if 'total_score' in record else 'score'
+
+    # Build strict top 3 from the record history
+    candidates = [(r.get('player', ''), r.get(score_field), r) for r in records_list]
+    strict_top3 = build_strict_top3(candidates, lower_is_better)
+
+    # Find position in strict top 3 by comparing record identity
+    for i, entry in enumerate(strict_top3):
+        if entry[2] is record:
+            medals = ['🥇', '🥈', '🥉']
+            return medals[i] if i < 3 else None
+
+    # Record is not in strict top 3
+    return None
+
+
 def build_strict_top3(candidates, lower_is_better=False):
     """
     Build strict top 3 list with same-date tie exception.
@@ -755,9 +785,13 @@ def generate_course_html(course_id, course_config, players_data, events_config, 
         if event_score_3 != '--':
             event_score_3 = int(event_score_3)
 
+        # Add medal icons for top 3 WR holders (courses use higher scores as better)
+        medal = get_medal_for_record(record, record_history, lower_is_better=False)
+        player_display = f"{medal} {record['player']}" if medal else record['player']
+
         html_content += f'''
             <tr data-proof="{proof_type}">
-                <td>{record['player']}</td>
+                <td>{player_display}</td>
                 <td>{int(record['total_score'])}</td>
                 <td>{event_score_1}</td>
                 <td>{event_score_2}</td>
@@ -896,9 +930,14 @@ def generate_event_html(event_id, event_config, players_data, events_config, out
         score_display = record['score']
         if event_id in ['hurdle-dash', 'relay-run']:
             score_display = f"{score_display:.1f}".replace('.', ',') if isinstance(score_display, float) else score_display
+
+        # Add medal icons for top 3 WR holders
+        medal = get_medal_for_record(record, record_history, lower_is_better)
+        player_display = f"{medal} {record['player']}" if medal else record['player']
+
         html_content += f'''
                 <tr>
-                    <td>{record['player']}</td>
+                    <td>{player_display}</td>
                     <td>{score_display}</td>
                     <td>{format_date(record['date'])}</td>
                     <td>{proof_link}</td>
