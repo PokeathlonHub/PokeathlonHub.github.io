@@ -186,6 +186,46 @@ def calculate_points(score, event_id, events_config):
     return min(max_points, formula_fn(score))
 
 
+def build_strict_top3(candidates, lower_is_better=False):
+    """
+    Build strict top 3 list with same-date tie exception.
+
+    Rules:
+    1. Include top 3 positions by score
+    2. If multiple records tie for 3rd place on SAME date, include all
+    3. If records tie for 3rd place on DIFFERENT dates, only earliest
+
+    Returns: List of (player, score, record) tuples for strict top 3
+    """
+    if len(candidates) < 3:
+        return candidates
+
+    # Sort by score (desc/asc), then by date ascending
+    if lower_is_better:
+        candidates.sort(key=lambda x: (x[1], x[2]['date']))
+    else:
+        candidates.sort(key=lambda x: (-x[1], x[2]['date']))
+
+    # Get 3rd position details
+    third_score = candidates[2][1]
+    third_date = candidates[2][2]['date']
+
+    # Include top 2 + all same-score same-date 3rd place ties
+    strict_top3 = candidates[:2]
+
+    for entry in candidates[2:]:
+        matches_score = entry[1] == third_score
+        matches_date = entry[2]['date'] == third_date
+
+        if matches_score and matches_date:
+            strict_top3.append(entry)
+        elif (entry[1] < third_score and not lower_is_better) or \
+             (entry[1] > third_score and lower_is_better):
+            break  # No more possible ties
+
+    return strict_top3
+
+
 def get_course_leaderboard(players_data, course_id, config):
     """
     Get course leaderboard with best score per player and historical statistics.
@@ -213,7 +253,8 @@ def get_course_leaderboard(players_data, course_id, config):
     all_records.sort(key=lambda r: r['date'])
 
     # Calculate leaderboard statistics
-    top3 = []
+    top3_extended = []  # For record history
+    top3_strict = []    # For time tracking
     first_place_periods = []
     top23_periods = {}
     current_first_holder = None
@@ -222,17 +263,29 @@ def get_course_leaderboard(players_data, course_id, config):
     record_improvements = []
 
     for record in all_records:
-        previous_top3 = top3.copy()
-        previous_first = top3[0] if top3 else None
+        # === EXTENDED TOP 3 (Record History) ===
+        previous_extended = top3_extended.copy()
+        top3_extended.append((record['player'], record['total_score'], record))
+        top3_extended.sort(key=lambda x: -x[1])
 
-        # Update top 3
-        top3.append((record['player'], record['total_score'], record))
-        top3.sort(key=lambda x: -x[1])
-        top3 = top3[:3]
+        if len(top3_extended) >= 3:
+            third_best_score = top3_extended[2][1]
+            top3_extended = [e for e in top3_extended if e[1] >= third_best_score]
 
-        # Check if leaderboard changed
-        if [(p, s) for p, s, _ in top3] != [(p, s) for p, s, _ in previous_top3]:
-            new_top23_names = set(entry[0] for entry in top3[1:])
+        # Record if extended leaderboard changed (for record history)
+        if [(p, s) for p, s, _ in top3_extended] != [(p, s) for p, s, _ in previous_extended]:
+            record_improvements.append(record)
+
+        # === STRICT TOP 3 (Time Tracking) ===
+        previous_strict = top3_strict.copy()
+
+        candidates = top3_strict.copy()
+        candidates.append((record['player'], record['total_score'], record))
+        top3_strict = build_strict_top3(candidates, lower_is_better=False)
+
+        # Track time periods if strict leaderboard changed
+        if [(p, s) for p, s, _ in top3_strict] != [(p, s) for p, s, _ in previous_strict]:
+            new_top23_names = set(entry[0] for entry in top3_strict[1:])
 
             # End periods for players no longer in positions 2-3
             for player, start_date in list(current_top23_holders.items()):
@@ -242,28 +295,26 @@ def get_course_leaderboard(players_data, course_id, config):
                     top23_periods[player].append((start_date, record['date']))
 
             # Handle first place changes
-            new_first = top3[0]
-            if previous_first and new_first[0] != previous_first[0]:
+            new_first = top3_strict[0]
+            if previous_strict and previous_strict[0][0] != new_first[0]:
                 if current_first_holder and current_first_start:
                     first_place_periods.append((current_first_holder, current_first_start, record['date']))
                 current_first_holder = new_first[0]
                 current_first_start = record['date']
-            elif not previous_first:
+            elif not previous_strict:
                 current_first_holder = new_first[0]
                 current_first_start = record['date']
 
             # Start new periods for players entering positions 2-3
             new_top23_holders = {}
-            for entry in top3[1:]:
+            for entry in top3_strict[1:]:
                 player = entry[0]
                 new_top23_holders[player] = current_top23_holders.get(player, record['date'])
             current_top23_holders = new_top23_holders
 
-            record_improvements.append(record)
-
     # End final periods
     if all_records:
-        final_date = all_records[-1]['date']
+        final_date = date.today()
         for player, start_date in current_top23_holders.items():
             if player not in top23_periods:
                 top23_periods[player] = []
@@ -321,7 +372,8 @@ def get_event_leaderboard(players_data, event_id, events_config):
     all_records.sort(key=lambda r: r['date'])
 
     # Calculate leaderboard statistics (similar to course but for events)
-    top3 = []
+    top3_extended = []  # For record history
+    top3_strict = []    # For time tracking
     first_place_periods = []
     top23_periods = {}
     current_first_holder = None
@@ -330,20 +382,35 @@ def get_event_leaderboard(players_data, event_id, events_config):
     record_improvements = []
 
     for record in all_records:
-        previous_top3 = top3.copy()
-        previous_first = top3[0] if top3 else None
-
-        # Update top 3
-        top3.append((record['player'], record['score'], record))
+        # === EXTENDED TOP 3 (Record History) ===
+        previous_extended = top3_extended.copy()
+        top3_extended.append((record['player'], record['score'], record))
         if lower_is_better:
-            top3.sort(key=lambda x: (x[1], all_records.index(x[2]) if x[2] in all_records else 0))
+            top3_extended.sort(key=lambda x: (x[1], all_records.index(x[2]) if x[2] in all_records else 0))
         else:
-            top3.sort(key=lambda x: (-x[1], all_records.index(x[2]) if x[2] in all_records else 0))
-        top3 = top3[:3]
+            top3_extended.sort(key=lambda x: (-x[1], all_records.index(x[2]) if x[2] in all_records else 0))
 
-        # Check if leaderboard changed
-        if [(p, s) for p, s, _ in top3] != [(p, s) for p, s, _ in previous_top3]:
-            new_top23_names = set(entry[0] for entry in top3[1:])
+        if len(top3_extended) >= 3:
+            third_best_score = top3_extended[2][1]
+            if lower_is_better:
+                top3_extended = [e for e in top3_extended if e[1] <= third_best_score]
+            else:
+                top3_extended = [e for e in top3_extended if e[1] >= third_best_score]
+
+        # Record if extended leaderboard changed (for record history)
+        if [(p, s) for p, s, _ in top3_extended] != [(p, s) for p, s, _ in previous_extended]:
+            record_improvements.append(record)
+
+        # === STRICT TOP 3 (Time Tracking) ===
+        previous_strict = top3_strict.copy()
+
+        candidates = top3_strict.copy()
+        candidates.append((record['player'], record['score'], record))
+        top3_strict = build_strict_top3(candidates, lower_is_better=lower_is_better)
+
+        # Track time periods if strict leaderboard changed
+        if [(p, s) for p, s, _ in top3_strict] != [(p, s) for p, s, _ in previous_strict]:
+            new_top23_names = set(entry[0] for entry in top3_strict[1:])
 
             for player, start_date in list(current_top23_holders.items()):
                 if player not in new_top23_names:
@@ -351,27 +418,25 @@ def get_event_leaderboard(players_data, event_id, events_config):
                         top23_periods[player] = []
                     top23_periods[player].append((start_date, record['date']))
 
-            new_first = top3[0]
-            if previous_first and new_first[0] != previous_first[0]:
+            new_first = top3_strict[0]
+            if previous_strict and previous_strict[0][0] != new_first[0]:
                 if current_first_holder and current_first_start:
                     first_place_periods.append((current_first_holder, current_first_start, record['date']))
                 current_first_holder = new_first[0]
                 current_first_start = record['date']
-            elif not previous_first:
+            elif not previous_strict:
                 current_first_holder = new_first[0]
                 current_first_start = record['date']
 
             new_top23_holders = {}
-            for entry in top3[1:]:
+            for entry in top3_strict[1:]:
                 player = entry[0]
                 new_top23_holders[player] = current_top23_holders.get(player, record['date'])
             current_top23_holders = new_top23_holders
 
-            record_improvements.append(record)
-
     # End final periods
     if all_records:
-        final_date = all_records[-1]['date']
+        final_date = date.today()
         for player, start_date in current_top23_holders.items():
             if player not in top23_periods:
                 top23_periods[player] = []
@@ -852,6 +917,9 @@ def generate_index_html(players_data, config):
         if latex:
             event_formulas[event_id] = r'\( ' + latex + r' \)'
 
+    # Format last updated timestamp
+    last_updated = date.today().strftime("%B %d, %Y")
+
     html_content = '''<!DOCTYPE html>
 <html>
 <head>
@@ -897,6 +965,9 @@ def generate_index_html(players_data, config):
 
   <h1>Pokeathlon World Records</h1>
   <p>Since the release of HG/SS, Pokeathlon has been an endless source of entertainment for many people. During these years people have shared their PBs in many different forums and websites, our goal is to create the go-to place for pokeathlon enjoyers.</p>
+  <p class="last-updated" style="text-align: center; color: #666; font-size: 0.9em; margin-top: 1em;">
+    Last updated: ''' + last_updated + '''
+  </p>
 
   <h2>Course World Records</h2>
   <div class="table-wrapper">
