@@ -15,19 +15,11 @@ This is a beta version – expect updates and improvements.
 
 ---
 
-## ⚠ Known Limitations
-- **Real-time updates** are not yet implemented (static data only).
-- **Incomplete stats**, if you have some data I do not have please share.
-- The time tracking leadboard do not track time until today but it tracks until the last top 3 update.
-
----
-
 ## 🛠 Future Improvements
 Some ideas for improvements:
 - [ ] **Filters for Events** – Add the same filters of the courses in the single event section.
 - [x] **Mobile Design** – Optimize layout for mobile and tablet devices.
 - [ ] **Player Profiles** – Add a profile page for each player with stats.
-- [ ] **Real-time Updates** – Fetch leaderboard data via an API instead of static files.
 - [x] **Dark Mode** – Add a toggle for dark/light theme.
 - [ ] **Localization** - Add different localizations for the most used languages.
 - [ ] **Emulator Filter** - Add support for record obtained on emulator.
@@ -37,6 +29,10 @@ Some ideas for improvements:
 ---
 
 ## 📅 Changelog
+### v0.4.0-beta (2026-01-26)
+- Switched from record-centric to player-centric model
+- The record history now shows the ties in the top 3
+- Fixed time-tracking leaderboard bugs
 ### v0.3.0-beta (2025-08-13)
 - Added a toggle for dark/light theme
 ### v0.2.0-beta (2025-07-27)
