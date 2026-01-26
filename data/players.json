@@ -4,8 +4,8 @@
     "generatedAt": "2026-01-25T17:35:00.319673",
     "source": "csv_migration",
     "totalPlayers": 289,
-    "totalCourseRecords": 599,
-    "totalEventRecords": 1646
+    "totalCourseRecords": 601,
+    "totalEventRecords": 1647
   },
   "players": {
     "SkyHippowdon": {
@@ -30637,7 +30637,7 @@
       "name": "PokeathlonEnjoyer",
       "country": "Unknown",
       "firstRecordDate": "2025-07-26",
-      "lastActiveDate": "2025-07-26",
+      "lastActiveDate": "2025-12-03",
       "status": "active",
       "courseRecords": {
         "speed": [],
@@ -30656,13 +30656,51 @@
               "type": "photo",
               "url": "https://pokeathlonhub.github.io/courses/skill.html"
             }
+          },
+          {
+            "totalScore": 618,
+            "eventScores": {
+              "snow-throw": 200,
+              "goal-roll": 185,
+              "pennant-capture": 132
+            },
+            "bonusPoints": 101,
+            "date": "2025-12-03",
+            "proof": {
+              "type": "photo",
+              "url": "discord.com"
+            }
           }
         ],
         "stamina": [],
-        "jump": []
+        "jump": [
+          {
+            "totalScore": 569,
+            "eventScores": {
+              "lamp-jump": 189,
+              "disc-catch": 134,
+              "hurdle-dash": 145
+            },
+            "bonusPoints": 101,
+            "date": "2025-10-23",
+            "proof": {
+              "type": "photo",
+              "url": "https://www.smogon.com/forums/attachments/1762286055065-png.784468/"
+            }
+          }
+        ]
       },
       "eventRecords": {
-        "hurdle-dash": [],
+        "hurdle-dash": [
+          {
+            "score": 75.9,
+            "date": "2025-10-22",
+            "proof": {
+              "type": "photo",
+              "url": "discord.com"
+            }
+          }
+        ],
         "pennant-capture": [],
         "circle-push": [],
         "block-smash": [],
@@ -30674,10 +30712,12 @@
         "goal-roll": []
       },
       "statistics": {
-        "totalRecordsSubmitted": 1,
+        "totalRecordsSubmitted": 4,
         "currentWorldRecords": 0,
         "personalBests": {
-          "skill": 604
+          "skill": 618,
+          "jump": 569,
+          "hurdle-dash": 75.9
         }
       },
       "progression": [
