@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rank Simulator - Pokeathlon</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="../championship-trophy.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light theme">🌙</button>
+  <nav><a href="../index.html">← Back to All Events</a></nav>
+
+  <h1>Rank Simulator</h1>
+  <p>See where your score would rank on the leaderboard. This is a simulator only - your score will not be saved to the actual records.</p>
+
+  <div class="filter-container">
+    <h3>Category Type</h3>
+    <div class="filter-options">
+      <div class="filter-option">
+        <input type="radio" id="type-course" name="category-type" value="course" checked>
+        <label for="type-course">Course</label>
+      </div>
+      <div class="filter-option">
+        <input type="radio" id="type-event" name="category-type" value="event">
+        <label for="type-event">Event</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-container">
+    <h3>Category</h3>
+    <div class="input-group">
+      <select id="category-select">
+        <!-- Populated by JavaScript -->
+      </select>
+    </div>
+    <p id="scoring-hint" class="filter-info" style="margin-top: 10px;"></p>
+  </div>
+
+  <div class="filter-container">
+    <h3>Your Score</h3>
+    <div class="input-group">
+      <input type="number" id="score-input" step="0.1" min="0" placeholder="Enter your score" style="padding: 6px 10px; border: 1px solid var(--border-color); font-size: 14px; background: var(--bg-color); color: var(--text-color);">
+    </div>
+  </div>
+
+  <button class="calculate-btn" onclick="checkRank()">
+    Check My Rank
+  </button>
+
+  <div id="results" class="results" style="display: none;">
+    <h3>Results</h3>
+    <div id="results-content"></div>
+  </div>
+
+  <script src="../js/theme-toggle.js"></script>
+  <script>
+    // Category configuration
+    const CATEGORIES = {
+      courses: {
+        speed: { displayName: "Speed", higherIsBetter: true },
+        power: { displayName: "Power", higherIsBetter: true },
+        skill: { displayName: "Skill", higherIsBetter: true },
+        stamina: { displayName: "Stamina", higherIsBetter: true },
+        jump: { displayName: "Jump", higherIsBetter: true }
+      },
+      events: {
+        "hurdle-dash": { displayName: "Hurdle Dash", higherIsBetter: false, unit: "seconds" },
+        "pennant-capture": { displayName: "Pennant Capture", higherIsBetter: true, unit: "count" },
+        "circle-push": { displayName: "Circle Push", higherIsBetter: true, unit: "count" },
+        "block-smash": { displayName: "Block Smash", higherIsBetter: true, unit: "count" },
+        "disc-catch": { displayName: "Disc Catch", higherIsBetter: true, unit: "count" },
+        "lamp-jump": { displayName: "Lamp Jump", higherIsBetter: true, unit: "count" },
+        "relay-run": { displayName: "Relay Run", higherIsBetter: true, unit: "laps" },
+        "ring-drop": { displayName: "Ring Drop", higherIsBetter: true, unit: "count" },
+        "snow-throw": { displayName: "Snow Throw", higherIsBetter: true, unit: "count" },
+        "goal-roll": { displayName: "Goal Roll", higherIsBetter: true, unit: "count" }
+      }
+    };
+
+    // Cache for player data
+    let playersDataCache = null;
+
+    // DOM elements
+    const categoryTypeRadios = document.querySelectorAll('input[name="category-type"]');
+    const categorySelect = document.getElementById('category-select');
+    const scoringHint = document.getElementById('scoring-hint');
+    const scoreInput = document.getElementById('score-input');
+    const resultsDiv = document.getElementById('results');
+    const resultsContent = document.getElementById('results-content');
+
+    // Initialize
+    populateCategorySelect();
+    updateScoringHint();
+
+    // Event listeners
+    categoryTypeRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        populateCategorySelect();
+        updateScoringHint();
+      });
+    });
+
+    categorySelect.addEventListener('change', updateScoringHint);
+
+    function getSelectedType() {
+      return document.querySelector('input[name="category-type"]:checked').value;
+    }
+
+    function populateCategorySelect() {
+      const type = getSelectedType();
+      const categories = type === 'course' ? CATEGORIES.courses : CATEGORIES.events;
+
+      categorySelect.innerHTML = '';
+      for (const [key, config] of Object.entries(categories)) {
+        const option = document.createElement('option');
+        option.value = key;
+        option.textContent = config.displayName;
+        categorySelect.appendChild(option);
+      }
+    }
+
+    function updateScoringHint() {
+      const type = getSelectedType();
+      const categoryKey = categorySelect.value;
+      const categories = type === 'course' ? CATEGORIES.courses : CATEGORIES.events;
+      const config = categories[categoryKey];
+
+      if (config) {
+        if (config.higherIsBetter) {
+          scoringHint.textContent = 'Higher scores are better for this category.';
+        } else {
+          scoringHint.textContent = 'Lower scores are better for this category (time in seconds).';
+        }
+      }
+    }
+
+    async function loadPlayersData() {
+      if (playersDataCache) {
+        return playersDataCache;
+      }
+
+      const response = await fetch('../data/players.json');
+      if (!response.ok) {
+        throw new Error('Failed to load player data');
+      }
+
+      playersDataCache = await response.json();
+      return playersDataCache;
+    }
+
+    function getBestScore(records, higherIsBetter) {
+      if (!records || records.length === 0) {
+        return null;
+      }
+
+      let best = null;
+      for (const record of records) {
+        const score = record.totalScore !== undefined ? record.totalScore : record.score;
+        if (score === undefined || score === null) continue;
+
+        if (best === null) {
+          best = score;
+        } else if (higherIsBetter && score > best) {
+          best = score;
+        } else if (!higherIsBetter && score < best) {
+          best = score;
+        }
+      }
+      return best;
+    }
+
+    function getOrdinalSuffix(n) {
+      const s = ["th", "st", "nd", "rd"];
+      const v = n % 100;
+      return n + (s[(v - 20) % 10] || s[v] || s[0]);
+    }
+
+    async function checkRank() {
+      const type = getSelectedType();
+      const categoryKey = categorySelect.value;
+      const userScore = parseFloat(scoreInput.value);
+
+      if (isNaN(userScore)) {
+        resultsDiv.style.display = 'block';
+        resultsContent.innerHTML = '<div class="no-results">Please enter a valid score.</div>';
+        return;
+      }
+
+      // Show loading
+      resultsDiv.style.display = 'block';
+      resultsContent.innerHTML = '<div class="loading">Loading player data...</div>';
+
+      try {
+        const data = await loadPlayersData();
+        const categories = type === 'course' ? CATEGORIES.courses : CATEGORIES.events;
+        const config = categories[categoryKey];
+        const higherIsBetter = config.higherIsBetter;
+
+        // Collect best scores from all players
+        const playerBestScores = [];
+
+        for (const [playerName, player] of Object.entries(data.players)) {
+          let records;
+          if (type === 'course') {
+            records = player.courseRecords?.[categoryKey];
+          } else {
+            records = player.eventRecords?.[categoryKey];
+          }
+
+          const bestScore = getBestScore(records, higherIsBetter);
+          if (bestScore !== null) {
+            playerBestScores.push({
+              name: playerName,
+              score: bestScore
+            });
+          }
+        }
+
+        // Calculate position
+        let betterCount = 0;
+        let tiedCount = 0;
+
+        for (const player of playerBestScores) {
+          if (higherIsBetter) {
+            if (player.score > userScore) {
+              betterCount++;
+            } else if (player.score === userScore) {
+              tiedCount++;
+            }
+          } else {
+            // Lower is better (e.g., Hurdle Dash time)
+            if (player.score < userScore) {
+              betterCount++;
+            } else if (player.score === userScore) {
+              tiedCount++;
+            }
+          }
+        }
+
+        // User position = players with better scores + players with same score + 1
+        // (user ranks last among ties because they're the "newest")
+        const userPosition = betterCount + tiedCount + 1;
+        const totalPlayers = playerBestScores.length + 1; // Include the user
+        const playersBeaten = playerBestScores.length - betterCount - tiedCount;
+
+        // Build results HTML
+        let html = '<div class="result-item">';
+        html += `<strong>Your Position:</strong> ${getOrdinalSuffix(userPosition)} out of ${totalPlayers} players`;
+        html += '</div>';
+
+        if (tiedCount > 0) {
+          html += '<div class="result-item">';
+          html += `<strong>Tied Players:</strong> ${tiedCount + 1} players share this exact score (including you)`;
+          html += '</div>';
+          html += '<p class="filter-info" style="margin-top: 10px;">Note: You rank last among tied players (newest entry loses ties).</p>';
+        }
+
+        html += '<div class="result-item">';
+        html += `<strong>Players Beaten:</strong> ${playersBeaten}`;
+        html += '</div>';
+
+        html += '<div class="result-item">';
+        html += `<strong>Players Ahead:</strong> ${betterCount}`;
+        html += '</div>';
+
+        // Show percentile
+        const percentile = ((totalPlayers - userPosition) / (totalPlayers - 1) * 100).toFixed(1);
+        if (totalPlayers > 1) {
+          html += '<div class="result-item">';
+          html += `<strong>Percentile:</strong> Top ${(100 - parseFloat(percentile)).toFixed(1)}%`;
+          html += '</div>';
+        }
+
+        resultsContent.innerHTML = html;
+
+      } catch (error) {
+        let errorMsg = error.message;
+        if (error.message.includes('fetch') || error.name === 'TypeError') {
+          errorMsg = 'Failed to load player data. If testing locally, run a local server:<br><code style="background: var(--table-header-bg); padding: 2px 6px;">python -m http.server 8000</code><br>Then open <a href="http://localhost:8000/calculators/rank-simulator.html">localhost:8000</a>';
+        }
+        resultsContent.innerHTML = `<div class="no-results">${errorMsg}</div>`;
+      }
+    }
+  </script>
+
+</body>
+</html>

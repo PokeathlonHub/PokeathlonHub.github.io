@@ -1068,6 +1068,7 @@ def generate_index_html(players_data, config):
     <h3 id="calculatorsToggle">Calculators</h3>
     <ul id="calculatorsMenu">
       <li><a href="calculators/PID.html">PID</a></li>
+      <li><a href="calculators/rank-simulator.html">Rank Simulator</a></li>
     </ul>
   </div>
 
