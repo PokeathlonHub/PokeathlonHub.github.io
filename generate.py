@@ -1212,6 +1212,50 @@ def generate_index_html(players_data, config):
         f.write(html_content)
 
 
+def save_players(filepath, data):
+    """Save players.json data."""
+    with open(filepath, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+
+
+def update_world_record_counts(players_data, courses_config, events_config):
+    """
+    Recalculate and update currentWorldRecords for all players.
+
+    A player holds a world record if they have the current best score
+    (earliest date wins ties) for any course or event.
+    """
+    players = players_data.get('players', {})
+
+    # Reset all world record counts to 0
+    for player in players.values():
+        if 'statistics' not in player:
+            player['statistics'] = {}
+        player['statistics']['currentWorldRecords'] = 0
+
+    # Count course world records
+    for course_id in courses_config.keys():
+        record = get_current_course_record(players_data, course_id)
+        if record and record['player'] in players:
+            players[record['player']]['statistics']['currentWorldRecords'] += 1
+
+    # Count event world records
+    for event_id, event_cfg in events_config.items():
+        # Skip fixed records (Circle Push, Ring Drop) - those aren't player-held
+        if event_cfg.get('fixed_record'):
+            continue
+        record = get_current_event_record(players_data, event_id, events_config)
+        if record and record['player'] in players:
+            players[record['player']]['statistics']['currentWorldRecords'] += 1
+
+    # Count how many players have world records
+    holders = [(name, p['statistics']['currentWorldRecords'])
+               for name, p in players.items()
+               if p['statistics'].get('currentWorldRecords', 0) > 0]
+
+    return holders
+
+
 def generate_all():
     """Generate all HTML files from player-centric data."""
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -1228,6 +1272,12 @@ def generate_all():
     players_data = load_players(players_file)
 
     print(f"Loaded {len(players_data.get('players', {}))} players")
+
+    # Update world record counts in player statistics
+    print("Updating world record counts...")
+    holders = update_world_record_counts(players_data, courses_config, events_config)
+    print(f"  Found {len(holders)} players with world records")
+    save_players(players_file, players_data)
 
     # Ensure output directories exist
     os.makedirs('courses', exist_ok=True)

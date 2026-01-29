@@ -618,7 +618,7 @@
       },
       "statistics": {
         "totalRecordsSubmitted": 15,
-        "currentWorldRecords": 2,
+        "currentWorldRecords": 0,
         "personalBests": {
           "speed": 555,
           "power": 548,
@@ -1076,7 +1076,7 @@
     },
     "hotdogturtle": {
       "name": "hotdogturtle",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2010-04-04",
       "lastActiveDate": "2021-03-04",
       "status": "active",
@@ -1325,7 +1325,7 @@
       },
       "statistics": {
         "totalRecordsSubmitted": 22,
-        "currentWorldRecords": 3,
+        "currentWorldRecords": 1,
         "personalBests": {
           "speed": 571,
           "power": 590,
@@ -6602,7 +6602,7 @@
     },
     "[⭐]nickwii77": {
       "name": "[⭐]nickwii77",
-      "country": "(No country flag)",
+      "country": "Unknown",
       "firstRecordDate": "2010-12-07",
       "lastActiveDate": "2010-12-07",
       "status": "active",
@@ -7010,7 +7010,7 @@
     },
     "Magiclapras": {
       "name": "Magiclapras",
-      "country": "AUS",
+      "country": "Australia",
       "firstRecordDate": "2011-01-02",
       "lastActiveDate": "2021-06-02",
       "status": "active",
@@ -7876,7 +7876,7 @@
     },
     "Dominitzk": {
       "name": "Dominitzk",
-      "country": "GER",
+      "country": "Germany",
       "firstRecordDate": "2011-02-17",
       "lastActiveDate": "2011-03-14",
       "status": "active",
@@ -8362,7 +8362,7 @@
     },
     "glukkers": {
       "name": "glukkers",
-      "country": "AUS",
+      "country": "Australia",
       "firstRecordDate": "2011-02-16",
       "lastActiveDate": "2011-03-08",
       "status": "active",
@@ -9278,7 +9278,7 @@
     },
     "Bownzinho": {
       "name": "Bownzinho",
-      "country": "UK",
+      "country": "United Kingdom",
       "firstRecordDate": "2011-05-29",
       "lastActiveDate": "2011-05-29",
       "status": "active",
@@ -10124,7 +10124,7 @@
     },
     "GrandMasterAish !": {
       "name": "GrandMasterAish !",
-      "country": "AUS",
+      "country": "Australia",
       "firstRecordDate": "2011-07-31",
       "lastActiveDate": "2011-07-31",
       "status": "active",
@@ -11176,7 +11176,7 @@
     },
     "Nintendofreak2245": {
       "name": "Nintendofreak2245",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2011-08-19",
       "lastActiveDate": "2011-08-19",
       "status": "active",
@@ -13932,7 +13932,7 @@
     },
     "Volcaronick": {
       "name": "Volcaronick",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2011-12-28",
       "lastActiveDate": "2012-01-19",
       "status": "active",
@@ -14410,7 +14410,7 @@
     },
     "ChaosZero_CDC": {
       "name": "ChaosZero_CDC",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2012-02-14",
       "lastActiveDate": "2012-02-14",
       "status": "active",
@@ -14724,7 +14724,7 @@
     },
     "Chimecho3000": {
       "name": "Chimecho3000",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2012-03-07",
       "lastActiveDate": "2012-03-07",
       "status": "active",
@@ -15038,7 +15038,7 @@
     },
     "Lord Fighting": {
       "name": "Lord Fighting",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2012-03-22",
       "lastActiveDate": "2012-03-22",
       "status": "active",
@@ -15666,7 +15666,7 @@
     },
     "Snowden": {
       "name": "Snowden",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2012-05-10",
       "lastActiveDate": "2012-05-10",
       "status": "active",
@@ -16364,7 +16364,7 @@
     },
     "Mugeli": {
       "name": "Mugeli",
-      "country": "FIN",
+      "country": "Finland",
       "firstRecordDate": "2012-08-10",
       "lastActiveDate": "2012-08-13",
       "status": "active",
@@ -18532,7 +18532,7 @@
     },
     "SabreNightmare": {
       "name": "SabreNightmare",
-      "country": "UK",
+      "country": "United Kingdom",
       "firstRecordDate": "2013-05-21",
       "lastActiveDate": "2013-05-21",
       "status": "active",
@@ -18864,7 +18864,7 @@
     },
     "BielR3": {
       "name": "BielR3",
-      "country": "SPA",
+      "country": "Spain",
       "firstRecordDate": "2014-03-03",
       "lastActiveDate": "2014-11-01",
       "status": "active",
@@ -19976,7 +19976,7 @@
     },
     "hfactor66": {
       "name": "hfactor66",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2014-09-29",
       "lastActiveDate": "2021-06-04",
       "status": "active",
@@ -20222,7 +20222,7 @@
     },
     "Pokemonmaster888": {
       "name": "Pokemonmaster888",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2010-08-01",
       "lastActiveDate": "2014-12-14",
       "status": "active",
@@ -20454,7 +20454,7 @@
     },
     "Alex \"mathfreak231\" B": {
       "name": "Alex \"mathfreak231\" B",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2015-03-08",
       "lastActiveDate": "2015-07-07",
       "status": "active",
@@ -20850,7 +20850,7 @@
     },
     "Lyto": {
       "name": "Lyto",
-      "country": "UK",
+      "country": "United Kingdom",
       "firstRecordDate": "2015-06-05",
       "lastActiveDate": "2015-06-05",
       "status": "active",
@@ -21378,7 +21378,7 @@
     },
     "Astragazer": {
       "name": "Astragazer",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2015-08-18",
       "lastActiveDate": "2015-08-18",
       "status": "active",
@@ -21690,7 +21690,7 @@
     },
     "PurpleOstrich47": {
       "name": "PurpleOstrich47",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2016-07-29",
       "lastActiveDate": "2016-07-29",
       "status": "active",
@@ -22034,7 +22034,7 @@
     },
     "Lennert \"SaimeZX\"": {
       "name": "Lennert \"SaimeZX\"",
-      "country": "BGM",
+      "country": "Belgium",
       "firstRecordDate": "2014-02-07",
       "lastActiveDate": "2017-06-30",
       "status": "active",
@@ -22604,7 +22604,7 @@
     },
     "Linke": {
       "name": "Linke",
-      "country": "AUS",
+      "country": "Australia",
       "firstRecordDate": "2017-12-22",
       "lastActiveDate": "2024-09-21",
       "status": "active",
@@ -23156,7 +23156,7 @@
     },
     "Noble \"nnmn\" Prize": {
       "name": "Noble \"nnmn\" Prize",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2018-02-26",
       "lastActiveDate": "2018-02-26",
       "status": "active",
@@ -23586,7 +23586,7 @@
     },
     "FlamezOfGamez": {
       "name": "FlamezOfGamez",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2021-07-22",
       "lastActiveDate": "2021-08-03",
       "status": "active",
@@ -23836,7 +23836,7 @@
     },
     "Thebestsilver7": {
       "name": "Thebestsilver7",
-      "country": "SPA",
+      "country": "Spain",
       "firstRecordDate": "2020-05-21",
       "lastActiveDate": "2022-01-25",
       "status": "active",
@@ -25382,7 +25382,7 @@
     },
     "BeafCultist": {
       "name": "BeafCultist",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2024-01-06",
       "lastActiveDate": "2024-01-06",
       "status": "active",
@@ -25906,7 +25906,7 @@
     },
     "PiplupHG": {
       "name": "PiplupHG",
-      "country": "italy",
+      "country": "Italy",
       "firstRecordDate": "2024-12-28",
       "lastActiveDate": "2025-08-27",
       "status": "active",
@@ -28261,7 +28261,7 @@
     },
     "“Bownzinho”": {
       "name": "“Bownzinho”",
-      "country": "UK",
+      "country": "United Kingdom",
       "firstRecordDate": "2011-05-29",
       "lastActiveDate": "2011-05-29",
       "status": "active",
@@ -28335,7 +28335,7 @@
     },
     "“GrandMasterAish” !": {
       "name": "“GrandMasterAish” !",
-      "country": "AUS",
+      "country": "Australia",
       "firstRecordDate": "2011-07-31",
       "lastActiveDate": "2011-07-31",
       "status": "active",
@@ -30257,7 +30257,7 @@
     },
     "“955561976”": {
       "name": "“955561976”",
-      "country": "ENG",
+      "country": "United Kingdom",
       "firstRecordDate": "2023-02-27",
       "lastActiveDate": "2023-02-27",
       "status": "active",
@@ -30543,7 +30543,7 @@
     },
     "mathfreak231": {
       "name": "mathfreak231",
-      "country": "United States of America",
+      "country": "United States",
       "firstRecordDate": "2015-09-29",
       "lastActiveDate": "2015-09-29",
       "status": "active",
@@ -30727,7 +30727,7 @@
       },
       "statistics": {
         "totalRecordsSubmitted": 4,
-        "currentWorldRecords": 0,
+        "currentWorldRecords": 2,
         "personalBests": {
           "skill": 618,
           "jump": 569,
@@ -31017,7 +31017,7 @@
     },
     "zaldor": {
       "name": "zaldor",
-      "country": "NOR",
+      "country": "Norway",
       "firstRecordDate": "2014-02-19",
       "lastActiveDate": "2014-02-19",
       "status": "active",
@@ -31379,7 +31379,7 @@
     },
     "mugeli": {
       "name": "mugeli",
-      "country": "FIN",
+      "country": "Finland",
       "firstRecordDate": "2012-08-10",
       "lastActiveDate": "2012-08-10",
       "status": "active",
@@ -31433,7 +31433,7 @@
     },
     "Astragazert": {
       "name": "Astragazert",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2015-08-18",
       "lastActiveDate": "2015-08-18",
       "status": "active",
@@ -31487,7 +31487,7 @@
     },
     "mathfreak321": {
       "name": "mathfreak321",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2015-11-01",
       "lastActiveDate": "2015-11-01",
       "status": "active",
@@ -31603,7 +31603,7 @@
     },
     "nnmn": {
       "name": "nnmn",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2017-08-16",
       "lastActiveDate": "2018-02-26",
       "status": "active",
@@ -31855,7 +31855,7 @@
     },
     "Magiclapras”": {
       "name": "Magiclapras”",
-      "country": "AUS",
+      "country": "Australia",
       "firstRecordDate": "2021-06-02",
       "lastActiveDate": "2021-06-02",
       "status": "active",
@@ -32801,7 +32801,7 @@
     },
     "Vaati_Reborn": {
       "name": "Vaati_Reborn",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2010-03-22",
       "lastActiveDate": "2010-03-22",
       "status": "active",
@@ -33015,7 +33015,7 @@
     },
     "Ppug_wishbone": {
       "name": "Ppug_wishbone",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2010-03-22",
       "lastActiveDate": "2010-03-22",
       "status": "active",
@@ -33229,7 +33229,7 @@
     },
     "mashystrr": {
       "name": "mashystrr",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2010-03-22",
       "lastActiveDate": "2010-03-22",
       "status": "active",
@@ -33443,7 +33443,7 @@
     },
     "Megaloshi": {
       "name": "Megaloshi",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2010-03-22",
       "lastActiveDate": "2010-03-22",
       "status": "active",
@@ -33657,7 +33657,7 @@
     },
     "apolloflameowns": {
       "name": "apolloflameowns",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2010-04-01",
       "lastActiveDate": "2010-04-01",
       "status": "active",
@@ -33871,7 +33871,7 @@
     },
     "mqntqstorm": {
       "name": "mqntqstorm",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2010-04-01",
       "lastActiveDate": "2010-04-01",
       "status": "active",
@@ -34085,7 +34085,7 @@
     },
     "Arkayna": {
       "name": "Arkayna",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2010-04-01",
       "lastActiveDate": "2010-04-01",
       "status": "active",
@@ -34299,7 +34299,7 @@
     },
     "[DX] CiaraJansonFan": {
       "name": "[DX] CiaraJansonFan",
-      "country": "UK",
+      "country": "United Kingdom",
       "firstRecordDate": "2010-04-12",
       "lastActiveDate": "2011-04-05",
       "status": "active",
@@ -34477,7 +34477,7 @@
     },
     "[Gamer] wadoludo": {
       "name": "[Gamer] wadoludo",
-      "country": "BR",
+      "country": "Brazil",
       "firstRecordDate": "2010-04-12",
       "lastActiveDate": "2010-04-12",
       "status": "active",
@@ -34601,7 +34601,7 @@
     },
     "[BF] BlackShark": {
       "name": "[BF] BlackShark",
-      "country": "FR",
+      "country": "France",
       "firstRecordDate": "2010-04-12",
       "lastActiveDate": "2014-02-24",
       "status": "active",
@@ -34779,7 +34779,7 @@
     },
     "Flashpanda": {
       "name": "Flashpanda",
-      "country": "Western country",
+      "country": "Western countries",
       "firstRecordDate": "2010-04-12",
       "lastActiveDate": "2010-04-12",
       "status": "active",
@@ -34831,7 +34831,7 @@
     },
     "Soro99": {
       "name": "Soro99",
-      "country": "Western country",
+      "country": "Western countries",
       "firstRecordDate": "2010-04-12",
       "lastActiveDate": "2010-04-12",
       "status": "active",
@@ -34883,7 +34883,7 @@
     },
     "[B2H] Basile": {
       "name": "[B2H] Basile",
-      "country": "FR",
+      "country": "France",
       "firstRecordDate": "2010-04-13",
       "lastActiveDate": "2011-03-12",
       "status": "active",
@@ -35061,7 +35061,7 @@
     },
     "[Czn] daft.moustik": {
       "name": "[Czn] daft.moustik",
-      "country": "FR",
+      "country": "France",
       "firstRecordDate": "2010-04-13",
       "lastActiveDate": "2010-04-13",
       "status": "active",
@@ -35239,7 +35239,7 @@
     },
     "[SBEXP] PIERREL05": {
       "name": "[SBEXP] PIERREL05",
-      "country": "FR",
+      "country": "France",
       "firstRecordDate": "2010-04-13",
       "lastActiveDate": "2010-04-13",
       "status": "active",
@@ -35417,7 +35417,7 @@
     },
     "[SM] Virus-v2": {
       "name": "[SM] Virus-v2",
-      "country": "FR",
+      "country": "France",
       "firstRecordDate": "2010-04-13",
       "lastActiveDate": "2010-04-13",
       "status": "active",
@@ -35469,7 +35469,7 @@
     },
     "[RS] elpierrot17": {
       "name": "[RS] elpierrot17",
-      "country": "FR",
+      "country": "France",
       "firstRecordDate": "2010-04-16",
       "lastActiveDate": "2010-07-23",
       "status": "active",
@@ -35647,7 +35647,7 @@
     },
     "[B2H] Joulou-Michael": {
       "name": "[B2H] Joulou-Michael",
-      "country": "FR",
+      "country": "France",
       "firstRecordDate": "2010-04-20",
       "lastActiveDate": "2010-04-20",
       "status": "active",
@@ -35825,7 +35825,7 @@
     },
     "[RS] Yoshi55": {
       "name": "[RS] Yoshi55",
-      "country": "FR",
+      "country": "France",
       "firstRecordDate": "2010-04-23",
       "lastActiveDate": "2011-03-20",
       "status": "active",
@@ -38373,7 +38373,7 @@
     },
     "Missile": {
       "name": "Missile",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2010-08-01",
       "lastActiveDate": "2010-08-01",
       "status": "active",
@@ -38587,7 +38587,7 @@
     },
     "AtomicPokabu": {
       "name": "AtomicPokabu",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2010-08-01",
       "lastActiveDate": "2010-08-01",
       "status": "active",
@@ -38801,7 +38801,7 @@
     },
     "nothing to see here": {
       "name": "nothing to see here",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2010-08-03",
       "lastActiveDate": "2010-08-03",
       "status": "active",
@@ -39657,7 +39657,7 @@
     },
     "[GB] m251": {
       "name": "[GB] m251",
-      "country": "FR",
+      "country": "France",
       "firstRecordDate": "2010-08-12",
       "lastActiveDate": "2010-08-12",
       "status": "active",
@@ -40049,7 +40049,7 @@
     },
     "[RS] Boullu": {
       "name": "[RS] Boullu",
-      "country": "FR",
+      "country": "France",
       "firstRecordDate": "2010-08-24",
       "lastActiveDate": "2010-08-24",
       "status": "active",
@@ -40441,7 +40441,7 @@
     },
     "Impo": {
       "name": "Impo",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2010-10-09",
       "lastActiveDate": "2010-10-09",
       "status": "active",
@@ -40655,7 +40655,7 @@
     },
     "PlatinumDude": {
       "name": "PlatinumDude",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2010-10-09",
       "lastActiveDate": "2010-10-09",
       "status": "active",
@@ -41065,7 +41065,7 @@
     },
     "PKMN_trainer": {
       "name": "PKMN_trainer",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2010-10-21",
       "lastActiveDate": "2010-10-21",
       "status": "active",
@@ -42277,7 +42277,7 @@
     },
     "Leafbarrett": {
       "name": "Leafbarrett",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2010-12-23",
       "lastActiveDate": "2010-12-23",
       "status": "active",
@@ -42705,7 +42705,7 @@
     },
     "clemo7": {
       "name": "clemo7",
-      "country": "FR",
+      "country": "France",
       "firstRecordDate": "2011-02-12",
       "lastActiveDate": "2011-02-12",
       "status": "active",
@@ -42971,7 +42971,7 @@
     },
     "Anonymi": {
       "name": "Anonymi",
-      "country": "French",
+      "country": "France",
       "firstRecordDate": "2011-03-02",
       "lastActiveDate": "2011-03-02",
       "status": "active",
@@ -43185,7 +43185,7 @@
     },
     "phenix71400": {
       "name": "phenix71400",
-      "country": "French",
+      "country": "France",
       "firstRecordDate": "2011-03-02",
       "lastActiveDate": "2011-03-02",
       "status": "active",
@@ -43399,7 +43399,7 @@
     },
     "Sunny day": {
       "name": "Sunny day",
-      "country": "western countries",
+      "country": "Western countries",
       "firstRecordDate": "2011-03-06",
       "lastActiveDate": "2011-03-06",
       "status": "active",
@@ -43827,7 +43827,7 @@
     },
     "JDavidC": {
       "name": "JDavidC",
-      "country": "Western country",
+      "country": "Western countries",
       "firstRecordDate": "2011-04-15",
       "lastActiveDate": "2011-04-15",
       "status": "active",
@@ -43897,7 +43897,7 @@
     },
     "ultimate_ninja_": {
       "name": "ultimate_ninja_",
-      "country": "Western country",
+      "country": "Western countries",
       "firstRecordDate": "2011-04-15",
       "lastActiveDate": "2011-04-15",
       "status": "active",
@@ -43985,7 +43985,7 @@
     },
     "fail_fish_84": {
       "name": "fail_fish_84",
-      "country": "Western country",
+      "country": "Western countries",
       "firstRecordDate": "2011-04-15",
       "lastActiveDate": "2011-04-15",
       "status": "active",
@@ -44037,7 +44037,7 @@
     },
     "Jirachi_Wins": {
       "name": "Jirachi_Wins",
-      "country": "Western country",
+      "country": "Western countries",
       "firstRecordDate": "2011-04-15",
       "lastActiveDate": "2011-04-15",
       "status": "active",
@@ -44107,7 +44107,7 @@
     },
     "Arctickiller158": {
       "name": "Arctickiller158",
-      "country": "Western country",
+      "country": "Western countries",
       "firstRecordDate": "2011-04-15",
       "lastActiveDate": "2011-04-15",
       "status": "active",
@@ -44159,7 +44159,7 @@
     },
     "Game_ROB": {
       "name": "Game_ROB",
-      "country": "Western country",
+      "country": "Western countries",
       "firstRecordDate": "2011-04-15",
       "lastActiveDate": "2011-04-15",
       "status": "active",
@@ -44211,7 +44211,7 @@
     },
     "iforgotmyname": {
       "name": "iforgotmyname",
-      "country": "Western country",
+      "country": "Western countries",
       "firstRecordDate": "2011-04-15",
       "lastActiveDate": "2011-04-15",
       "status": "active",
@@ -44263,7 +44263,7 @@
     },
     "ApolloMing": {
       "name": "ApolloMing",
-      "country": "French",
+      "country": "France",
       "firstRecordDate": "2011-05-13",
       "lastActiveDate": "2011-05-13",
       "status": "active",
@@ -44477,7 +44477,7 @@
     },
     "Lolympien03": {
       "name": "Lolympien03",
-      "country": "French",
+      "country": "France",
       "firstRecordDate": "2011-05-14",
       "lastActiveDate": "2011-05-14",
       "status": "active",
@@ -44691,7 +44691,7 @@
     },
     "haku-chan": {
       "name": "haku-chan",
-      "country": "French",
+      "country": "France",
       "firstRecordDate": "2011-05-14",
       "lastActiveDate": "2011-05-14",
       "status": "active",
@@ -44905,7 +44905,7 @@
     },
     "jeje1403": {
       "name": "jeje1403",
-      "country": "French",
+      "country": "France",
       "firstRecordDate": "2011-07-09",
       "lastActiveDate": "2011-07-09",
       "status": "active",
@@ -45119,7 +45119,7 @@
     },
     "obito-du-05": {
       "name": "obito-du-05",
-      "country": "French",
+      "country": "France",
       "firstRecordDate": "2011-08-08",
       "lastActiveDate": "2011-08-08",
       "status": "active",
@@ -45333,7 +45333,7 @@
     },
     "punteggio di gioco": {
       "name": "punteggio di gioco",
-      "country": "French",
+      "country": "France",
       "firstRecordDate": "2011-08-09",
       "lastActiveDate": "2011-08-09",
       "status": "active",
@@ -45547,7 +45547,7 @@
     },
     "[⭐] xelon00": {
       "name": "[⭐] xelon00",
-      "country": "FR",
+      "country": "France",
       "firstRecordDate": "2011-10-28",
       "lastActiveDate": "2011-10-28",
       "status": "active",
@@ -46081,7 +46081,7 @@
     },
     "Silverboxer": {
       "name": "Silverboxer",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2011-12-18",
       "lastActiveDate": "2011-12-18",
       "status": "active",
@@ -46793,7 +46793,7 @@
     },
     "Pseudonym": {
       "name": "Pseudonym",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2012-05-03",
       "lastActiveDate": "2012-05-03",
       "status": "active",
@@ -47059,7 +47059,7 @@
     },
     "[CA.fr] pkaddict58": {
       "name": "[CA.fr] pkaddict58",
-      "country": "FR",
+      "country": "France",
       "firstRecordDate": "2012-07-08",
       "lastActiveDate": "2013-09-12",
       "status": "active",
@@ -47665,7 +47665,7 @@
     },
     "sibbi": {
       "name": "sibbi",
-      "country": "French",
+      "country": "France",
       "firstRecordDate": "2012-09-18",
       "lastActiveDate": "2012-09-18",
       "status": "active",
@@ -48093,7 +48093,7 @@
     },
     "Lennert SaimeZX": {
       "name": "Lennert SaimeZX",
-      "country": "BLG",
+      "country": "Belgium",
       "firstRecordDate": "2014-02-07",
       "lastActiveDate": "2024-12-05",
       "status": "active",
@@ -48271,7 +48271,7 @@
     },
     "u/Rayquaza384": {
       "name": "u/Rayquaza384",
-      "country": "Western country",
+      "country": "Western countries",
       "firstRecordDate": "2014-07-24",
       "lastActiveDate": "2014-07-24",
       "status": "active",
@@ -48573,7 +48573,7 @@
     },
     "Alex mathfreak231 B": {
       "name": "Alex mathfreak231 B",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2015-03-10",
       "lastActiveDate": "2015-07-09",
       "status": "active",
@@ -49535,7 +49535,7 @@
     },
     "u/BantaVGC": {
       "name": "u/BantaVGC",
-      "country": "Western country",
+      "country": "Western countries",
       "firstRecordDate": "2017-10-29",
       "lastActiveDate": "2017-10-29",
       "status": "active",
@@ -49749,7 +49749,7 @@
     },
     "[B2H] Vivi_Stem": {
       "name": "[B2H] Vivi_Stem",
-      "country": "FR",
+      "country": "France",
       "firstRecordDate": "2019-06-23",
       "lastActiveDate": "2019-06-23",
       "status": "active",
@@ -50123,7 +50123,7 @@
     },
     "[FS] Thebestsilver7": {
       "name": "[FS] Thebestsilver7",
-      "country": "SPA",
+      "country": "Spain",
       "firstRecordDate": "2020-05-21",
       "lastActiveDate": "2020-05-21",
       "status": "active",
@@ -50247,7 +50247,7 @@
     },
     "ReiaAst1205": {
       "name": "ReiaAst1205",
-      "country": "JAP",
+      "country": "Japan",
       "firstRecordDate": "2021-10-12",
       "lastActiveDate": "2024-11-18",
       "status": "active",
@@ -50513,7 +50513,7 @@
     },
     "Beaf Cultist": {
       "name": "Beaf Cultist",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2023-01-24",
       "lastActiveDate": "2023-01-24",
       "status": "active",
@@ -50727,7 +50727,7 @@
     },
     "955561976": {
       "name": "955561976",
-      "country": "ENG",
+      "country": "United Kingdom",
       "firstRecordDate": "2023-02-27",
       "lastActiveDate": "2023-02-27",
       "status": "active",
@@ -50833,7 +50833,7 @@
     },
     "u/EchoAlchemy": {
       "name": "u/EchoAlchemy",
-      "country": "Western country",
+      "country": "Western countries",
       "firstRecordDate": "2023-04-19",
       "lastActiveDate": "2023-04-19",
       "status": "active",
@@ -51563,7 +51563,7 @@
     },
     "MegaPelican": {
       "name": "MegaPelican",
-      "country": "CAN",
+      "country": "Canada",
       "firstRecordDate": "2024-09-25",
       "lastActiveDate": "2024-09-25",
       "status": "active",
@@ -51615,7 +51615,7 @@
     },
     "Kebriones": {
       "name": "Kebriones",
-      "country": "US",
+      "country": "United States",
       "firstRecordDate": "2024-10-01",
       "lastActiveDate": "2024-10-11",
       "status": "active",
