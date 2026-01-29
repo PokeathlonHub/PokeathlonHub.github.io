@@ -24,11 +24,13 @@ Some ideas for improvements:
 - [ ] **Localization** - Add different localizations for the most used languages.
 - [ ] **Emulator Filter** - Add support for record obtained on emulator.
 - [ ] **Countries Statistics** - Add a column for the country of origin.
-- [ ] **Where Am I?** - Show to the users their position in the leadeboard.
+- [x] **Where Am I?** - Show to the users their position in the leadeboard.
 
 ---
 
 ## 📅 Changelog
+### v0.5.0-beta (2026-01-29)
+- Users can input scores and see their hypothetical leaderboard position. Features category selection (courses/events), tie handling, and percentile display.
 ### v0.4.0-beta (2026-01-26)
 - Switched from record-centric to player-centric model
 - The record history now shows the ties in the top 3
