@@ -8,6 +8,12 @@ on:
       - "generate.py"
       - "scripts/validate_data.py"
 
+# Cancel in-progress runs when a new commit is pushed
+# This prevents race conditions and avoids failure emails
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -44,7 +50,9 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git add events/ courses/ index.html || true
+          git add events/ courses/ index.html data/players.json || true
           git diff --staged --quiet && echo "No changes to commit." && exit 0
           git commit -m "Auto-update site from player data"
+          # Pull with rebase to handle any concurrent commits, then push
+          git pull --rebase origin main
           git push
