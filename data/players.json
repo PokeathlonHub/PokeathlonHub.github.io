@@ -4,7 +4,7 @@
     "generatedAt": "2026-01-25T17:35:00.319673",
     "source": "csv_migration",
     "totalPlayers": 289,
-    "totalCourseRecords": 601,
+    "totalCourseRecords": 602,
     "totalEventRecords": 1647
   },
   "players": {
@@ -30333,7 +30333,7 @@
       "name": "CS__",
       "country": "France",
       "firstRecordDate": "2025-07-28",
-      "lastActiveDate": "2025-10-26",
+      "lastActiveDate": "2025-11-04",
       "status": "active",
       "courseRecords": {
         "speed": [],
@@ -30367,6 +30367,20 @@
             "proof": {
               "type": "claimed",
               "url": "https://discord.com"
+            }
+          },
+          {
+            "totalScore": 697,
+            "eventScores": {
+              "ring-drop": 200,
+              "relay-run": 200,
+              "block-smash": 150
+            },
+            "bonusPoints": 147,
+            "date": "2025-11-04",
+            "proof": {
+              "type": "photo",
+              "url": "https://www.smogon.com/forums/attachments/img_20251104_073126-jpg.784393/"
             }
           }
         ],
@@ -30420,11 +30434,11 @@
         "goal-roll": []
       },
       "statistics": {
-        "totalRecordsSubmitted": 6,
+        "totalRecordsSubmitted": 7,
         "currentWorldRecords": 3,
         "personalBests": {
           "power": 653,
-          "stamina": 682,
+          "stamina": 697,
           "hurdle-dash": 76.2,
           "pennant-capture": 55.0,
           "relay-run": 22.5
