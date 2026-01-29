@@ -1,6 +1,6 @@
 # PokeathlonHub 
 [![Status: Beta](https://img.shields.io/badge/status-beta-orange)](https://github.com/yourusername/leaderboard) 
-[![Version](https://img.shields.io/badge/version-0.3.0--beta-blue)]()
+[![Version](https://img.shields.io/badge/version-0.5.0--beta-blue)]()
 
 PokeathlonHub is a simple leaderboard tracking website for the Pokeathlon, a famous HG/SS minigame.  
 This is a beta version – expect updates and improvements.
