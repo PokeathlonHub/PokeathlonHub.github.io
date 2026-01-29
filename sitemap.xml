@@ -1,88 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="https://www.sitemaps.org/schemas/sitemap/0.9
-            https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
   <loc>https://pokeathlonhub.github.io/</loc>
-  <lastmod>2025-07-25T08:54:59+00:00</lastmod>
+  <lastmod>2026-01-29</lastmod>
   <priority>1.00</priority>
 </url>
+
+<url>
+  <loc>https://pokeathlonhub.github.io/calculators/PID.html</loc>
+  <lastmod>2026-01-29</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pokeathlonhub.github.io/calculators/rank-simulator.html</loc>
+  <lastmod>2026-01-29</lastmod>
+  <priority>0.80</priority>
+</url>
+
 <url>
   <loc>https://pokeathlonhub.github.io/courses/speed.html</loc>
-  <lastmod>2025-07-25T08:54:59+00:00</lastmod>
+  <lastmod>2026-01-29</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pokeathlonhub.github.io/courses/power.html</loc>
-  <lastmod>2025-07-25T08:54:59+00:00</lastmod>
+  <lastmod>2026-01-29</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pokeathlonhub.github.io/courses/skill.html</loc>
-  <lastmod>2025-07-25T08:54:59+00:00</lastmod>
+  <lastmod>2026-01-29</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pokeathlonhub.github.io/courses/stamina.html</loc>
-  <lastmod>2025-07-25T08:54:59+00:00</lastmod>
+  <lastmod>2026-01-29</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pokeathlonhub.github.io/courses/jump.html</loc>
-  <lastmod>2025-07-25T08:54:59+00:00</lastmod>
+  <lastmod>2026-01-29</lastmod>
   <priority>0.80</priority>
 </url>
+
 <url>
   <loc>https://pokeathlonhub.github.io/events/hurdle-dash.html</loc>
-  <lastmod>2025-07-25T08:54:59+00:00</lastmod>
+  <lastmod>2026-01-29</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pokeathlonhub.github.io/events/pennant-capture.html</loc>
-  <lastmod>2025-07-25T08:54:59+00:00</lastmod>
+  <lastmod>2026-01-29</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pokeathlonhub.github.io/events/block-smash.html</loc>
-  <lastmod>2025-07-25T08:54:59+00:00</lastmod>
+  <lastmod>2026-01-29</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pokeathlonhub.github.io/events/circle-push.html</loc>
+  <lastmod>2026-01-29</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pokeathlonhub.github.io/events/disc-catch.html</loc>
-  <lastmod>2025-07-25T08:54:59+00:00</lastmod>
+  <lastmod>2026-01-29</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pokeathlonhub.github.io/events/lamp-jump.html</loc>
-  <lastmod>2025-07-25T08:54:59+00:00</lastmod>
+  <lastmod>2026-01-29</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pokeathlonhub.github.io/events/relay-run.html</loc>
-  <lastmod>2025-07-25T08:54:59+00:00</lastmod>
+  <lastmod>2026-01-29</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pokeathlonhub.github.io/events/ring-drop.html</loc>
+  <lastmod>2026-01-29</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pokeathlonhub.github.io/events/snow-throw.html</loc>
-  <lastmod>2025-07-25T08:54:59+00:00</lastmod>
+  <lastmod>2026-01-29</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pokeathlonhub.github.io/events/goal-roll.html</loc>
-  <lastmod>2025-07-25T08:54:59+00:00</lastmod>
+  <lastmod>2026-01-29</lastmod>
   <priority>0.80</priority>
 </url>
-<url>
-  <loc>https://pokeathlonhub.github.io/index.html</loc>
-  <lastmod>2025-07-25T08:54:59+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-
 
 </urlset>
-
