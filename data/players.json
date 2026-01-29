@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "generatedAt": "2026-01-25T17:35:00.319673",
     "source": "csv_migration",
-    "totalPlayers": 289,
+    "totalPlayers": 288,
     "totalCourseRecords": 602,
     "totalEventRecords": 1647
   },
@@ -1520,6 +1520,10 @@
           "previousScore": 102.0,
           "newScore": 125.0
         }
+      ],
+      "aliases": [
+        "HotDogTurtle",
+        "hotdog_turtle"
       ]
     },
     "pikaby": {
@@ -26619,108 +26623,6 @@
         }
       ]
     },
-    "CS_": {
-      "name": "CS_",
-      "country": "Unknown",
-      "firstRecordDate": "2025-07-20",
-      "lastActiveDate": "2025-07-28",
-      "status": "active",
-      "courseRecords": {
-        "speed": [
-          {
-            "totalScore": 630,
-            "eventScores": {
-              "hurdle-dash": 143,
-              "pennant-capture": 156,
-              "relay-run": 200
-            },
-            "bonusPoints": 131,
-            "date": "2025-07-20",
-            "proof": {
-              "type": "photo",
-              "url": "https://www.smogon.com/forums/threads/pok%C3%A9athlon-records.3715012/page-2"
-            }
-          },
-          {
-            "totalScore": 641,
-            "eventScores": {
-              "hurdle-dash": 150,
-              "pennant-capture": 150,
-              "relay-run": 200
-            },
-            "bonusPoints": 141,
-            "date": "2025-07-28",
-            "proof": {
-              "type": "photo",
-              "url": "https://www.smogon.com/forums/threads/pok%C3%A9athlon-records.3715012/page-2"
-            }
-          },
-          {
-            "totalScore": 657,
-            "eventScores": {
-              "hurdle-dash": 150,
-              "pennant-capture": 156,
-              "relay-run": 200
-            },
-            "bonusPoints": 151,
-            "date": "2025-07-28",
-            "proof": {
-              "type": "photo",
-              "url": "https://www.smogon.com/forums/threads/pok%C3%A9athlon-records.3715012/page-2"
-            }
-          }
-        ],
-        "power": [],
-        "skill": [],
-        "stamina": [],
-        "jump": []
-      },
-      "eventRecords": {
-        "hurdle-dash": [],
-        "pennant-capture": [],
-        "circle-push": [],
-        "block-smash": [],
-        "disc-catch": [],
-        "lamp-jump": [],
-        "relay-run": [],
-        "ring-drop": [],
-        "snow-throw": [],
-        "goal-roll": []
-      },
-      "statistics": {
-        "totalRecordsSubmitted": 3,
-        "currentWorldRecords": 1,
-        "personalBests": {
-          "speed": 657
-        }
-      },
-      "progression": [
-        {
-          "date": "2025-07-20",
-          "category": "speed",
-          "type": "course",
-          "event": "first_record",
-          "previousScore": null,
-          "newScore": 630
-        },
-        {
-          "date": "2025-07-28",
-          "category": "speed",
-          "type": "course",
-          "event": "new_pb",
-          "previousScore": 630,
-          "newScore": 641
-        },
-        {
-          "date": "2025-07-28",
-          "category": "speed",
-          "type": "course",
-          "event": "new_pb",
-          "previousScore": 641,
-          "newScore": 657
-        }
-      ]
-    },
     "Nerdrowwilson": {
       "name": "Nerdrowwilson",
       "country": "Western countries",
@@ -30332,11 +30234,54 @@
     "CS__": {
       "name": "CS__",
       "country": "France",
-      "firstRecordDate": "2025-07-28",
+      "firstRecordDate": "2025-07-20",
       "lastActiveDate": "2025-11-04",
       "status": "active",
       "courseRecords": {
-        "speed": [],
+        "speed": [
+          {
+            "totalScore": 630,
+            "eventScores": {
+              "hurdle-dash": 143,
+              "pennant-capture": 156,
+              "relay-run": 200
+            },
+            "bonusPoints": 131,
+            "date": "2025-07-20",
+            "proof": {
+              "type": "photo",
+              "url": "https://www.smogon.com/forums/threads/pok%C3%A9athlon-records.3715012/page-2"
+            }
+          },
+          {
+            "totalScore": 641,
+            "eventScores": {
+              "hurdle-dash": 150,
+              "pennant-capture": 150,
+              "relay-run": 200
+            },
+            "bonusPoints": 141,
+            "date": "2025-07-28",
+            "proof": {
+              "type": "photo",
+              "url": "https://www.smogon.com/forums/threads/pok%C3%A9athlon-records.3715012/page-2"
+            }
+          },
+          {
+            "totalScore": 657,
+            "eventScores": {
+              "hurdle-dash": 150,
+              "pennant-capture": 156,
+              "relay-run": 200
+            },
+            "bonusPoints": 151,
+            "date": "2025-07-28",
+            "proof": {
+              "type": "photo",
+              "url": "https://www.smogon.com/forums/threads/pok%C3%A9athlon-records.3715012/page-2"
+            }
+          }
+        ],
         "power": [
           {
             "totalScore": 653,
@@ -30434,9 +30379,10 @@
         "goal-roll": []
       },
       "statistics": {
-        "totalRecordsSubmitted": 7,
-        "currentWorldRecords": 3,
+        "totalRecordsSubmitted": 10,
+        "currentWorldRecords": 4,
         "personalBests": {
+          "speed": 657,
           "power": 653,
           "stamina": 697,
           "hurdle-dash": 76.2,
@@ -30445,6 +30391,14 @@
         }
       },
       "progression": [
+        {
+          "date": "2025-07-20",
+          "category": "speed",
+          "type": "course",
+          "event": "first_record",
+          "previousScore": null,
+          "newScore": 630
+        },
         {
           "date": "2025-07-28",
           "category": "hurdle-dash",
@@ -30470,6 +30424,22 @@
           "newScore": 22.5
         },
         {
+          "date": "2025-07-28",
+          "category": "speed",
+          "type": "course",
+          "event": "new_pb",
+          "previousScore": 630,
+          "newScore": 641
+        },
+        {
+          "date": "2025-07-28",
+          "category": "speed",
+          "type": "course",
+          "event": "new_pb",
+          "previousScore": 641,
+          "newScore": 657
+        },
+        {
           "date": "2025-08-22",
           "category": "power",
           "type": "course",
@@ -30485,6 +30455,9 @@
           "previousScore": null,
           "newScore": 682
         }
+      ],
+      "aliases": [
+        "CS_"
       ]
     },
     "KeyBlade999": {
