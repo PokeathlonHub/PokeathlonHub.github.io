@@ -118,7 +118,7 @@ events:
     lower_is_better: false
     formula: "100 + (score * 5)"
     max_points: 200
-    latex: '\text{position\_points} + \text{score} \times 5'
+    latex: '\text{position points} + \text{score} \times 5'
     output: "events/goal-roll.html"
     has_page: true
     notes: "Position points: 100-80-70-60"

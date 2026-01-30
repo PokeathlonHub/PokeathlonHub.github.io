@@ -1166,6 +1166,9 @@ def generate_index_html(players_data, config):
                 event_cell = f'<td>{display_name}</td>'
 
             formula = event_formulas.get(event_id, '–')
+            # Add tooltip for goal-roll to explain position points
+            if event_id == 'goal-roll':
+                formula += ' <span class="tooltip-icon" tabindex="0">?<span class="tooltip-text">Position points: 1st: 100 · 2nd: 80 · 3rd: 70 · 4th: 60</span></span>'
 
             html_content += f'''
         <tr>
@@ -1178,6 +1181,9 @@ def generate_index_html(players_data, config):
         </tr>'''
         else:
             formula = event_formulas.get(event_id, '–')
+            # Add tooltip for goal-roll to explain position points
+            if event_id == 'goal-roll':
+                formula += ' <span class="tooltip-icon" tabindex="0">?<span class="tooltip-text">Position points: 1st: 100 · 2nd: 80 · 3rd: 70 · 4th: 60</span></span>'
             html_content += f'''
         <tr>
           <td>{display_name}</td>
@@ -1192,8 +1198,6 @@ def generate_index_html(players_data, config):
       </tbody>
     </table>
   </div>
-
-  <p>Position points: 100-80-70-60.</p>
 
   <script src="js/tablesort.min.js"></script>
   <script src="js/tablesort.number.min.js"></script>
