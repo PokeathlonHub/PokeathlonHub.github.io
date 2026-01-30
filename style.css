@@ -131,6 +131,13 @@ a:hover {
   border-radius: 4px;
 }
 
+@media (max-width: 768px) {
+  .table-wrapper {
+    display: table;
+    min-width: 100%;
+  }
+}
+
 @media (min-width: 769px) {
   .table-wrapper {
     margin: 15px 0; /* Normal margins on desktop */
@@ -163,7 +170,8 @@ th, td {
   /* Make the table scroll indicator more visible */
   .table-wrapper::after {
     content: "← Swipe to see more columns →";
-    display: block;
+    display: table-caption;
+    caption-side: bottom;
     text-align: center;
     font-size: 12px;
     color: var(--filter-text-muted);
