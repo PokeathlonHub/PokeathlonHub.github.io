@@ -725,6 +725,7 @@ def generate_course_html(course_id, course_config, players_data, events_config, 
     <h2>Current Record</h2>
     <div class="table-wrapper">
     <table>
+      <caption class="swipe-indicator">← Swipe to see more columns →</caption>
         <thead>
             <tr>
                 <th>Player</th>
@@ -757,6 +758,7 @@ def generate_course_html(course_id, course_config, players_data, events_config, 
     <h2>Record History</h2>
     <div class="table-wrapper">
     <table>
+      <caption class="swipe-indicator">← Swipe to see more columns →</caption>
         <thead>
             <tr>
                 <th>Player</th>
@@ -814,6 +816,7 @@ def generate_course_html(course_id, course_config, players_data, events_config, 
     <h2>Leaderboard Statistics</h2>
     <div class="table-wrapper">
     <table>
+      <caption class="swipe-indicator">← Swipe to see more columns →</caption>
         <thead>
             <tr>
                 <th>Player</th>
@@ -884,6 +887,7 @@ def generate_event_html(event_id, event_config, players_data, events_config, out
     <h2>Current Record</h2>
     <div class="table-wrapper">
         <table>
+            <caption class="swipe-indicator">← Swipe to see more columns →</caption>
             <thead>
                 <tr>
                     <th>Score</th>
@@ -915,6 +919,7 @@ def generate_event_html(event_id, event_config, players_data, events_config, out
     <h2>Record History</h2>
     <div class="table-wrapper">
         <table>
+            <caption class="swipe-indicator">← Swipe to see more columns →</caption>
             <thead>
                 <tr>
                     <th>Player</th>
@@ -951,6 +956,7 @@ def generate_event_html(event_id, event_config, players_data, events_config, out
     <h2>Leaderboard Statistics</h2>
     <div class="table-wrapper">
         <table>
+            <caption class="swipe-indicator">← Swipe to see more columns →</caption>
             <thead>
                 <tr>
                     <th>Name</th>
@@ -1081,6 +1087,7 @@ def generate_index_html(players_data, config):
   <h2>Course World Records</h2>
   <div class="table-wrapper">
     <table>
+      <caption class="swipe-indicator">← Swipe to see more columns →</caption>
       <thead>
         <tr>
           <th>Course</th>
@@ -1131,6 +1138,7 @@ def generate_index_html(players_data, config):
   <h2>Single Event World Records</h2>
   <div class="table-wrapper">
     <table>
+      <caption class="swipe-indicator">← Swipe to see more columns →</caption>
       <thead>
         <tr>
           <th>Event</th>
