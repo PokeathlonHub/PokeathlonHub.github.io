@@ -1,11 +1,11 @@
 {
   "metadata": {
     "version": "1.0.0",
-    "generatedAt": "2026-02-04T10:13:10.557449",
+    "generatedAt": "2026-02-04T10:29:00.568821",
     "source": "csv_migration",
     "totalPlayers": 288,
     "totalCourseRecords": 604,
-    "totalEventRecords": 1650
+    "totalEventRecords": 1649
   },
   "players": {
     "SkyHippowdon": {
@@ -1257,14 +1257,6 @@
             }
           },
           {
-            "score": 105.0,
-            "date": "2017-04-30",
-            "proof": {
-              "type": "claimed",
-              "url": "https://cyberscore.me.uk/games/864"
-            }
-          },
-          {
             "score": 105,
             "date": "2017-04-23",
             "proof": {
@@ -1349,7 +1341,7 @@
         ]
       },
       "statistics": {
-        "totalRecordsSubmitted": 25,
+        "totalRecordsSubmitted": 24,
         "currentWorldRecords": 1,
         "personalBests": {
           "speed": 571,
@@ -1361,7 +1353,7 @@
           "pennant-capture": 52,
           "circle-push": 66,
           "block-smash": 155,
-          "disc-catch": 105.0,
+          "disc-catch": 105,
           "lamp-jump": 637,
           "relay-run": 21.5,
           "ring-drop": 200,
