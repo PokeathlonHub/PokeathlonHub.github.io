@@ -1,11 +1,11 @@
 {
   "metadata": {
     "version": "1.0.0",
-    "generatedAt": "2026-01-25T17:35:00.319673",
+    "generatedAt": "2026-02-04T10:13:10.557449",
     "source": "csv_migration",
     "totalPlayers": 288,
-    "totalCourseRecords": 602,
-    "totalEventRecords": 1647
+    "totalCourseRecords": 604,
+    "totalEventRecords": 1650
   },
   "players": {
     "SkyHippowdon": {
@@ -1103,7 +1103,7 @@
             "date": "2017-04-30",
             "proof": {
               "type": "photo",
-              "url": "https://cyberscore.me.uk/games/864"
+              "url": "https://cyberscore.me.uk/proofs/1329150"
             }
           }
         ],
@@ -1119,7 +1119,7 @@
             "date": "2017-04-23",
             "proof": {
               "type": "photo",
-              "url": "https://cyberscore.me.uk/charts/111816"
+              "url": "https://cyberscore.me.uk/proofs/1329148"
             }
           }
         ],
@@ -1145,7 +1145,7 @@
             "date": "2021-03-04",
             "proof": {
               "type": "photo",
-              "url": "https://cyberscore.me.uk/games/864"
+              "url": "https://cyberscore.me.uk/proofs/1329149"
             }
           }
         ],
@@ -1161,7 +1161,7 @@
             "date": "2017-04-30",
             "proof": {
               "type": "photo",
-              "url": "https://cyberscore.me.uk/games/864"
+              "url": "https://cyberscore.me.uk/proofs/1329151"
             }
           }
         ],
@@ -1196,18 +1196,18 @@
             "score": 75.9,
             "date": "2017-12-24",
             "proof": {
-              "type": "claimed",
-              "url": "https://cyberscore.me.uk/games/864"
+              "type": "photo",
+              "url": "https://cyberscore.me.uk/proofs/1329155"
             }
           }
         ],
         "pennant-capture": [
           {
-            "score": 52.0,
+            "score": 52,
             "date": "2017-04-30",
             "proof": {
-              "type": "claimed",
-              "url": "https://cyberscore.me.uk/games/864"
+              "type": "photo",
+              "url": "https://cyberscore.me.uk/proofs/1329157"
             }
           }
         ],
@@ -1218,6 +1218,14 @@
             "proof": {
               "type": "claimed",
               "url": "https://gamefaqs.gamespot.com/boards/960099-pokemon-heartgold-version/54194139?page=2"
+            }
+          },
+          {
+            "score": 66,
+            "date": "2017-04-23",
+            "proof": {
+              "type": "photo",
+              "url": "https://cyberscore.me.uk/proofs/1329152"
             }
           }
         ],
@@ -1231,11 +1239,11 @@
             }
           },
           {
-            "score": 155.0,
+            "score": 155,
             "date": "2021-01-12",
             "proof": {
-              "type": "claimed",
-              "url": "https://cyberscore.me.uk/games/864"
+              "type": "photo",
+              "url": "https://cyberscore.me.uk/proofs/1329163"
             }
           }
         ],
@@ -1255,15 +1263,23 @@
               "type": "claimed",
               "url": "https://cyberscore.me.uk/games/864"
             }
+          },
+          {
+            "score": 105,
+            "date": "2017-04-23",
+            "proof": {
+              "type": "photo",
+              "url": "https://cyberscore.me.uk/proofs/1329153"
+            }
           }
         ],
         "lamp-jump": [
           {
-            "score": 637.0,
+            "score": 637,
             "date": "2021-03-02",
             "proof": {
-              "type": "claimed",
-              "url": "https://cyberscore.me.uk/games/864"
+              "type": "photo",
+              "url": "https://cyberscore.me.uk/proofs/1329156"
             }
           }
         ],
@@ -1280,12 +1296,21 @@
             "score": 21.5,
             "date": "2017-04-30",
             "proof": {
-              "type": "claimed",
-              "url": "https://cyberscore.me.uk/games/864"
+              "type": "photo",
+              "url": "https://cyberscore.me.uk/proofs/1329158"
             }
           }
         ],
-        "ring-drop": [],
+        "ring-drop": [
+          {
+            "score": 200,
+            "date": "2017-04-17",
+            "proof": {
+              "type": "video",
+              "url": "https://cyberscore.me.uk/proofs/1329159"
+            }
+          }
+        ],
         "snow-throw": [
           {
             "score": 102.0,
@@ -1296,11 +1321,11 @@
             }
           },
           {
-            "score": 125.0,
+            "score": 125,
             "date": "2021-03-04",
             "proof": {
-              "type": "claimed",
-              "url": "https://cyberscore.me.uk/games/864"
+              "type": "photo",
+              "url": "https://cyberscore.me.uk/proofs/1329160"
             }
           }
         ],
@@ -1314,17 +1339,17 @@
             }
           },
           {
-            "score": 18.0,
+            "score": 18,
             "date": "2021-01-12",
             "proof": {
-              "type": "claimed",
-              "url": "https://cyberscore.me.uk/games/864"
+              "type": "photo",
+              "url": "https://cyberscore.me.uk/proofs/1329154"
             }
           }
         ]
       },
       "statistics": {
-        "totalRecordsSubmitted": 22,
+        "totalRecordsSubmitted": 25,
         "currentWorldRecords": 1,
         "personalBests": {
           "speed": 571,
@@ -1332,15 +1357,16 @@
           "skill": 600,
           "stamina": 595,
           "jump": 550,
-          "hurdle-dash": 75.9,
-          "circle-push": 65.0,
-          "block-smash": 155.0,
+          "hurdle-dash": 77.1,
+          "pennant-capture": 52,
+          "circle-push": 66,
+          "block-smash": 155,
           "disc-catch": 105.0,
+          "lamp-jump": 637,
           "relay-run": 21.5,
-          "snow-throw": 125.0,
-          "goal-roll": 18.0,
-          "pennant-capture": 52.0,
-          "lamp-jump": 637.0
+          "ring-drop": 200,
+          "snow-throw": 125,
+          "goal-roll": 18
         }
       },
       "progression": [
@@ -1417,6 +1443,14 @@
           "newScore": 13.0
         },
         {
+          "date": "2017-04-17",
+          "category": "ring-drop",
+          "type": "event",
+          "event": "first_record",
+          "previousScore": null,
+          "newScore": 200
+        },
+        {
           "date": "2017-04-23",
           "category": "power",
           "type": "course",
@@ -1425,10 +1459,26 @@
           "newScore": 590
         },
         {
+          "date": "2017-04-23",
+          "category": "circle-push",
+          "type": "event",
+          "event": "improvement",
+          "previousScore": 65.0,
+          "newScore": 66
+        },
+        {
+          "date": "2017-04-23",
+          "category": "disc-catch",
+          "type": "event",
+          "event": "improvement",
+          "previousScore": 85.0,
+          "newScore": 105
+        },
+        {
           "date": "2017-04-30",
           "category": "speed",
           "type": "course",
-          "event": "new_pb",
+          "event": "improvement",
           "previousScore": 494,
           "newScore": 571
         },
@@ -1446,47 +1496,31 @@
           "type": "event",
           "event": "first_record",
           "previousScore": null,
-          "newScore": 52.0
-        },
-        {
-          "date": "2017-04-30",
-          "category": "disc-catch",
-          "type": "event",
-          "event": "new_pb",
-          "previousScore": 85.0,
-          "newScore": 105.0
+          "newScore": 52
         },
         {
           "date": "2017-04-30",
           "category": "relay-run",
           "type": "event",
-          "event": "new_pb",
+          "event": "improvement",
           "previousScore": 18.8,
           "newScore": 21.5
-        },
-        {
-          "date": "2017-12-24",
-          "category": "hurdle-dash",
-          "type": "event",
-          "event": "new_pb",
-          "previousScore": 77.1,
-          "newScore": 75.9
         },
         {
           "date": "2021-01-12",
           "category": "block-smash",
           "type": "event",
-          "event": "new_pb",
+          "event": "improvement",
           "previousScore": 150.0,
-          "newScore": 155.0
+          "newScore": 155
         },
         {
           "date": "2021-01-12",
           "category": "goal-roll",
           "type": "event",
-          "event": "new_pb",
+          "event": "improvement",
           "previousScore": 13.0,
-          "newScore": 18.0
+          "newScore": 18
         },
         {
           "date": "2021-03-02",
@@ -1494,7 +1528,7 @@
           "type": "event",
           "event": "first_record",
           "previousScore": null,
-          "newScore": 637.0
+          "newScore": 637
         },
         {
           "date": "2021-03-03",
@@ -1508,7 +1542,7 @@
           "date": "2021-03-04",
           "category": "skill",
           "type": "course",
-          "event": "new_pb",
+          "event": "improvement",
           "previousScore": 544,
           "newScore": 600
         },
@@ -1516,9 +1550,9 @@
           "date": "2021-03-04",
           "category": "snow-throw",
           "type": "event",
-          "event": "new_pb",
+          "event": "improvement",
           "previousScore": 102.0,
-          "newScore": 125.0
+          "newScore": 125
         }
       ],
       "aliases": [
@@ -25578,7 +25612,7 @@
       "name": "u/BigCheeseNaan",
       "country": "France",
       "firstRecordDate": "2024-10-13",
-      "lastActiveDate": "2024-10-13",
+      "lastActiveDate": "2026-02-02",
       "status": "active",
       "courseRecords": {
         "speed": [
@@ -25642,6 +25676,34 @@
             "proof": {
               "type": "photo",
               "url": "https://www.reddit.com/r/pokemon/comments/79ird5/pokeathlon_world_records/"
+            }
+          },
+          {
+            "totalScore": 709,
+            "eventScores": {
+              "ring-drop": 200,
+              "relay-run": 200,
+              "block-smash": 160
+            },
+            "bonusPoints": 149,
+            "date": "2026-02-02",
+            "proof": {
+              "type": "photo",
+              "url": "https://www.smogon.com/forums/threads/pok%C3%A9athlon-records.3715012/page-2"
+            }
+          },
+          {
+            "totalScore": 689,
+            "eventScores": {
+              "ring-drop": 200,
+              "relay-run": 200,
+              "block-smash": 160
+            },
+            "bonusPoints": 129,
+            "date": "2026-02-01",
+            "proof": {
+              "type": "photo",
+              "url": "https://www.smogon.com/forums/threads/pok%C3%A9athlon-records.3715012/page-2"
             }
           }
         ],
@@ -25765,13 +25827,13 @@
         ]
       },
       "statistics": {
-        "totalRecordsSubmitted": 15,
-        "currentWorldRecords": 0,
+        "totalRecordsSubmitted": 17,
+        "currentWorldRecords": 1,
         "personalBests": {
           "speed": 537,
           "power": 602,
           "skill": 586,
-          "stamina": 628,
+          "stamina": 709,
           "jump": 452,
           "hurdle-dash": 78.2,
           "pennant-capture": 52.0,
@@ -30380,7 +30442,7 @@
       },
       "statistics": {
         "totalRecordsSubmitted": 10,
-        "currentWorldRecords": 4,
+        "currentWorldRecords": 3,
         "personalBests": {
           "speed": 657,
           "power": 653,
